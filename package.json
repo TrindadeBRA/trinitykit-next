@@ -11,8 +11,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.0",
+    "@heroicons/react": "^2.2.0",
     "@orval/core": "^7.6.0",
-    "next": "15.2.1",
+    "next": "^15.2.1",
     "orval": "^7.6.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
