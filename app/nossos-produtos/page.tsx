@@ -2,6 +2,11 @@ import { getGetProductsUrl, getProductsResponse } from "@/src/services/api";
 import customFetch from "@/src/services/custom-fetch";
 import { GetProducts200DataItem } from "@/src/services/model";
 
+export const metadata = {
+  title: 'Nossos Produtos | Tiken',
+  description: 'A Tiken oferece soluções inovadoras em química. Se não encontrar seu produto, entre em contato e encontraremos a solução ideal para você.',
+}
+
 async function getProdutos(): Promise<getProductsResponse> {
   try {
     const response = await customFetch<getProductsResponse>(getGetProductsUrl());

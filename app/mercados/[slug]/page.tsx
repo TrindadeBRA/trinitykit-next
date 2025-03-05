@@ -12,8 +12,10 @@ export async function generateStaticParams() {
   // const posts = await fetch('https://.../posts').then((res) => res.json())
 
   const posts = [
-    { slug: "my-first-post" },
-    { slug: "my-second-post" },
+    { slug: "plasticos-e-elastomeros" },
+    { slug: "cosmeticos" },
+    { slug: "adesivos" },
+    { slug: "tintas-e-vernizes" },
   ];
  
   return posts.map((post) => ({
