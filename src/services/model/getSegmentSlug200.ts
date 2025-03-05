@@ -6,12 +6,10 @@
  * OpenAPI spec version: 1.0.0
  */
 import type { GetSegmentSlug200DataItem } from './getSegmentSlug200DataItem';
-import type { GetSegmentSlug200Segment } from './getSegmentSlug200Segment';
 
 export type GetSegmentSlug200 = {
   success?: boolean;
   data?: GetSegmentSlug200DataItem[];
   /** Número total de produtos retornados */
   items?: number;
-  segment?: GetSegmentSlug200Segment;
 };

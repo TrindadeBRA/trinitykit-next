@@ -117,7 +117,7 @@ export const getProducts = async ( options?: RequestInit): Promise<getProductsRe
 
 
 /**
- * Retorna uma lista de produtos filtrados por um segmento específico
+ * Retorna uma lista de produtos filtrados por um segmento específico, organizados por linhas de produto
  * @summary Listar produtos por segmento
  */
 export type getSegmentSlugResponse200 = {

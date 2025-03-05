@@ -22,6 +22,8 @@ export * from './getProducts401';
 export * from './getProducts401Data';
 export * from './getSegmentSlug200';
 export * from './getSegmentSlug200DataItem';
+export * from './getSegmentSlug200DataItemCategoriesItem';
+export * from './getSegmentSlug200DataItemCategoriesItemProductsItem';
 export * from './getSegmentSlug200DataItemProductLinesItem';
 export * from './getSegmentSlug200DataItemSegmentsItem';
 export * from './getSegmentSlug200Segment';
