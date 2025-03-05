@@ -27,7 +27,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "src/components/Ballpit/index.tjsx"  ],
   "exclude": [
     "node_modules"
   ]

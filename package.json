@@ -15,9 +15,11 @@
     "@heroicons/react": "^2.2.0",
     "@orval/core": "^7.6.0",
     "next": "^15.2.1",
+    "ogl": "^1.0.11",
     "orval": "^7.6.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "three": "^0.174.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
