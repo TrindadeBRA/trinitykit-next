@@ -1,10 +1,20 @@
+import IntroProductLine from "@/src/components/IntroProductLine";
+
 interface MercadoProps {
   slug?: string;
 }
 
 export default async function Page({ params }: { params: Promise<MercadoProps> }) {
   const { slug } = await params;
-  return <h1>Mercado - {slug}</h1>
+  return (
+    <div>
+      <h1 className="text-4xl font-bold">Mercado - {slug}</h1>
+      <IntroProductLine />
+      <IntroProductLine invert />
+      <IntroProductLine />
+      <IntroProductLine invert />
+    </div>
+  )
 }
 
 
