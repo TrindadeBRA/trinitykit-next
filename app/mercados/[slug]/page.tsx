@@ -27,10 +27,11 @@ async function getSegmentsInfo(slug: string): Promise<getSegmentSlugResponse> {
   }
 }
 
-  export async function generateMetadata(
-  { params }: { params: MercadoProps }
+export async function generateMetadata(
+  { params }: { params: Promise<MercadoProps> }
 ): Promise<Metadata> {
-  const { slug } = params;
+  const resolvedParams = await params;
+  const { slug } = resolvedParams;
   
   const segmentName = slug ? slugToName[slug as keyof typeof slugToName] || slug : 'Segmento Desconhecido';
   const segmentNameLower = segmentName.toLowerCase();
@@ -41,8 +42,9 @@ async function getSegmentsInfo(slug: string): Promise<getSegmentSlugResponse> {
   };
 }
 
-export default async function Page({ params }: { params: MercadoProps }) {
-  const { slug } = params;
+export default async function Page({ params }: { params: Promise<MercadoProps> }) {
+  const resolvedParams = await params;
+  const { slug } = resolvedParams;
   if (!slug) {
     return <div>Slug não encontrado</div>;
   }
