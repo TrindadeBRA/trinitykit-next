@@ -1,7 +1,7 @@
 import IntroProductLine from "@/src/components/IntroProductLine";
 import { getGetSegmentSlugUrl, getSegmentSlugResponse } from "@/src/services/api";
 import customFetch from "@/src/services/custom-fetch";
-import { GetSegmentSlug200DataItem } from "@/src/services/model";
+import { GetSegmentSlug200DataItem, GetSegmentSlug200DataItemCategoriesItem, GetSegmentSlug200DataItemCategoriesItemProductsItem } from "@/src/services/model";
 
 interface MercadoProps {
   slug?: string;
@@ -58,12 +58,37 @@ export default async function Page({ params }: { params: Promise<MercadoProps> }
                 invert={index % 2 !== 0}
                 title={product_lines.name!}
                 description={product_lines.description!}
+                imagesUrls={product_lines.images!}
               />
+              
+              {product_lines?.categories?.map((category: GetSegmentSlug200DataItemCategoriesItem) => (
+                <div key={category.slug}>
+                  <h2 className="text-2xl font-semibold">{category.name}</h2>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Nome</th>
+                        <th>CAS Number</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {category?.products?.map((product: GetSegmentSlug200DataItemCategoriesItemProductsItem) => (
+                        <tr key={product.id}>
+                          <td>{product.title}</td>
+                          <td>{product.cas_number}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ))}
             </div>
           )
         })
       }
+      <div className="mb-96"></div>
     </div>
+
   )
 }
 
