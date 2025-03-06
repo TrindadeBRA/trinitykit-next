@@ -1,10 +1,15 @@
+"use client"
+
 import Image from "next/image";
 
 interface IntroProductLineProps {
     invert?: boolean;
+    title: string;
+    description: string;
 }
 
-export default function IntroProductLine({ invert = false }: IntroProductLineProps) {
+export default function IntroProductLine({ invert = false, title, description }: IntroProductLineProps) {
+
 
     return (
         <div className="relative isolate">
@@ -50,12 +55,11 @@ export default function IntroProductLine({ invert = false }: IntroProductLinePro
                         {/* COLUNA 01 */}
                         <div className="relative w-full lg:max-w-xl lg:shrink-0 xl:max-w-2xl">
                             <h1 className={`text-5xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-7xl ${invert ? 'text-right' : 'text-left'}`}>
-                                Were changing the way people connect
+                                {title}
                             </h1>
-                            <p className={`mt-8 text-lg font-medium text-pretty text-gray-500 sm:max-w-md sm:text-xl/8 lg:max-w-none ${invert ? 'text-right' : 'text-left'}`}>
-                                Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt
-                                amet fugiat veniam occaecat fugiat aliqua. Anim aute id magna aliqua ad ad non deserunt sunt.
-                            </p>
+                            <div className={`mt-8 text-lg font-medium text-pretty text-gray-500 sm:max-w-md sm:text-xl/8 lg:max-w-none ${invert ? 'text-right' : 'text-left'} flex flex-col gap-4`}
+                                dangerouslySetInnerHTML={{ __html: description }}
+                            ></div>
                             <div className={`mt-10 flex items-center gap-x-6 ${invert ? 'justify-end' : 'justify-start'}`}>
                                 <a
                                     href="#"
