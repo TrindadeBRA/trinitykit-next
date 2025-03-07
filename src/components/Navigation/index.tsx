@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
+import LanguageSwitcher from '../LanguageSwitcher'
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -49,10 +50,9 @@ export default function Navigation() {
             </a>
           ))}
         </div>
+        
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm/6 font-semibold text-gray-900">
-            Log in <span aria-hidden="true">&rarr;</span>
-          </a>
+          <LanguageSwitcher />
         </div>
       </nav>
       <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
@@ -90,14 +90,10 @@ export default function Navigation() {
                     {item.name}
                   </a>
                 ))}
+                
               </div>
               <div className="py-6">
-                <a
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
-                >
-                  Log in
-                </a>
+                <LanguageSwitcher />
               </div>
             </div>
           </div>
