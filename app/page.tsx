@@ -10,6 +10,10 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <Hero />
+      <Hero />
+      <Hero />
+
     </>
   );
 }
