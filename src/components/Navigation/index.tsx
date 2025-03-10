@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
@@ -17,10 +17,22 @@ const navigation = [
 
 export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [isFixed, setIsFixed] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsFixed(window.scrollY > 50)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   return (
-    <header className="bg-white fixed top-0 left-0 right-0 z-50 shadow">
-      <nav aria-label="Global" className="flex items-center justify-between p-6 lg:px-8 shadow">
+    <header className={`bg-white fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isFixed ? 'shadow-lg' : ''}`}>
+      <nav aria-label="Global" className={`flex items-center justify-between p-6 lg:px-8 transition-all duration-300 ${isFixed ? 'py-4' : 'py-6'}`}>
         <div className="flex lg:flex-1">
           <a href="#" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
@@ -37,7 +49,7 @@ export default function Navigation() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(true)}
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 cursor-pointer"
           >
             <span className="sr-only">Open main menu</span>
             <Bars3Icon aria-hidden="true" className="size-6" />
@@ -72,7 +84,7 @@ export default function Navigation() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(false)}
-              className="-m-2.5 rounded-md p-2.5 text-gray-700"
+              className="-m-2.5 rounded-md p-2.5 text-gray-700 cursor-pointer"
             >
               <span className="sr-only">Close menu</span>
               <XMarkIcon aria-hidden="true" className="size-6" />

@@ -3,7 +3,7 @@ import Particles from '../Particles'
 
 export default function Hero() {
     return (
-        <div className="relative isolate overflow-hidden bg-white h-lvh md:h-[calc(100vh-96px)]">
+        <div className="relative isolate overflow-hidden bg-white h-lvh">
             <div className="w-full absolute top-0 left-0 right-0 bottom-0 -z-10">
                 <Particles
                     particleColors={
@@ -44,7 +44,7 @@ export default function Hero() {
                 </defs>
                 <rect fill="url(#0787a7c5-978c-4f66-83c7-11c213f99cb7)" width="100%" height="100%" strokeWidth={0} />
             </svg>
-            <div className="mx-auto max-w-7xl px-6 lg:flex h-full items-center">
+            <div className="mx-auto max-w-7xl px-6 lg:flex h-full items-center justify-center lg:justify-start">
                 <div className="mx-auto max-w-2xl lg:mx-0 lg:shrink-0 lg:pt-8 bg-white/75 p-2 rounded-lg">
                     <div className="mt-24 sm:mt-32 lg:mt-16">
                         <a href="#" className="inline-flex space-x-6">
