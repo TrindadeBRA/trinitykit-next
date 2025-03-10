@@ -1,5 +1,5 @@
 'use client';
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import {
   createColumnHelper,
   getCoreRowModel,
@@ -15,15 +15,12 @@ import { GetProducts200DataItem } from "@/src/services/model";
 
 type ProductsTableProps = GetProducts200DataItem;
 
-
-
 const fuzzyFilter: FilterFn<ProductsTableProps> = (row, columnId, value) => {
   const itemValue = row.getValue(columnId)?.toString()?.toLowerCase();
   return itemValue ? itemValue.includes(value.toLowerCase()) : false;
 };
 
 export default function ProductsTable({ produtos }: { produtos: ProductsTableProps[] }) {
-  
   const [segmentoFilter, setSegmentoFilter] = useState('');
   const [linhaFilter, setLinhaFilter] = useState('');
   const columnHelper = createColumnHelper<ProductsTableProps>();
@@ -100,33 +97,85 @@ export default function ProductsTable({ produtos }: { produtos: ProductsTablePro
 
   // Extrair segmentos e linhas únicos para os filtros dropdown
   const uniqueSegments = useMemo(() => {
-    const segments = new Set<{ id: number; name: string; slug: string; uuid: string }>();
+    const segmentsMap = new Map<string, { id: number; name: string; slug: string; uuid: string }>();
     produtos.forEach(produto => {
       produto.segments?.forEach(segment => {
-        segments.add({ id: segment.id!, name: segment.name!, slug: segment.slug!, uuid: crypto.randomUUID() });
+        segmentsMap.set(segment.slug!, { id: segment.id!, name: segment.name!, slug: segment.slug!, uuid: crypto.randomUUID() });
       });
     });
-    return Array.from(segments).sort((a, b) => a.name.localeCompare(b.name));
+    return Array.from(segmentsMap.values()).sort((a, b) => a.name.localeCompare(b.name));
   }, [produtos]);
 
   const uniqueLines = useMemo(() => {
-    const lines = new Set<{ id: number; name: string; slug: string; uuid: string }>();
+    const linesMap = new Map<string, { id: number; name: string; slug: string; uuid: string }>();
     produtos.forEach(produto => {
       produto.product_lines?.forEach(line => {
-        lines.add({ id: line.id!, name: line.name!, slug: line.slug!, uuid: crypto.randomUUID() });
+        linesMap.set(line.slug!, { id: line.id!, name: line.name!, slug: line.slug!, uuid: crypto.randomUUID() });
       });
     });
-    return Array.from(lines).sort((a, b) => a.name.localeCompare(b.name));
+    return Array.from(linesMap.values()).sort((a, b) => a.name.localeCompare(b.name));
   }, [produtos]);
 
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const segment = searchParams.get('segment');
+    const productLine = searchParams.get('product-line');
+
+    if (segment) {
+      const selectedSegment = uniqueSegments.find(seg => seg.slug === segment);
+      if (selectedSegment) {
+        setSegmentoFilter(selectedSegment.name);
+      }
+    }
+
+    if (productLine) {
+      const selectedLine = uniqueLines.find(line => line.slug === productLine);
+      if (selectedLine) {
+        setLinhaFilter(selectedLine.name);
+      }
+    }
+  }, [uniqueSegments, uniqueLines]);
+
   const handleSegmentChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedSegment = uniqueSegments.find(segment => segment.name === e.target.value);
-    setSegmentoFilter(selectedSegment ? selectedSegment.name : '');
+    const selectedSegment = e.target.value;
+
+    if (selectedSegment === "") {
+      setSegmentoFilter(''); // Limpar filtro se "Todos" for selecionado
+      const newUrl = new URL(window.location.href);
+      newUrl.searchParams.delete('segment'); // Remover o parâmetro da URL
+      window.history.pushState({}, '', newUrl);
+    } else {
+      const segment = uniqueSegments.find(segment => segment.name === selectedSegment);
+      setSegmentoFilter(segment ? segment.name : '');
+
+      // Atualizar a URL
+      if (segment) {
+        const newUrl = new URL(window.location.href);
+        newUrl.searchParams.set('segment', segment.slug);
+        window.history.pushState({}, '', newUrl);
+      }
+    }
   }, [uniqueSegments]);
 
   const handleLineChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedLine = uniqueLines.find(line => line.name === e.target.value);
-    setLinhaFilter(selectedLine ? selectedLine.name : '');
+    const selectedLine = e.target.value;
+
+    if (selectedLine === "") {
+      setLinhaFilter(''); // Limpar filtro se "Todos" for selecionado
+      const newUrl = new URL(window.location.href);
+      newUrl.searchParams.delete('product-line'); // Remover o parâmetro da URL
+      window.history.pushState({}, '', newUrl);
+    } else {
+      const line = uniqueLines.find(line => line.name === selectedLine);
+      setLinhaFilter(line ? line.name : '');
+
+      // Atualizar a URL
+      if (line) {
+        const newUrl = new URL(window.location.href);
+        newUrl.searchParams.set('product-line', line.slug);
+        window.history.pushState({}, '', newUrl);
+      }
+    }
   }, [uniqueLines]);
 
   return (
