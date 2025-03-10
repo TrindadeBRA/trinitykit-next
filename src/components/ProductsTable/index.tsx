@@ -100,36 +100,34 @@ export default function ProductsTable({ produtos }: { produtos: ProductsTablePro
 
   // Extrair segmentos e linhas únicos para os filtros dropdown
   const uniqueSegments = useMemo(() => {
-    const segments = new Set<string>();
+    const segments = new Set<{ id: number; name: string; slug: string; uuid: string }>();
     produtos.forEach(produto => {
       produto.segments?.forEach(segment => {
-        segments.add(segment.name!);
+        segments.add({ id: segment.id!, name: segment.name!, slug: segment.slug!, uuid: crypto.randomUUID() });
       });
     });
-    return Array.from(segments).sort();
+    return Array.from(segments).sort((a, b) => a.name.localeCompare(b.name));
   }, [produtos]);
 
   const uniqueLines = useMemo(() => {
-    const lines = new Set<string>();
+    const lines = new Set<{ id: number; name: string; slug: string; uuid: string }>();
     produtos.forEach(produto => {
       produto.product_lines?.forEach(line => {
-        lines.add(line.name!);
+        lines.add({ id: line.id!, name: line.name!, slug: line.slug!, uuid: crypto.randomUUID() });
       });
     });
-    return Array.from(lines).sort();
+    return Array.from(lines).sort((a, b) => a.name.localeCompare(b.name));
   }, [produtos]);
 
   const handleSegmentChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSegmentoFilter(e.target.value);
-  }, [
-    setSegmentoFilter
-  ]);
+    const selectedSegment = uniqueSegments.find(segment => segment.name === e.target.value);
+    setSegmentoFilter(selectedSegment ? selectedSegment.name : '');
+  }, [uniqueSegments]);
 
   const handleLineChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
-    setLinhaFilter(e.target.value);
-  }, [
-    setLinhaFilter
-  ]);
+    const selectedLine = uniqueLines.find(line => line.name === e.target.value);
+    setLinhaFilter(selectedLine ? selectedLine.name : '');
+  }, [uniqueLines]);
 
   return (
     <div className="p-8 mt-6">
@@ -149,7 +147,7 @@ export default function ProductsTable({ produtos }: { produtos: ProductsTablePro
             >
               <option value="">Todos os Segmentos</option>
               {uniqueSegments.map(segment => (
-                <option key={segment} value={segment}>{segment}</option>
+                <option key={segment.uuid} value={segment.name}>{segment.name}</option>
               ))}
             </select>
           </div>
@@ -165,7 +163,7 @@ export default function ProductsTable({ produtos }: { produtos: ProductsTablePro
             >
               <option value="">Todas as Linhas</option>
               {uniqueLines.map(line => (
-                <option key={line} value={line}>{line}</option>
+                <option key={line.uuid} value={line.name}>{line.name}</option>
               ))}
             </select>
           </div>
