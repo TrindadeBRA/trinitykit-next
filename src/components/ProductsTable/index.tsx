@@ -64,10 +64,17 @@ export default function ProductsTable({ produtos }: { produtos: ProductsTablePro
         header: 'Sublinhas',
       }),
     ],
-    [columnHelper]
+    []
   );
 
   console.log('Renderizando ProductsTable com produtos:', produtos);
+
+  const tableState = useMemo(() => ({
+    columnFilters: [
+      { id: 'segmentos', value: segmentoFilter },
+      { id: 'linhas', value: linhaFilter },
+    ],
+  }), [segmentoFilter, linhaFilter]);
 
   const table = useReactTable({
     data: produtos,
@@ -79,15 +86,7 @@ export default function ProductsTable({ produtos }: { produtos: ProductsTablePro
     filterFns: {
       fuzzy: fuzzyFilter,
     },
-    state: {
-      globalFilter: '',
-      columnFilters: [
-        { id: 'segmentos', value: segmentoFilter },
-        { id: 'linhas', value: linhaFilter },
-      ],
-    },
-    onGlobalFilterChange: () => {},
-    // Definir configurações padrão de paginação
+    state: tableState,
     initialState: {
       pagination: {
         pageSize: 500,

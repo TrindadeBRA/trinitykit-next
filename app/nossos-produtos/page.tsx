@@ -10,7 +10,6 @@ export const metadata = {
 async function getProdutos(): Promise<getProductsResponse> {
   try {
     const response = await customFetch<getProductsResponse>(getGetProductsUrl());
-    console.log(response);
     return response;
   } catch (error) {
     console.error('Erro ao buscar produtos:', error);
