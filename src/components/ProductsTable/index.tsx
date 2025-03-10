@@ -64,7 +64,7 @@ export default function ProductsTable({ produtos }: { produtos: ProductsTablePro
     []
   );
 
-  console.log('Renderizando ProductsTable com produtos:', produtos);
+  console.log('Renderizando ProductsTable com produtos:');
 
   const tableState = useMemo(() => ({
     columnFilters: [
@@ -248,7 +248,7 @@ export default function ProductsTable({ produtos }: { produtos: ProductsTablePro
           <tbody className="divide-y divide-gray-600 bg-gray-800">
             {table.getRowModel().rows.length > 0 ? (
               table.getRowModel().rows.map(row => {
-                console.log('Renderizando linha:', row);
+                console.log('Renderizando linha:');
                 return (
                   <tr key={row.id} className="text-gray-300 hover:bg-gray-700">
                     {row.getVisibleCells().map(cell => (
