@@ -64,18 +64,13 @@ export default function ProductsTable({ produtos }: { produtos: ProductsTablePro
         header: 'Sublinhas',
       }),
     ],
-    []
+    [columnHelper]
   );
 
-  // Memoize os dados da tabela para evitar recálculos
-  const memoizedData = useMemo(() => {
-    return produtos; // Removido o filtro de busca
-  }, [produtos]);
-  
   console.log('Renderizando ProductsTable com produtos:', produtos);
 
   const table = useReactTable({
-    data: memoizedData,
+    data: produtos,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -126,11 +121,15 @@ export default function ProductsTable({ produtos }: { produtos: ProductsTablePro
 
   const handleSegmentChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
     setSegmentoFilter(e.target.value);
-  }, []);
+  }, [
+    setSegmentoFilter
+  ]);
 
   const handleLineChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
     setLinhaFilter(e.target.value);
-  }, []);
+  }, [
+    setLinhaFilter
+  ]);
 
   return (
     <div className="p-8 mt-6">
