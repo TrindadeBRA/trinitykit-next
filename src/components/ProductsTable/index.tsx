@@ -91,6 +91,7 @@ export default function ProductsTable({ produtos }: { produtos: ProductsTablePro
       pagination: {
         pageSize: 500,
       },
+      sorting: [{ id: 'segmentos', desc: false }], // Ordenar por segmentos
     },
   });
 
