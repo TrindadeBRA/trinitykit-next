@@ -1,5 +1,5 @@
 'use client';
-import { useState, useMemo, useCallback, useEffect } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import {
   createColumnHelper,
   getCoreRowModel,
@@ -10,36 +10,22 @@ import {
   FilterFn,
   flexRender,
 } from '@tanstack/react-table';
-import { ChevronUp, ChevronDown, Search, Filter } from 'lucide-react';
+import { ChevronUp, ChevronDown, Filter } from 'lucide-react';
 import { GetProducts200DataItem } from "@/src/services/model";
 
 type ProductsTableProps = GetProducts200DataItem;
 
 
 
-const fuzzyFilter: FilterFn<any> = (row, columnId, value) => {
+const fuzzyFilter: FilterFn<ProductsTableProps> = (row, columnId, value) => {
   const itemValue = row.getValue(columnId)?.toString()?.toLowerCase();
-  return itemValue?.includes(value.toLowerCase());
+  return itemValue ? itemValue.includes(value.toLowerCase()) : false;
 };
 
 export default function ProductsTable({ produtos }: { produtos: ProductsTableProps[] }) {
-  // Estado para o valor do input de pesquisa
-  const [searchValue, setSearchValue] = useState('');
-  // Estado separado para o filtro global que será aplicado com debounce
-  const [globalFilter, setGlobalFilter] = useState('');
   
   const [segmentoFilter, setSegmentoFilter] = useState('');
   const [linhaFilter, setLinhaFilter] = useState('');
-
-  // Aplicar debounce na pesquisa para evitar travamentos
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setGlobalFilter(searchValue);
-    }, 300); // 300ms de debounce
-    
-    return () => clearTimeout(timeoutId);
-  }, [searchValue]);
-
   const columnHelper = createColumnHelper<ProductsTableProps>();
   
   const columns = useMemo(
@@ -61,16 +47,16 @@ export default function ProductsTable({ produtos }: { produtos: ProductsTablePro
         id: 'segmentos',
         header: 'Segmentos',
         filterFn: (row, columnId, filterValue) => {
-          const segments = row.original.segments?.map(s => s.name.toLowerCase()) || [];
-          return filterValue === '' || segments.some(s => s.includes(filterValue.toLowerCase()));
+          const segments = row.original.segments?.map(s => s?.name?.toLowerCase()) || [];
+          return filterValue === '' || segments.some(s => s?.includes(filterValue.toLowerCase()));
         }
       }),
       columnHelper.accessor(row => row.product_lines?.map(l => l.name).join(', '), {
         id: 'linhas',
         header: 'Linhas de Produto',
         filterFn: (row, columnId, filterValue) => {
-          const lines = row.original.product_lines?.map(l => l.name.toLowerCase()) || [];
-          return filterValue === '' || lines.some(l => l.includes(filterValue.toLowerCase()));
+          const lines = row.original.product_lines?.map(l => l?.name?.toLowerCase()) || [];
+          return filterValue === '' || lines.some(l => l?.includes(filterValue.toLowerCase()));
         }
       }),
       columnHelper.accessor(row => row.product_lines?.flatMap(l => l.children?.map(c => c.name) || []).join(', '), {
@@ -83,12 +69,11 @@ export default function ProductsTable({ produtos }: { produtos: ProductsTablePro
 
   // Memoize os dados da tabela para evitar recálculos
   const memoizedData = useMemo(() => {
-    return produtos.filter(produto => {
-      // Filtrar produtos com base no valor de busca
-      return produto.title.toLowerCase().includes(globalFilter.toLowerCase());
-    });
-  }, [produtos, globalFilter]);
+    return produtos; // Removido o filtro de busca
+  }, [produtos]);
   
+  console.log('Renderizando ProductsTable com produtos:', produtos);
+
   const table = useReactTable({
     data: memoizedData,
     columns,
@@ -100,27 +85,30 @@ export default function ProductsTable({ produtos }: { produtos: ProductsTablePro
       fuzzy: fuzzyFilter,
     },
     state: {
-      globalFilter,
+      globalFilter: '',
       columnFilters: [
         { id: 'segmentos', value: segmentoFilter },
         { id: 'linhas', value: linhaFilter },
       ],
     },
-    onGlobalFilterChange: setGlobalFilter,
+    onGlobalFilterChange: () => {},
     // Definir configurações padrão de paginação
     initialState: {
       pagination: {
-        pageSize: 10,
+        pageSize: 500,
       },
     },
   });
+
+  // Log para verificar a quantidade de linhas
+  console.log('Número de linhas na tabela:', table.getRowModel().rows.length);
 
   // Extrair segmentos e linhas únicos para os filtros dropdown
   const uniqueSegments = useMemo(() => {
     const segments = new Set<string>();
     produtos.forEach(produto => {
       produto.segments?.forEach(segment => {
-        segments.add(segment.name);
+        segments.add(segment.name!);
       });
     });
     return Array.from(segments).sort();
@@ -130,16 +118,11 @@ export default function ProductsTable({ produtos }: { produtos: ProductsTablePro
     const lines = new Set<string>();
     produtos.forEach(produto => {
       produto.product_lines?.forEach(line => {
-        lines.add(line.name);
+        lines.add(line.name!);
       });
     });
     return Array.from(lines).sort();
   }, [produtos]);
-
-  // Memoize os handlers para evitar recriações desnecessárias
-  const handleSearchChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value);
-  }, []);
 
   const handleSegmentChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
     setSegmentoFilter(e.target.value);
@@ -150,22 +133,10 @@ export default function ProductsTable({ produtos }: { produtos: ProductsTablePro
   }, []);
 
   return (
-    <div className="p-8">
+    <div className="p-8 mt-6">
       <h1 className="text-2xl font-bold mb-6 text-white">Nossos Produtos</h1>
       
       <div className="mb-6 flex flex-col md:flex-row gap-4">
-        <div className="relative flex-1">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <Search className="h-5 w-5 text-gray-400" />
-          </div>
-          <input
-            type="text"
-            value={searchValue}
-            onChange={handleSearchChange}
-            placeholder="Buscar em todos os campos..."
-            className="pl-10 p-2 w-full bg-gray-700 border border-gray-600 rounded-md text-white focus:ring-blue-500 focus:border-blue-500"
-          />
-        </div>
         
         <div className="flex flex-col md:flex-row gap-4">
           <div className="relative">
@@ -230,15 +201,18 @@ export default function ProductsTable({ produtos }: { produtos: ProductsTablePro
           </thead>
           <tbody className="divide-y divide-gray-600 bg-gray-800">
             {table.getRowModel().rows.length > 0 ? (
-              table.getRowModel().rows.map(row => (
-                <tr key={row.id} className="text-gray-300 hover:bg-gray-700">
-                  {row.getVisibleCells().map(cell => (
-                    <td key={cell.id} className="px-6 py-4 whitespace-nowrap">
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </td>
-                  ))}
-                </tr>
-              ))
+              table.getRowModel().rows.map(row => {
+                console.log('Renderizando linha:', row);
+                return (
+                  <tr key={row.id} className="text-gray-300 hover:bg-gray-700">
+                    {row.getVisibleCells().map(cell => (
+                      <td key={cell.id} className="px-6 py-4 whitespace-nowrap">
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </td>
+                    ))}
+                  </tr>
+                );
+              })
             ) : (
               <tr>
                 <td 
@@ -303,7 +277,7 @@ export default function ProductsTable({ produtos }: { produtos: ProductsTablePro
                 table.setPageSize(Number(e.target.value));
               }}
             >
-              {[10, 20, 30, 40, 50].map(pageSize => (
+              {[500, 1000, 2000, 3000, 4000, 5000].map(pageSize => (
                 <option key={pageSize} value={pageSize}>
                   Mostrar {pageSize}
                 </option>
