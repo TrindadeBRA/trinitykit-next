@@ -8,10 +8,10 @@ import LanguageSwitcher from '../LanguageSwitcher'
 
 const navigation = [
   { name: 'Home', href: '/' },
+  { name: 'Quem Somos', href: '/quem-somos' },
   { name: 'Nossos Produtos', href: '/nossos-produtos' },
   { name: 'Blog', href: '/blog' },
   { name: 'Mercados', href: '/mercados' },
-  { name: 'Quem Somos', href: '/quem-somos' },
   { name: 'Contato', href: '/contato' },
 ]
 

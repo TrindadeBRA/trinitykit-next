@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/src/components/Navigation";
 import Script from "next/script";
+import { WhatsAppFloat } from "../src/components/WhatsAppFloat";
+import Footer from "@/src/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -45,8 +47,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased !bg-white !text-black`}
       >
+        <WhatsAppFloat 
+          whatsappNumber="5511999999999" 
+          message="Olá! Vim pelo site e gostaria de mais informações."
+        />
         <Navigation />
         {children}
+        <Footer />
       </body>
     </html>
   );
