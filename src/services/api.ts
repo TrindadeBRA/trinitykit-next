@@ -10,6 +10,9 @@ import type {
   GetConfigs401,
   GetPostSlugs200,
   GetPostSlugs401,
+  GetProductLineSlug200,
+  GetProductLineSlug401,
+  GetProductLineSlug404,
   GetProducts200,
   GetProducts401,
   GetSegmentSlug200,
@@ -117,58 +120,6 @@ export const getProducts = async ( options?: RequestInit): Promise<getProductsRe
 
 
 /**
- * Retorna uma lista de produtos filtrados por um segmento específico, organizados por linhas de produto
- * @summary Listar produtos por segmento
- */
-export type getSegmentSlugResponse200 = {
-  data: GetSegmentSlug200
-  status: 200
-}
-
-export type getSegmentSlugResponse401 = {
-  data: GetSegmentSlug401
-  status: 401
-}
-
-export type getSegmentSlugResponse404 = {
-  data: GetSegmentSlug404
-  status: 404
-}
-    
-export type getSegmentSlugResponseComposite = getSegmentSlugResponse200 | getSegmentSlugResponse401 | getSegmentSlugResponse404;
-    
-export type getSegmentSlugResponse = getSegmentSlugResponseComposite & {
-  headers: Headers;
-}
-
-export const getGetSegmentSlugUrl = (slug: string,) => {
-
-
-  
-
-  return `/segment/${slug}`
-}
-
-export const getSegmentSlug = async (slug: string, options?: RequestInit): Promise<getSegmentSlugResponse> => {
-  
-  const res = await fetch(getGetSegmentSlugUrl(slug),
-  {      
-    ...options,
-    method: 'GET'
-    
-    
-  }
-)
-
-  const body = [204, 205, 304].includes(res.status) ? null : await res.text()
-  const data: getSegmentSlugResponse['data'] = body ? JSON.parse(body) : {}
-
-  return { data, status: res.status, headers: res.headers } as getSegmentSlugResponse
-}
-
-
-
-/**
  * Cria um novo registro de contato no WordPress
  * @summary Enviar formulário de contato
  */
@@ -269,4 +220,108 @@ export const getPostSlugs = async ( options?: RequestInit): Promise<getPostSlugs
   const data: getPostSlugsResponse['data'] = body ? JSON.parse(body) : {}
 
   return { data, status: res.status, headers: res.headers } as getPostSlugsResponse
+}
+
+
+
+/**
+ * Retorna uma lista de produtos filtrados por uma linha de produto específica.
+ * @summary Obter produtos por linha
+ */
+export type getProductLineSlugResponse200 = {
+  data: GetProductLineSlug200
+  status: 200
+}
+
+export type getProductLineSlugResponse401 = {
+  data: GetProductLineSlug401
+  status: 401
+}
+
+export type getProductLineSlugResponse404 = {
+  data: GetProductLineSlug404
+  status: 404
+}
+    
+export type getProductLineSlugResponseComposite = getProductLineSlugResponse200 | getProductLineSlugResponse401 | getProductLineSlugResponse404;
+    
+export type getProductLineSlugResponse = getProductLineSlugResponseComposite & {
+  headers: Headers;
+}
+
+export const getGetProductLineSlugUrl = (slug: string,) => {
+
+
+  
+
+  return `/product-line/${slug}`
+}
+
+export const getProductLineSlug = async (slug: string, options?: RequestInit): Promise<getProductLineSlugResponse> => {
+  
+  const res = await fetch(getGetProductLineSlugUrl(slug),
+  {      
+    ...options,
+    method: 'GET'
+    
+    
+  }
+)
+
+  const body = [204, 205, 304].includes(res.status) ? null : await res.text()
+  const data: getProductLineSlugResponse['data'] = body ? JSON.parse(body) : {}
+
+  return { data, status: res.status, headers: res.headers } as getProductLineSlugResponse
+}
+
+
+
+/**
+ * Retorna uma lista de produtos filtrados por um segmento específico, organizados por linhas de produto
+ * @summary Listar produtos por segmento
+ */
+export type getSegmentSlugResponse200 = {
+  data: GetSegmentSlug200
+  status: 200
+}
+
+export type getSegmentSlugResponse401 = {
+  data: GetSegmentSlug401
+  status: 401
+}
+
+export type getSegmentSlugResponse404 = {
+  data: GetSegmentSlug404
+  status: 404
+}
+    
+export type getSegmentSlugResponseComposite = getSegmentSlugResponse200 | getSegmentSlugResponse401 | getSegmentSlugResponse404;
+    
+export type getSegmentSlugResponse = getSegmentSlugResponseComposite & {
+  headers: Headers;
+}
+
+export const getGetSegmentSlugUrl = (slug: string,) => {
+
+
+  
+
+  return `/segment/${slug}`
+}
+
+export const getSegmentSlug = async (slug: string, options?: RequestInit): Promise<getSegmentSlugResponse> => {
+  
+  const res = await fetch(getGetSegmentSlugUrl(slug),
+  {      
+    ...options,
+    method: 'GET'
+    
+    
+  }
+)
+
+  const body = [204, 205, 304].includes(res.status) ? null : await res.text()
+  const data: getSegmentSlugResponse['data'] = body ? JSON.parse(body) : {}
+
+  return { data, status: res.status, headers: res.headers } as getSegmentSlugResponse
 }
