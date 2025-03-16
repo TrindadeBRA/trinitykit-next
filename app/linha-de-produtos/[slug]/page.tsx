@@ -1,5 +1,5 @@
 import IntroProductLine from "@/src/components/IntroProductLine";
-import { getGetProductLineSlugUrl, getProductLineSlugResponse } from "@/src/services/api";
+import { getGetProductLineSlugUrl, getProductLineSlugResponse, getGetProductLineSlugsUrl, getProductLineSlugsResponse } from "@/src/services/api";
 import customFetch from "@/src/services/custom-fetch";
 import type { GetProductLineSlug200Data, GetProductLineSlug200DataSubcategoriesItem, GetProductLineSlug200DataSubcategoriesItemProductsItem } from '@/src/services/model';
 import { Metadata } from 'next';
@@ -57,8 +57,6 @@ export default async function Page({ params }: { params: Promise<ProductLineProp
 
   return (
     <div>
-      <h1>Linha de produtos</h1>
-
       <IntroProductLine
         invert={false}
         title={data.parent?.name || ''}
@@ -66,58 +64,59 @@ export default async function Page({ params }: { params: Promise<ProductLineProp
         imagesUrls={data.parent?.images || []}
       />
 
-      <div className="flex flex-wrap w-full gap-x-8 gap-y-24 px-8 lg:px-0 container max-w-7xl mx-auto">
-        {data?.subcategories?.map((category: GetProductLineSlug200DataSubcategoriesItem) => {
-          
-          const getColumnClass = (length: number) => {
-            const baseClasses = "w-full transition-all duration-300"; // classes base para todos os casos
+      <>
+        <div className="flex flex-wrap w-full gap-x-8 gap-y-24 px-8 lg:px-0 container max-w-7xl mx-auto">
+          {data?.subcategories?.map((category: GetProductLineSlug200DataSubcategoriesItem) => {
             
-            const columnConfig = {
-              1: `${baseClasses}`,
-              2: `${baseClasses} md:w-[calc(50%-16px)]`,
-              3: `${baseClasses} md:w-[calc(50%-16px)] lg:w-[calc(33.333%-22px)]`,
+            const getColumnClass = (length: number) => {
+              const baseClasses = "w-full transition-all duration-300"; // classes base para todos os casos
+              
+              const columnConfig = {
+                1: `${baseClasses}`,
+                2: `${baseClasses} md:w-[calc(50%-16px)]`,
+                3: `${baseClasses} md:w-[calc(50%-16px)] lg:w-[calc(33.333%-22px)]`,
+              };
+              
+              return columnConfig[length as keyof typeof columnConfig] || columnConfig[3];
             };
-            
-            return columnConfig[length as keyof typeof columnConfig] || columnConfig[3];
-          };
 
-          return (
-            <div
-              key={category.slug}
-              className={getColumnClass(data?.subcategories?.length || 0)}
-            >
-              <h3 className="text-lg text-left font-light mb-2 text-[#4d4d4d]">{category.name}</h3>
-              <div className="h-[3px] w-full bg-gradient-to-r from-[#f8e91f] to-[#6a2771]"></div>
-              <table className="w-full table-fixed mt-4">
-                <thead>
-                  <tr className="text-sm uppercase mt-2">
-                    <th className="py-2 text-left w-1/2">Produto</th>
-                    <th className="py-2 text-center w-1/2">CAS Number</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {category?.products?.map((product: GetProductLineSlug200DataSubcategoriesItemProductsItem) => (
-                    <tr key={product.id} className="border-y-2 border-gray-300 py-2 text-xs">
-                      <td className="text-left py-2 pr-2">
-                        <div className="truncate">{product.title}</div>
-                      </td>
-                      <td className="text-center py-2">
-                        <div className="truncate">{product.cas_number}</div>
-                      </td>
+            return (
+              <div
+                key={category.slug}
+                className={getColumnClass(data?.subcategories?.length || 0)}
+              >
+                <h3 className="text-lg text-left font-light mb-2 text-[#4d4d4d]">{category.name}</h3>
+                <div className="h-[3px] w-full bg-gradient-to-r from-[#f8e91f] to-[#6a2771]"></div>
+                <table className="w-full table-fixed mt-4">
+                  <thead>
+                    <tr className="text-sm uppercase mt-2">
+                      <th className="py-2 text-left w-1/2">Produto</th>
+                      <th className="py-2 text-center w-1/2">CAS Number</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          );
-        })}
-      </div>
-
-      <div className="container flex justify-center mx-auto mt-8">
-        <a href="#" className="text-sm/6 font-semibold text-gray-900 px-8 text-center bg-yellow-300 py-2 rounded-lg ">
-          clique para solicitar amostra <span aria-hidden="true">→</span>
-        </a>
-      </div>
+                  </thead>
+                  <tbody>
+                    {category?.products?.map((product: GetProductLineSlug200DataSubcategoriesItemProductsItem) => (
+                      <tr key={product.id} className="border-y-2 border-gray-300 py-2 text-xs">
+                        <td className="text-left py-2 pr-2">
+                          <div className="truncate">{product.title}</div>
+                        </td>
+                        <td className="text-center py-2">
+                          <div className="truncate">{product.cas_number}</div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            );
+          })}
+        </div>
+        <div className="container flex justify-center mx-auto mt-8">
+          <a href="#" className="text-sm/6 font-semibold text-gray-900 px-8 text-center bg-yellow-300 py-2 rounded-lg ">
+            clique para solicitar amostra <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </>
 
 
     </div>
@@ -125,7 +124,22 @@ export default async function Page({ params }: { params: Promise<ProductLineProp
 }
 
 export async function generateStaticParams() {
-  return [
-    { slug: "tk-comp" },
-  ];
+  try {
+    const { data } = await customFetch<getProductLineSlugsResponse>(getGetProductLineSlugsUrl());
+
+    console.log("Slugs encontrados: ", data);
+    
+    if (!data || !Array.isArray(data)) {
+      console.error('Dados de slugs não encontrados ou formato inválido');
+      return [];
+    }
+    
+    return data.map(item => ({
+      slug: item.slug
+    }));
+
+  } catch (error) {
+    console.error('Erro ao buscar slugs das linhas de produtos:', error);
+    return [];
+  }
 }

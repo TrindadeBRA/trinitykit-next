@@ -13,6 +13,8 @@ import type {
   GetProductLineSlug200,
   GetProductLineSlug401,
   GetProductLineSlug404,
+  GetProductLineSlugs200,
+  GetProductLineSlugs401,
   GetProducts200,
   GetProducts401,
   GetSegmentSlug200,
@@ -324,4 +326,51 @@ export const getSegmentSlug = async (slug: string, options?: RequestInit): Promi
   const data: getSegmentSlugResponse['data'] = body ? JSON.parse(body) : {}
 
   return { data, status: res.status, headers: res.headers } as getSegmentSlugResponse
+}
+
+
+
+/**
+ * Retorna uma lista de slugs apenas das linhas de produtos que são categorias pai (não inclui subcategorias)
+ * @summary Listar slugs das linhas de produtos principais
+ */
+export type getProductLineSlugsResponse200 = {
+  data: GetProductLineSlugs200
+  status: 200
+}
+
+export type getProductLineSlugsResponse401 = {
+  data: GetProductLineSlugs401
+  status: 401
+}
+    
+export type getProductLineSlugsResponseComposite = getProductLineSlugsResponse200 | getProductLineSlugsResponse401;
+    
+export type getProductLineSlugsResponse = getProductLineSlugsResponseComposite & {
+  headers: Headers;
+}
+
+export const getGetProductLineSlugsUrl = () => {
+
+
+  
+
+  return `/product-line-slugs`
+}
+
+export const getProductLineSlugs = async ( options?: RequestInit): Promise<getProductLineSlugsResponse> => {
+  
+  const res = await fetch(getGetProductLineSlugsUrl(),
+  {      
+    ...options,
+    method: 'GET'
+    
+    
+  }
+)
+
+  const body = [204, 205, 304].includes(res.status) ? null : await res.text()
+  const data: getProductLineSlugsResponse['data'] = body ? JSON.parse(body) : {}
+
+  return { data, status: res.status, headers: res.headers } as getProductLineSlugsResponse
 }

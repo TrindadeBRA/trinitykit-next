@@ -75,7 +75,7 @@ export default function IntroProductLine({ invert = false, title, description, i
                                 <div className="relative">
                                     <Image
                                         alt=""
-                                        src={imagesUrls[0]}
+                                        src={imagesUrls[0] || 'https://placehold.co/500x500.png'}
                                         className="aspect-2/3 w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
                                         width={400}
                                         height={528}
@@ -87,7 +87,7 @@ export default function IntroProductLine({ invert = false, title, description, i
                                 <div className="relative">
                                     <Image
                                         alt=""
-                                        src={imagesUrls[1]}
+                                        src={imagesUrls[1] || 'https://placehold.co/500x500.png'}
                                         className="aspect-2/3 w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
                                         width={400}
                                         height={528}
@@ -97,7 +97,7 @@ export default function IntroProductLine({ invert = false, title, description, i
                                 <div className="relative">
                                     <Image
                                         alt=""
-                                        src={imagesUrls[2]}
+                                        src={imagesUrls[2] || 'https://placehold.co/500x500.png'}
                                         className="aspect-2/3 w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
                                         width={400}
                                         height={528}
@@ -109,7 +109,7 @@ export default function IntroProductLine({ invert = false, title, description, i
                                 <div className="relative">
                                     <Image
                                         alt=""
-                                        src={imagesUrls[3]}
+                                        src={imagesUrls[3] || 'https://placehold.co/500x500.png'}
                                         className="aspect-2/3 w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
                                         width={400}
                                         height={528}
@@ -119,7 +119,7 @@ export default function IntroProductLine({ invert = false, title, description, i
                                 <div className="relative">
                                     <Image
                                         alt=""
-                                        src={imagesUrls[4]}
+                                        src={imagesUrls[4] || 'https://placehold.co/500x500.png'}
                                         className="aspect-2/3 w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
                                         width={400}
                                         height={528}
