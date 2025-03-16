@@ -3,21 +3,14 @@ import { getGetProductLineSlugUrl, getProductLineSlugResponse } from "@/src/serv
 import customFetch from "@/src/services/custom-fetch";
 import type { GetProductLineSlug200Data, GetProductLineSlug200DataSubcategoriesItem, GetProductLineSlug200DataSubcategoriesItemProductsItem } from '@/src/services/model';
 import { Metadata } from 'next';
-import { twMerge } from "tailwind-merge";
 
 interface ProductLineProps {
   slug?: string;
 }
 
-// Traduzir slugs
-export const slugToName = {
-  "tk-comp": "TK Comp",
-}
-
 async function getProductLineInfo(slug: string): Promise<getProductLineSlugResponse> {
   try {
     const response = await customFetch<getProductLineSlugResponse>(getGetProductLineSlugUrl(slug));
-    console.log(response?.data);
     return response;
   } catch (error) {
     console.error('Erro ao buscar produtos:', error);
@@ -28,15 +21,13 @@ async function getProductLineInfo(slug: string): Promise<getProductLineSlugRespo
 export async function generateMetadata(
   { params }: { params: Promise<ProductLineProps> }
 ): Promise<Metadata> {
-  const resolvedParams = await params;
-  const { slug } = resolvedParams;
-
-  const segmentName = slug ? slugToName[slug as keyof typeof slugToName] || slug : 'Segmento Desconhecido';
-  const segmentNameLower = segmentName.toLowerCase();
+  const { slug } = await params;
+  const { data } = await getProductLineInfo(slug as string);
+  const description = (data as GetProductLineSlug200Data)?.parent?.description?.replace(/<[^>]*>?/g, '') || '';
 
   return {
-    title: `Tiken - Linha de produtos - ${segmentName}`,
-    description: `Explore nossa linha de produtos ${segmentNameLower}.`,
+    title: `Tiken - Linha de produtos - ${(data as GetProductLineSlug200Data)?.parent?.name || ''}`,
+    description: description,
   };
 }
 
@@ -75,40 +66,44 @@ export default async function Page({ params }: { params: Promise<ProductLineProp
         imagesUrls={data.parent?.images || []}
       />
 
-      <div className="flex gap-x-4 gap-y-12 md:gap-y-6 px-8 flex-wrap container mx-auto">
-        
+      <div className="flex flex-wrap w-full gap-x-8 gap-y-24 px-8 lg:px-0 container max-w-7xl mx-auto">
         {data?.subcategories?.map((category: GetProductLineSlug200DataSubcategoriesItem) => {
-          const getMaxWidthClass = (length: number) => {
-            const widthMap: Record<number, string> = {
-              1: "max-w-full",
-              2: "max-w-1/2",
-              3: "max-w-1/3"
+          
+          const getColumnClass = (length: number) => {
+            const baseClasses = "w-full transition-all duration-300"; // classes base para todos os casos
+            
+            const columnConfig = {
+              1: `${baseClasses}`,
+              2: `${baseClasses} md:w-[calc(50%-16px)]`,
+              3: `${baseClasses} md:w-[calc(50%-16px)] lg:w-[calc(33.333%-22px)]`,
             };
-            return `max-w-full md:${widthMap[length] || "max-w-1/3"}`;
+            
+            return columnConfig[length as keyof typeof columnConfig] || columnConfig[3];
           };
 
-          const maxWidthClass = data?.subcategories?.length 
-            ? getMaxWidthClass(data.subcategories.length)
-            : "";
-
           return (
-            <div key={category.slug} className={twMerge(
-              "flex-1 w-full md:w-auto",
-              maxWidthClass
-            )}>
-              <h3 className="text-lg text-center font-semibold mb-2">{category.name}</h3>
-              <table className="border-collapse border border-gray-200 w-full">
-                <thead className="bg-gray-100">
-                  <tr>
-                    <th className="border border-gray-300 px-4 py-2">Produto</th>
-                    <th className="border border-gray-300 px-4 py-2">CAS Number</th>
+            <div
+              key={category.slug}
+              className={getColumnClass(data?.subcategories?.length || 0)}
+            >
+              <h3 className="text-lg text-left font-light mb-2 text-[#4d4d4d]">{category.name}</h3>
+              <div className="h-[3px] w-full bg-gradient-to-r from-[#f8e91f] to-[#6a2771]"></div>
+              <table className="w-full table-fixed mt-4">
+                <thead>
+                  <tr className="text-sm uppercase mt-2">
+                    <th className="py-2 text-left w-1/2">Produto</th>
+                    <th className="py-2 text-center w-1/2">CAS Number</th>
                   </tr>
                 </thead>
                 <tbody>
                   {category?.products?.map((product: GetProductLineSlug200DataSubcategoriesItemProductsItem) => (
-                    <tr key={product.id} className="hover:bg-gray-50">
-                      <td className="border border-gray-300 px-4 py-2">{product.title}</td>
-                      <td className="border border-gray-300 px-4 py-2">{product.cas_number}</td>
+                    <tr key={product.id} className="border-y-2 border-gray-300 py-2 text-xs">
+                      <td className="text-left py-2 pr-2">
+                        <div className="truncate">{product.title}</div>
+                      </td>
+                      <td className="text-center py-2">
+                        <div className="truncate">{product.cas_number}</div>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -117,6 +112,13 @@ export default async function Page({ params }: { params: Promise<ProductLineProp
           );
         })}
       </div>
+
+      <div className="container flex justify-center mx-auto mt-8">
+        <a href="#" className="text-sm/6 font-semibold text-gray-900 px-8 text-center bg-yellow-300 py-2 rounded-lg ">
+          clique para solicitar amostra <span aria-hidden="true">→</span>
+        </a>
+      </div>
+
 
     </div>
   );
