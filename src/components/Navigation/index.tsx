@@ -52,7 +52,7 @@ export default function Navigation() {
 
         <div className="flex lg:flex-1">
           <a href="#" className="-m-1.5 p-1.5">
-            <span className="sr-only">Your Company</span>
+            <span className="sr-only">Tiken</span>
             <Image
               alt=""
               src={isGradient ? '/assets/logo-header-white.png' : '/assets/logo-header.png'}
@@ -69,7 +69,7 @@ export default function Navigation() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(true)}
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 cursor-pointer"
+            className={twMerge("-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 cursor-pointer", isGradient && "text-white")}
           >
             <span className="sr-only">Open main menu</span>
             <Bars3Icon aria-hidden="true" className="size-6" />
@@ -83,10 +83,6 @@ export default function Navigation() {
             </a>
           ))}
         </div>
-
-        {/* <div className="hidden lg:flex flex-1 justify-end">
-          <a href={"/#contato"} className={twMerge("font-semibold flex items-center gap-x-2 bg-gradient-custom text-white px-3 py-2 rounded-lg", isGradient && "bg-white text-gray-900")}>fale conosco <ArrowRightIcon className="size-4" /></a>
-        </div> */}
 
         <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center">
           <a href={"/#contato"} className={twMerge("mr-4 font-semibold flex items-center gap-x-2 bg-gradient-custom text-white px-3 py-2 rounded-lg", isGradient && "bg-white text-gray-900")}>fale conosco <ArrowRightIcon className="size-4" /></a>
@@ -104,10 +100,10 @@ export default function Navigation() {
         <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
+              <span className="sr-only">Tiken</span>
               <Image
                 alt=""
-                src={isGradient ? '/assets/logo-header-white.png' : '/assets/logo-header.png'}
+                src={isGradient ? '/assets/logo-header.png' : '/assets/logo-header.png'}
                 className="h-8 w-auto"
                 width={32}
                 height={32}
@@ -138,6 +134,9 @@ export default function Navigation() {
               </div>
               <div className="py-6">
                 <LanguageSwitcher />
+              </div>
+              <div className="py-6 flex items-center">
+                <a href={"/#contato"} className={twMerge("font-semibold flex items-center gap-x-2 text-white px-3 py-2 rounded-lg bg-gradient-custom")}>fale conosco <ArrowRightIcon className="size-4" /></a>
               </div>
             </div>
           </div>
