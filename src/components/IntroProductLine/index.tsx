@@ -55,6 +55,7 @@ export default function IntroProductLine({ invert = false, title, description, i
                     <div className={`mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-center ${invert ? 'flex-row-reverse' : ''}`}>
                         {/* COLUNA 01 */}
                         <div className="relative w-full lg:max-w-xl lg:shrink-0 xl:max-w-2xl">
+                            <p className="text-lg font-semibold text-gray-900 pb-2">Linha de Produtos</p>
                             <h1 className={`text-5xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-7xl ${invert ? 'text-right' : 'text-left'}`}>
                                 {title}
                             </h1>
@@ -62,14 +63,8 @@ export default function IntroProductLine({ invert = false, title, description, i
                                 dangerouslySetInnerHTML={{ __html: description }}
                             ></div>
                             <div className={`mt-10 flex items-center gap-x-6 ${invert ? 'justify-end' : 'justify-start'}`}>
-                                <a
-                                    href="#"
-                                    className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                >
-                                    Get started
-                                </a>
                                 <a href="#" className="text-sm/6 font-semibold text-gray-900">
-                                    Live demo <span aria-hidden="true">→</span>
+                                    Solicitar amostra <span aria-hidden="true">→</span>
                                 </a>
                             </div>
                         </div>
