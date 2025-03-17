@@ -16,7 +16,7 @@ export default function OurProductsHero({ heroData }: OurProductsHeroProps) {
 
     return (
 
-        <div className="relative isolate">
+        <div className="relative isolate lg:h-[calc(100vh-96px)] lg:flex lg:items-center">
             <svg
                 aria-hidden="true"
                 className="absolute inset-x-0 top-0 -z-10 h-[64rem] w-full stroke-gray-200 [mask-image:radial-gradient(32rem_32rem_at_center,white,transparent)]"
@@ -53,8 +53,8 @@ export default function OurProductsHero({ heroData }: OurProductsHeroProps) {
                     className="aspect-801/1036 w-[50.0625rem] bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-30"
                 />
             </div>
-            <div className="overflow-hidden">
-                <div className="mx-auto max-w-7xl px-6 pt-36 pb-32 sm:pt-60 lg:px-8 lg:pt-32">
+            <div className="overflow-hidden lg:w-full lg:h-full">
+                <div className="mx-auto max-w-7xl px-6 pt-36 pb-32 sm:pt-60 lg:px-8 lg:pt-0 lg:pb-0 lg:h-full lg:flex lg:items-center">
                     <div className="mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-center">
                         <div className="relative w-full lg:max-w-xl lg:shrink-0 xl:max-w-2xl">
                             <h1 className="text-5xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-7xl">

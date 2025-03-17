@@ -1,4 +1,6 @@
+import ContactItems from "@/src/components/ContactItems";
 import OurProductsHero from "@/src/components/OurProductsHero";
+import PinMap from "@/src/components/PinMap";
 import ProductsTable from "@/src/components/ProductsTable";
 import { getGetProductLineSlugsUrl, getGetProductsUrl, getProductLineSlugsResponse, getProductsResponse } from "@/src/services/api";
 import customFetch from "@/src/services/custom-fetch";
@@ -50,6 +52,8 @@ export default async function NossosProdutos() {
     <>
       <OurProductsHero heroData={allProductsLines} />
       <ProductsTable allProducts={allProducts} />
+      <ContactItems />
+      <PinMap />
     </>
   );
 }
