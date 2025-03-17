@@ -20,7 +20,7 @@ const fuzzyFilter: FilterFn<ProductsTableProps> = (row, columnId, value) => {
   return itemValue ? itemValue.includes(value.toLowerCase()) : false;
 };
 
-export default function ProductsTable({ produtos }: { produtos: ProductsTableProps[] }) {
+export default function ProductsTable({ allProducts }: { allProducts: ProductsTableProps[] }) {
   const [segmentoFilter, setSegmentoFilter] = useState('');
   const [linhaFilter, setLinhaFilter] = useState('');
   const columnHelper = createColumnHelper<ProductsTableProps>();
@@ -74,7 +74,7 @@ export default function ProductsTable({ produtos }: { produtos: ProductsTablePro
   }), [segmentoFilter, linhaFilter]);
 
   const table = useReactTable({
-    data: produtos,
+    data: allProducts,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -98,23 +98,23 @@ export default function ProductsTable({ produtos }: { produtos: ProductsTablePro
   // Extrair segmentos e linhas únicos para os filtros dropdown
   const uniqueSegments = useMemo(() => {
     const segmentsMap = new Map<string, { id: number; name: string; slug: string; uuid: string }>();
-    produtos.forEach(produto => {
-      produto.segments?.forEach(segment => {
+    allProducts.forEach(product => {
+      product.segments?.forEach(segment => {
         segmentsMap.set(segment.slug!, { id: segment.id!, name: segment.name!, slug: segment.slug!, uuid: crypto.randomUUID() });
       });
     });
     return Array.from(segmentsMap.values()).sort((a, b) => a.name.localeCompare(b.name));
-  }, [produtos]);
+  }, [allProducts]);
 
   const uniqueLines = useMemo(() => {
     const linesMap = new Map<string, { id: number; name: string; slug: string; uuid: string }>();
-    produtos.forEach(produto => {
-      produto.product_lines?.forEach(line => {
+    allProducts.forEach(product => {
+      product.product_lines?.forEach(line => {
         linesMap.set(line.slug!, { id: line.id!, name: line.name!, slug: line.slug!, uuid: crypto.randomUUID() });
       });
     });
     return Array.from(linesMap.values()).sort((a, b) => a.name.localeCompare(b.name));
-  }, [produtos]);
+  }, [allProducts]);
 
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
@@ -180,7 +180,7 @@ export default function ProductsTable({ produtos }: { produtos: ProductsTablePro
 
   return (
     <div className="p-8 mt-6">
-      <h1 className="text-2xl font-bold mb-6 text-white">Nossos Produtos</h1>
+      <h1 className="text-2xl font-bold mb-6 text-black">Nossos ProdutosXXX</h1>
       
       <div className="mb-6 flex flex-col md:flex-row gap-4">
         

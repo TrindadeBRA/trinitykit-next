@@ -1,5 +1,6 @@
+import OurProductsHero from "@/src/components/OurProductsHero";
 import ProductsTable from "@/src/components/ProductsTable";
-import { getGetProductsUrl, getProductsResponse } from "@/src/services/api";
+import { getGetProductLineSlugsUrl, getGetProductsUrl, getProductLineSlugsResponse, getProductsResponse } from "@/src/services/api";
 import customFetch from "@/src/services/custom-fetch";
 
 export const metadata = {
@@ -7,7 +8,7 @@ export const metadata = {
   description: 'A Tiken oferece soluções inovadoras em química. Se não encontrar seu produto, entre em contato e encontraremos a solução ideal para você.',
 }
 
-async function getProdutos(): Promise<getProductsResponse> {
+async function getProducts(): Promise<getProductsResponse> {
   try {
     const response = await customFetch<getProductsResponse>(getGetProductsUrl());
     return response;
@@ -17,18 +18,38 @@ async function getProdutos(): Promise<getProductsResponse> {
   }
 }
 
+async function getProductsLines(): Promise<getProductLineSlugsResponse> {
+  try {
+    const response = await customFetch<getProductLineSlugsResponse>(getGetProductLineSlugsUrl());
+    return response;
+  } catch (error) {
+    console.error('Erro ao buscar produtos:', error);
+    throw error;
+  }
+}
+
 export default async function NossosProdutos() {
-  const response: getProductsResponse = await getProdutos();
-  const produtos = response.data;
-  
-  if (!produtos || !Array.isArray(produtos)) {
+  const allProductsResponse: getProductsResponse = await getProducts();
+  const allProducts = allProductsResponse.data;
+
+  const allProductsLinesResponse: getProductLineSlugsResponse = await getProductsLines();
+  const allProductsLines = allProductsLinesResponse.data;
+
+  if (
+    !allProducts || !Array.isArray(allProducts) ||
+    !allProductsLines || !Array.isArray(allProductsLines)
+  ) {
     return (
-      <div className="p-8 text-white">
-        <h1 className="text-2xl font-bold mb-6">Nossos Produtos</h1>
-        <div className="bg-gray-800 p-6 rounded-lg">Nenhum produto encontrado</div>
+      <div className="p-8">
+        <div className="bg-gradient-custom p-6 rounded-lg text-white font-bold text-center text-3xl border-2 border-white shadow-2xl">Nenhum produto encontrado</div>
       </div>
     );
   }
-  
-  return <ProductsTable produtos={produtos} />;
+
+  return (
+    <>
+      <OurProductsHero heroData={allProductsLines} />
+      <ProductsTable allProducts={allProducts} />
+    </>
+  );
 }
