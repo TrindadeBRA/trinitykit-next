@@ -331,7 +331,7 @@ export const getSegmentSlug = async (slug: string, options?: RequestInit): Promi
 
 
 /**
- * Retorna uma lista de slugs apenas das linhas de produtos que são categorias pai (não inclui subcategorias)
+ * Retorna uma lista de dados das linhas de produtos que são categorias pai (não inclui subcategorias)
  * @summary Listar slugs das linhas de produtos principais
  */
 export type getProductLineSlugsResponse200 = {

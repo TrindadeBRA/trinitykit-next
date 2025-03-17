@@ -26,15 +26,37 @@ body {
 }
 
 @layer utilities {
+  /* Gradiente personalizado para o fundo */
   .bg-gradient-custom {
-    background-image: linear-gradient(to right, 
-      #672873, 
-      #9a5183, 
-      #cc2e4a, 
-      #dd5736, 
-      #e37d4f, 
+    background-image: linear-gradient(to right,
+      #672873,
+      #9a5183,
+      #cc2e4a,
+      #dd5736,
+      #e37d4f,
       #e7ae24
     );
+  }
+  
+  /* Gradiente para bordas verticais (de cima para baixo) */
+  .border-gradient-vertical {
+    position: relative;
+  }
+  
+  .border-gradient-vertical::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background-image: linear-gradient(to bottom, #f8ea1e, #6b2771);
+  }
+  
+  /* Versão específica para a segunda coluna */
+  .border-gradient-vertical-right::before {
+    left: auto;
+    right: 0;
   }
 }
 

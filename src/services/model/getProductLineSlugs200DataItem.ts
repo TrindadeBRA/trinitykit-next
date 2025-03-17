@@ -7,6 +7,10 @@
  */
 
 export type GetProductLineSlugs200DataItem = {
-  /** Slug da linha de produto principal */
+  /** ID da linha de produto */
+  id?: number;
+  /** Título da linha de produto */
+  title?: string;
+  /** Slug da linha de produto */
   slug?: string;
 };

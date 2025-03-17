@@ -1,13 +1,16 @@
 'use client'
 
+import { GetProductLineSlugs200DataItem } from "@/src/services/model";
+import { ArrowRightIcon } from "lucide-react";
 import Image from "next/image"
+import Link from "next/link";
 
 interface OurProductsHeroProps {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     heroData: any
 }
 
-export default function OurProductsHero({ heroData }: OurProductsHeroProps) {    
+export default function OurProductsHero({ heroData }: OurProductsHeroProps) {
 
     console.log(">>>>>>>>>>>>>heroData", heroData);
 
@@ -58,10 +61,37 @@ export default function OurProductsHero({ heroData }: OurProductsHeroProps) {
                                 Nossos Produtos
                             </h1>
                             <p className="mt-8 text-lg font-medium text-pretty text-gray-500 sm:max-w-md sm:text-xl/8 lg:max-w-none">
-                            Melhorar esse texto para fins de SEO citando todas as linhas e soluções, além dos mercados atendidos. If you cannot find your product, please contact us and we will find the desired solution.                            </p>
-                            <div className="mt-10 flex items-center gap-x-6">
-                                XXXX
-                            </div>  
+                                Melhorar esse texto para fins de SEO citando todas as linhas e soluções, além dos mercados atendidos. If you cannot find your product, please contact us and we will find the desired solution.                            </p>
+                            <div className="mt-10">
+
+
+
+
+                                <div className="grid grid-cols-2 gap-6 mt-10">
+                                    <div className="border-gradient-vertical pl-6 space-y-4">
+                                        {/* Itens da primeira coluna */}
+                                        {heroData.slice(0, Math.ceil(heroData.length / 2)).map((item: GetProductLineSlugs200DataItem) => (
+                                            <Link key={item?.id} href={`/linha-de-produtos/${item?.slug}`} className="text-black flex items-center gap-x-4">
+                                                {item?.title}
+                                                <ArrowRightIcon className="size-4" />
+                                            </Link>
+                                        ))}
+                                    </div>
+
+                                    <div className="border-gradient-vertical pl-6 space-y-4">
+                                        {/* Itens da segunda coluna */}
+                                        {heroData.slice(Math.ceil(heroData.length / 2)).map((item: GetProductLineSlugs200DataItem) => (
+                                            <Link key={item?.id} href={`/linha-de-produtos/${item?.slug}`} className="text-black flex items-center gap-x-4">
+                                                {item?.title}
+                                                <ArrowRightIcon className="size-4" />
+                                            </Link>
+                                        ))}
+                                    </div>
+                                </div>
+
+
+
+                            </div>
                         </div>
                         <div className="mt-14 flex justify-end gap-8 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0">
                             <div className="ml-auto w-44 flex-none space-y-8 pt-32 sm:ml-0 sm:pt-80 lg:order-last lg:pt-36 xl:order-none xl:pt-80">
