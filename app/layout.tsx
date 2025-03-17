@@ -45,7 +45,7 @@ export default function RootLayout({
       </head>
 
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased !bg-white !text-black`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased !bg-white !text-black pt-[96px]`}
       >
         <WhatsAppFloat 
           whatsappNumber="5511999999999" 
