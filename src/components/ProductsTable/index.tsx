@@ -156,7 +156,7 @@ export default function ProductsTable({ allProducts }: { allProducts: ProductsTa
   }, [uniqueSegments]);
 
   return (
-    <div className="p-8 mt-6">
+    <div className="p-4 md:p-8 mt-6">
       <div className="mb-6 flex flex-col md:flex-row gap-4">
         <div className="flex flex-col md:flex-row gap-4">
           <div className="relative">
@@ -166,7 +166,7 @@ export default function ProductsTable({ allProducts }: { allProducts: ProductsTa
             <select
               value={segmentoFilter}
               onChange={handleSegmentChange}
-              className="pl-10 p-2 bg-[#f5d22c] rounded-md text-black"
+              className="pl-10 p-2 bg-[#f5d22c] rounded-md text-black w-full md:w-auto"
             >
               <option value="">Todos os Segmentos</option>
               {uniqueSegments.map(segment => (
@@ -177,67 +177,72 @@ export default function ProductsTable({ allProducts }: { allProducts: ProductsTa
         </div>
       </div>
 
-      <div className="overflow-x-auto rounded-lg shadow">
-        <table className="min-w-full w-full table-fixed divide-y divide-gray-300">
-          <thead className="">
-            {table.getHeaderGroups().map(headerGroup => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map(header => (
-                  <th
-                    key={header.id}
-                    className="px-6 py-3 text-center text-xs font-bold text-gray-850 uppercase tracking-wider cursor-pointer"
-                    onClick={header.column.getToggleSortingHandler()}
-                    style={{ width: `${header.getSize()}%` }}
-                  >
-                    <div className="flex items-center">
-                      <span>{flexRender(header.column.columnDef.header, header.getContext())}</span>
-                      <span>
-                        {{
-                          asc: <ChevronUp className="h-4 w-4" />,
-                          desc: <ChevronDown className="h-4 w-4" />,
-                        }[header.column.getIsSorted() as string] ?? null}
-                      </span>
-                    </div>
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody className="divide-y divide-gray-300">
-            {table.getRowModel().rows.length > 0 ? (
-              table.getRowModel().rows.map(row => {
-                console.log('Renderizando linha:');
-                return (
-                  <tr key={row.id} className="text-gray-850 hover:bg-gray-200">
-                    {row.getVisibleCells().map(cell => (
-                      <td key={cell.id} className={
-                        twMerge(
-                          `px-6 py-4 whitespace-nowrap truncate text-xs`
-                        )}
-                        style={{ width: `${cell.column.getSize()}%` }}
+      <div className="overflow-x-auto rounded-lg shadow md:overflow-visible">
+        <div className="min-w-full inline-block align-middle">
+          <div className="overflow-x-auto md:overflow-visible">
+            <table className="min-w-full table-fixed divide-y divide-gray-300" 
+                   style={{ minWidth: '768px', width: '100%' }}>
+              <thead>
+                {table.getHeaderGroups().map(headerGroup => (
+                  <tr key={headerGroup.id}>
+                    {headerGroup.headers.map(header => (
+                      <th
+                        key={header.id}
+                        className="px-4 md:px-6 py-3 text-center text-xs font-bold text-gray-850 uppercase tracking-wider cursor-pointer whitespace-nowrap"
+                        onClick={header.column.getToggleSortingHandler()}
+                        style={{ width: `${header.getSize()}%` }}
                       >
-                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                      </td>
+                        <div className="flex items-center justify-center">
+                          <span>{flexRender(header.column.columnDef.header, header.getContext())}</span>
+                          <span>
+                            {{
+                              asc: <ChevronUp className="h-4 w-4" />,
+                              desc: <ChevronDown className="h-4 w-4" />,
+                            }[header.column.getIsSorted() as string] ?? null}
+                          </span>
+                        </div>
+                      </th>
                     ))}
                   </tr>
-                );
-              })
-            ) : (
-              <tr>
-                <td
-                  colSpan={columns.length}
-                  className="px-6 py-8 text-center text-gray-400"
-                >
-                  Nenhum resultado encontrado
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+                ))}
+              </thead>
+              <tbody className="divide-y divide-gray-300">
+                {table.getRowModel().rows.length > 0 ? (
+                  table.getRowModel().rows.map(row => {
+                    console.log('Renderizando linha:');
+                    return (
+                      <tr key={row.id} className="text-gray-850 hover:bg-gray-200">
+                        {row.getVisibleCells().map(cell => (
+                          <td key={cell.id} className={
+                            twMerge(
+                              `px-6 py-4 whitespace-nowrap truncate text-xs`
+                            )}
+                              style={{ width: `${cell.column.getSize()}%` }}
+                          >
+                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                          </td>
+                        ))}
+                      </tr>
+                    );
+                  })
+                ) : (
+                  <tr>
+                    <td
+                      colSpan={columns.length}
+                      className="px-6 py-8 text-center text-gray-400"
+                    >
+                      Nenhum resultado encontrado
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
 
         {/* Paginação */}
-        <div className="p-4 flex items-center justify-between border-t border-gray-300">
-          <div className="flex items-center gap-2 text-sm text-gray-850">
+        <div className="p-2 md:p-4 flex flex-col md:flex-row items-center justify-between border-t border-gray-300 gap-4">
+          <div className="flex items-center gap-2 text-xs md:text-sm text-gray-850">
             <span>
               Página{' '}
               <strong>
@@ -252,35 +257,35 @@ export default function ProductsTable({ allProducts }: { allProducts: ProductsTa
 
           <div className="flex items-center gap-2">
             <button
-              className="px-3 py-1 bg-gray-300 text-gray-850 rounded hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-2 md:px-3 py-1 bg-gray-300 text-gray-850 rounded hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed text-xs md:text-sm"
               onClick={() => table.setPageIndex(0)}
               disabled={!table.getCanPreviousPage()}
             >
               {'<<'}
             </button>
             <button
-              className="px-3 py-1 bg-gray-300 text-gray-850 rounded hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-2 md:px-3 py-1 bg-gray-300 text-gray-850 rounded hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed text-xs md:text-sm"
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
             >
               {'<'}
             </button>
             <button
-              className="px-3 py-1 bg-gray-300 text-gray-850 rounded hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-2 md:px-3 py-1 bg-gray-300 text-gray-850 rounded hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed text-xs md:text-sm"
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
             >
               {'>'}
             </button>
             <button
-              className="px-3 py-1 bg-gray-300 text-gray-850 rounded hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-2 md:px-3 py-1 bg-gray-300 text-gray-850 rounded hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed text-xs md:text-sm"
               onClick={() => table.setPageIndex(table.getPageCount() - 1)}
               disabled={!table.getCanNextPage()}
             >
               {'>>'}
             </button>
             <select
-              className="px-3 py-2 bg-gray-300 text-gray-850 rounded focus:outline-none"
+              className="px-2 md:px-3 py-1 md:py-2 bg-gray-300 text-gray-850 rounded focus:outline-none text-xs md:text-sm"
               value={table.getState().pagination.pageSize}
               onChange={e => {
                 table.setPageSize(Number(e.target.value));
