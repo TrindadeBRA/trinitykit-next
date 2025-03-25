@@ -7,24 +7,24 @@ import { WhatsAppFloat } from "../src/components/WhatsAppFloat";
 import Footer from "@/src/components/Footer";
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
 });
 
 const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
+  variable: '--font-inter',
+  subsets: ['latin'],
 });
 
 const spaceMono = Space_Mono({
-  subsets: ["latin"],
-  variable: "--font-space-mono",
-  weight: ["400", "700"],
+  variable: '--font-space-mono',
+  subsets: ['latin'],
+  weight: ['400', '700'],
 });
 
 export const metadata: Metadata = {
@@ -56,7 +56,7 @@ export default function RootLayout({
       </head>
 
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} antialiased !bg-white !text-black pt-[96px]`}
+        className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${spaceMono.variable} antialiased !bg-white !text-black pt-[96px]`}
       >
         <WhatsAppFloat 
           whatsappNumber="5511999999999" 

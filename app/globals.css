@@ -39,6 +39,22 @@ body {
       #e7ae24
     );
   }
+
+  .font-geist-sans {
+    font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  }
+
+  .font-geist-mono {
+    font-family: var(--font-geist-mono), Arial, Helvetica, sans-serif;
+  }
+
+  .font-inter {
+    font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  }
+
+  .font-space-mono {
+    font-family: var(--font-space-mono), Arial, Helvetica, sans-serif;
+  }
   
   /* Gradiente para bordas verticais (de cima para baixo) */
   .border-gradient-vertical {
@@ -59,6 +75,23 @@ body {
   .border-gradient-vertical-right::before {
     left: auto;
     right: 0;
+  }
+
+  /* Classes para as fontes */
+  .font-geist {
+    font-family: "Geist", sans-serif;
+  }
+
+  .font-geist-mono {
+    font-family: "Geist Mono", monospace;
+  }
+
+  .font-inter {
+    font-family: "Inter", sans-serif;
+  }
+
+  .font-space-mono {
+    font-family: "Space Mono", monospace;
   }
 }
 

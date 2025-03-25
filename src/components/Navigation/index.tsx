@@ -48,9 +48,10 @@ export default function Navigation() {
       ${isFixed ? 'shadow-lg' : ''}
       ${isGradient ? 'bg-gradient-custom' : 'bg-white'}
     `)}>
-      <nav aria-label="Global" className={`flex items-center justify-between p-6 lg:px-8 transition-all duration-300 ${isFixed ? 'py-4' : 'py-6'}`}>
+      <nav aria-label="Global" className={`flex p-6 lg:px-8 transition-all duration-300 items-center justify-between ${isFixed ? 'py-4' : 'py-6'}`}>
 
-        <div className="flex lg:flex-1">
+        {/* Logo */}
+        <div className="flex w-auto">
           <a href="#" className="-m-1.5 p-1.5">
             <span className="sr-only">Tiken</span>
             <Image
@@ -63,8 +64,7 @@ export default function Navigation() {
           </a>
         </div>
 
-
-
+        {/* Menu mobile */}
         <div className="flex lg:hidden">
           <button
             type="button"
@@ -76,15 +76,17 @@ export default function Navigation() {
           </button>
         </div>
 
+        {/* Menu desktop */}
         <div className="hidden lg:flex gap-x-4 items-center">
           {navigation.map((item) => (
-            <a key={item.name} href={item.href} className={twMerge("text-sm/6 font-semibold text-gray-900", item.separator && "border-l border-gray-900 pl-4", isGradient && "text-white border-white")}>
+            <a key={item.name} href={item.href} className={twMerge("text-base font-semibold text-gray-900 font-space-mono font-bold ", item.separator && "border-l border-gray-900 pl-4", isGradient && "text-white border-white")}>
               {item.name}
             </a>
           ))}
         </div>
 
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center">
+        {/* Botão fale conosco */}
+        <div className="hidden lg:flex items-center">
           <a href={"/#contato"} className={twMerge("mr-4 font-semibold flex items-center gap-x-2 bg-gradient-custom text-white px-3 py-2 rounded-lg", isGradient && "bg-white text-gray-900")}>fale conosco <ArrowRightIcon className="size-4" /></a>
           <LanguageSwitcher isGradient={isGradient} />
         </div>
@@ -93,8 +95,7 @@ export default function Navigation() {
 
 
 
-
-
+      {/* Menu mobile - Dialog */}
       <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden z-50">
         <div className="fixed inset-0 z-10" />
         <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
@@ -125,7 +126,7 @@ export default function Navigation() {
                   <a
                     key={item.name}
                     href={item.href}
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                    className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 font-space-mono font-bold"
                   >
                     {item.name}
                   </a>
