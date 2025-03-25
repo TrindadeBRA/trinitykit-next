@@ -1,10 +1,24 @@
+'use client'
+
 import { BuildingOffice2Icon, EnvelopeIcon, PhoneIcon } from '@heroicons/react/24/outline'
+import { ArrowRightIcon } from 'lucide-react'
 
 export default function TalkToUs() {
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    console.log('Dados enviados!', {
+      name: (document.getElementById('name') as HTMLInputElement)?.value,
+      email: (document.getElementById('email') as HTMLInputElement)?.value,
+      phone: (document.getElementById('phone-number') as HTMLInputElement)?.value,
+      message: (document.getElementById('message') as HTMLTextAreaElement)?.value,
+    })
+  }
+
   return (
-    <div className="relative isolate bg-gray-900">
+    <div className="relative isolate bg-[#7b61c2]">
       <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
-        <div className="relative px-6 pt-24 pb-20 sm:pt-32 lg:static lg:px-8 lg:py-48">
+        <div className="relative px-6 pt-24 pb-20  lg:static lg:px-8">
           <div className="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
             <div className="absolute inset-y-0 left-0 -z-10 w-full overflow-hidden ring-1 ring-white/5 lg:w-1/2">
               <svg
@@ -41,75 +55,30 @@ export default function TalkToUs() {
                 />
               </div>
             </div>
-            <h2 className="text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl">Get in touch</h2>
-            <p className="mt-6 text-lg/8 text-gray-300">
-              Proin volutpat consequat porttitor cras nullam gravida at. Orci molestie a eu arcu. Sed ut tincidunt
-              integer elementum id sem. Arcu sed malesuada et magna.
+            <p className="text-base/7 font-semibold text-white" data-aos="fade-right">Entre em contato</p>
+
+            <h2 className="text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl" data-aos="fade-right">
+            Fale Conosco!
+            </h2>
+            <p className="mt-6 text-lg/8 text-white" data-aos="fade-right">
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna.
             </p>
-            <dl className="mt-10 space-y-4 text-base/7 text-gray-300">
-              <div className="flex gap-x-4">
-                <dt className="flex-none">
-                  <span className="sr-only">Address</span>
-                  <BuildingOffice2Icon aria-hidden="true" className="h-7 w-6 text-gray-400" />
-                </dt>
-                <dd>
-                  545 Mavis Island
-                  <br />
-                  Chicago, IL 99191
-                </dd>
-              </div>
-              <div className="flex gap-x-4">
-                <dt className="flex-none">
-                  <span className="sr-only">Telephone</span>
-                  <PhoneIcon aria-hidden="true" className="h-7 w-6 text-gray-400" />
-                </dt>
-                <dd>
-                  <a href="tel:+1 (555) 234-5678" className="hover:text-white">
-                    +1 (555) 234-5678
-                  </a>
-                </dd>
-              </div>
-              <div className="flex gap-x-4">
-                <dt className="flex-none">
-                  <span className="sr-only">Email</span>
-                  <EnvelopeIcon aria-hidden="true" className="h-7 w-6 text-gray-400" />
-                </dt>
-                <dd>
-                  <a href="mailto:hello@example.com" className="hover:text-white">
-                    hello@example.com
-                  </a>
-                </dd>
-              </div>
-            </dl>
+
           </div>
         </div>
-        <form action="#" method="POST" className="px-6 pt-20 pb-24 sm:pb-32 lg:px-8 lg:py-48">
+        <form action="#" method="POST" className="px-6 pt-16 pb-16 lg:px-8" data-aos="fade-left">
           <div className="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">
             <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-              <div>
-                <label htmlFor="first-name" className="block text-sm/6 font-semibold text-white">
-                  First name
+              <div className="sm:col-span-2">
+                <label htmlFor="name" className="block text-sm/6 font-semibold text-white">
+                  Nome
                 </label>
                 <div className="mt-2.5">
                   <input
-                    id="first-name"
-                    name="first-name"
+                    id="name"
+                    name="name"
                     type="text"
-                    autoComplete="given-name"
-                    className="block w-full rounded-md bg-white/5 px-3.5 py-2 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500"
-                  />
-                </div>
-              </div>
-              <div>
-                <label htmlFor="last-name" className="block text-sm/6 font-semibold text-white">
-                  Last name
-                </label>
-                <div className="mt-2.5">
-                  <input
-                    id="last-name"
-                    name="last-name"
-                    type="text"
-                    autoComplete="family-name"
+                    autoComplete="name"
                     className="block w-full rounded-md bg-white/5 px-3.5 py-2 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500"
                   />
                 </div>
@@ -130,7 +99,7 @@ export default function TalkToUs() {
               </div>
               <div className="sm:col-span-2">
                 <label htmlFor="phone-number" className="block text-sm/6 font-semibold text-white">
-                  Phone number
+                  Telefone
                 </label>
                 <div className="mt-2.5">
                   <input
@@ -144,7 +113,7 @@ export default function TalkToUs() {
               </div>
               <div className="sm:col-span-2">
                 <label htmlFor="message" className="block text-sm/6 font-semibold text-white">
-                  Message
+                  Mensagem
                 </label>
                 <div className="mt-2.5">
                   <textarea
@@ -159,10 +128,11 @@ export default function TalkToUs() {
             </div>
             <div className="mt-8 flex justify-end">
               <button
-                type="submit"
-                className="rounded-md bg-indigo-500 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                className="flex items-center gap-x-2 rounded-md bg-[#f5d22c] text-black px-4 py-2.5 font-bold font-space-mono text-sm hover:bg-[#f5d22c]/80 transition-all duration-300 cursor-pointer"
+                onClick={(e: any) => handleSubmit(e)}
               >
-                Send message
+                Enviar
+                <ArrowRightIcon className="size-4" />
               </button>
             </div>
           </div>

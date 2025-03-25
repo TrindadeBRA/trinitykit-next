@@ -14,10 +14,10 @@ const navigation = [
   { name: 'Home', href: '/' },
   { name: 'Quem Somos', href: '/quem-somos' },
   { name: 'Produtos', href: '/produtos' },
-  { name: 'Mercados', href: '/mercados' },
+  { name: 'Mercados', href: '/#mercados' },
   { name: 'Contato', href: '/contato' },
   { name: 'Blog', href: '/blog' },
-  { name: 'Portal Inove', href: '/loja', separator: true },
+  { name: 'Portal Inove', href: 'https://inove.tiken.com.br/', separator: true, external: true },
 ]
 
 export default function Navigation() {
@@ -80,9 +80,14 @@ export default function Navigation() {
         {/* Menu desktop */}
         <div className="hidden lg:flex gap-x-4 items-center">
           {navigation.map((item) => (
-            <a key={item.name} href={item.href} className={twMerge("text-base font-semibold text-gray-900 font-space-mono font-bold ", item.separator && "border-l border-gray-900 pl-4", isGradient && "text-white border-white")}>
+            <Link
+              key={item.name}
+              href={item.href}
+              className={twMerge("text-base text-gray-900 font-space-mono font-bold ", item.separator && "border-l border-gray-900 pl-4", isGradient && "text-white border-white")}
+              target={item.external ? '_blank' : '_self'}
+            >
               {item.name}
-            </a>
+            </Link>
           ))}
         </div>
 
@@ -124,13 +129,14 @@ export default function Navigation() {
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
                 {navigation.map((item) => (
-                  <a
+                  <Link
                     key={item.name}
                     href={item.href}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-gray-900 hover:bg-gray-50 font-space-mono font-bold"
+                    target={item.external ? '_blank' : '_self'}
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
 
               </div>

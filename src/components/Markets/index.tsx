@@ -24,7 +24,7 @@ const markets = [
 
 export default function Markets() {
   return (
-    <div className="bg-gray-100">
+    <div className="bg-gray-100" id="mercados">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl py-16 lg:max-w-none">
           <p className="text-base/7 font-semibold text-[#0399c4] text-center" data-aos="fade-left">Nosso Foco</p>
@@ -39,7 +39,7 @@ export default function Markets() {
 
                 <div>
                   <Link href={`/produtos?segment=${market.slug}`}>
-                    <h3 className="mt-6 mb-4 text-2xl text-gray-500 font-light">
+                    <h3 className="mt-6 mb-4 text-xl text-gray-500 font-light">
                       {market.name}
                     </h3>
                   </Link>
