@@ -9,16 +9,17 @@ export default function ExcellenceRecognition() {
       <div className="mx-auto max-w-7xl px-8 flex flex-col lg:flex-row items-center justify-between gap-12">
         {/* Lado esquerdo - Texto */}
         <div className="lg:w-2/3">
-          <h2 className="text-3xl font-bold tracking-tight text-[#515151]">
+          <h2 className="text-3xl font-bold tracking-tight text-[#515151]" data-aos="fade-right">
             Excelência e Reconhecimento
           </h2>
-          <p className="mt-8 text-base font-medium text-pretty text-[#515151]">
+          <p className="mt-8 text-base font-medium text-pretty text-[#515151]" data-aos="fade-right">
             Reconhecidos pelo Great Place to Work (GPTW) e agraciados com o selo Prata do ECOVADIS, destacamo-nos como uma das melhores empresas para se trabalhar. Além disso, estamos comprometidos com a excelência e a conformidade ESG, demonstrando uma forte atuação em inovação e sustentabilidade.
           </p>
           <Link
             href="/trabalhe-conosco"
             target="_blank"
             className="flex items-center gap-x-2 text-black font-bold font-space-mono mt-4"
+            data-aos="fade-right"
           >
             trabalhe conosco <ArrowRightIcon className="size-4" />
           </Link>
@@ -32,6 +33,7 @@ export default function ExcellenceRecognition() {
             width={100}
             height={100}
             className="w-full h-auto"
+            data-aos="fade-left"
           />
           <Image
             src="/assets/images/ecovadis.webp"
@@ -39,6 +41,7 @@ export default function ExcellenceRecognition() {
             width={100}
             height={100}
             className="w-full h-auto"
+            data-aos="fade-left"
           />
           <Image
             src="/assets/images/ecovadis.webp"
@@ -46,6 +49,7 @@ export default function ExcellenceRecognition() {
             width={100}
             height={100}
             className="w-full h-auto"
+            data-aos="fade-left"
           />
         </div>
       </div>

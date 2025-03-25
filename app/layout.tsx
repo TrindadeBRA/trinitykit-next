@@ -5,6 +5,7 @@ import Navigation from "@/src/components/Navigation";
 import Script from "next/script";
 import { WhatsAppFloat } from "../src/components/WhatsAppFloat";
 import Footer from "@/src/components/Footer";
+import AOS_Init from "@/src/components/AOS_Init";
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -62,6 +63,7 @@ export default function RootLayout({
           whatsappNumber="5511999999999" 
           message="Olá! Vim pelo site e gostaria de mais informações."
         />
+        <AOS_Init />
         <Navigation />
         {children}
         <Footer />

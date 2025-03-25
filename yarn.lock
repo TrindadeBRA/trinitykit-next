@@ -1043,7 +1043,7 @@
 
 "@tanstack/react-table@^8.21.2":
   version "8.21.2"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-table/-/react-table-8.21.2.tgz#6a7fce828b64547e33f4606ada8114db496007cc"
+  resolved "https://registry.npmjs.org/@tanstack/react-table/-/react-table-8.21.2.tgz"
   integrity sha512-11tNlEDTdIhMJba2RBH+ecJ9l1zgS2kjmexDPAraulc8jeNA4xocSNeyzextT0XJyASil4XsCYlJmf5jEWAtYg==
   dependencies:
     "@tanstack/table-core" "8.21.2"
@@ -1057,13 +1057,18 @@
 
 "@tanstack/table-core@8.21.2":
   version "8.21.2"
-  resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.21.2.tgz#dd57595a1773652bb6fb437e90a5f5386a49fd7e"
+  resolved "https://registry.npmjs.org/@tanstack/table-core/-/table-core-8.21.2.tgz"
   integrity sha512-uvXk/U4cBiFMxt+p9/G7yUWI/UbHYbyghLCjlpWZ3mLeIZiUBSKcUnw9UnKkdRz7Z/N4UBuFLWQdJCjUe7HjvA==
 
 "@tanstack/virtual-core@3.13.2":
   version "3.13.2"
   resolved "https://registry.npmjs.org/@tanstack/virtual-core/-/virtual-core-3.13.2.tgz"
   integrity sha512-Qzz4EgzMbO5gKrmqUondCjiHcuu4B1ftHb0pjCut661lXZdGoHeze9f/M8iwsK1t5LGR6aNuNGU7mxkowaW6RQ==
+
+"@types/aos@^3.0.7":
+  version "3.0.7"
+  resolved "https://registry.npmjs.org/@types/aos/-/aos-3.0.7.tgz"
+  integrity sha512-sEhyFqvKauUJZDbvAB3Pggynrq6g+2PS4XB3tmUr+mDL1gfDJnwslUC4QQ7/l8UD+LWpr3RxZVR/rHoZrLqZVg==
 
 "@types/es-aggregate-error@^1.0.2":
   version "1.0.6"
@@ -1274,6 +1279,15 @@ ansi-styles@^4.0.0, ansi-styles@^4.1.0:
   integrity sha512-zbB9rCJAT1rbjiVDb2hqKFHNYLxgtk8NURxZ3IZwD3F6NtxbXZQCnnSi1Lkx+IDohdPlFp222wVALIheZJQSEg==
   dependencies:
     color-convert "^2.0.1"
+
+aos@^2.3.4:
+  version "2.3.4"
+  resolved "https://registry.npmjs.org/aos/-/aos-2.3.4.tgz"
+  integrity sha512-zh/ahtR2yME4I51z8IttIt4lC1Nw0ktsFtmeDzID1m9naJnWXhCoARaCgNOGXb5CLy3zm+wqmRAEgMYB5E2HUw==
+  dependencies:
+    classlist-polyfill "^1.0.3"
+    lodash.debounce "^4.0.6"
+    lodash.throttle "^4.0.1"
 
 argparse@^2.0.1:
   version "2.0.1"
@@ -1505,6 +1519,11 @@ chokidar@^4.0.3:
   dependencies:
     readdirp "^4.0.1"
 
+classlist-polyfill@^1.0.3:
+  version "1.2.0"
+  resolved "https://registry.npmjs.org/classlist-polyfill/-/classlist-polyfill-1.2.0.tgz"
+  integrity sha512-GzIjNdcEtH4ieA2S8NmrSxv7DfEV5fmixQeyTmqmRmRJPGpRBaSnA2a0VrCjyT8iW8JjEdMbKzDotAJf+ajgaQ==
+
 client-only@0.0.1:
   version "0.0.1"
   resolved "https://registry.npmjs.org/client-only/-/client-only-0.0.1.tgz"
@@ -1564,7 +1583,7 @@ concat-map@0.0.1:
 
 cookie@^0.4.1:
   version "0.4.2"
-  resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.4.2.tgz#0e41f24de5ecf317947c82fc789e06a884824432"
+  resolved "https://registry.npmjs.org/cookie/-/cookie-0.4.2.tgz"
   integrity sha512-aSWTXFzaKWkvHO1Ny/s+ePFpvKsPnjc551iI41v3ny/ow6tBG5Vd+FuqGNhh1LxOmVzOlGUriIlOaokOvhaStA==
 
 cross-spawn@^7.0.3, cross-spawn@^7.0.6:
@@ -2885,6 +2904,11 @@ locate-path@^6.0.0:
   dependencies:
     p-locate "^5.0.0"
 
+lodash.debounce@^4.0.6:
+  version "4.0.8"
+  resolved "https://registry.npmjs.org/lodash.debounce/-/lodash.debounce-4.0.8.tgz"
+  integrity sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==
+
 lodash.isempty@^4.4.0:
   version "4.4.0"
   resolved "https://registry.npmjs.org/lodash.isempty/-/lodash.isempty-4.4.0.tgz"
@@ -2899,6 +2923,11 @@ lodash.omitby@^4.6.0:
   version "4.6.0"
   resolved "https://registry.npmjs.org/lodash.omitby/-/lodash.omitby-4.6.0.tgz"
   integrity sha512-5OrRcIVR75M288p4nbI2WLAf3ndw2GD9fyNv3Bc15+WCxJDdZ4lYndSxGd7hnG6PVjiJTeJE2dHEGhIuKGicIQ==
+
+lodash.throttle@^4.0.1:
+  version "4.1.1"
+  resolved "https://registry.npmjs.org/lodash.throttle/-/lodash.throttle-4.1.1.tgz"
+  integrity sha512-wIkUCfVKpVsWo3JSZlc+8MB5it+2AN5W8J7YVMST30UrvcQNZ1Okbj+rbVniijTWE6FGYy4XJq/rHkas8qJMLQ==
 
 lodash.topath@^4.5.2:
   version "4.5.2"
@@ -2944,7 +2973,7 @@ loose-envify@^1.4.0:
 
 lucide-react@^0.479.0:
   version "0.479.0"
-  resolved "https://registry.yarnpkg.com/lucide-react/-/lucide-react-0.479.0.tgz#7321f979a389ec5dd86747b2deb6444cf0922f8d"
+  resolved "https://registry.npmjs.org/lucide-react/-/lucide-react-0.479.0.tgz"
   integrity sha512-aBhNnveRhorBOK7uA4gDjgaf+YlHMdMhQ/3cupk6exM10hWlEU+2QtWYOfhXhjAsmdb6LeKR+NZnow4UxRRiTQ==
 
 lunr@^2.3.9:
@@ -3097,7 +3126,7 @@ node-readfiles@^0.2.0:
 
 nookies@^2.5.2:
   version "2.5.2"
-  resolved "https://registry.yarnpkg.com/nookies/-/nookies-2.5.2.tgz#cc55547efa982d013a21475bd0db0c02c1b35b27"
+  resolved "https://registry.npmjs.org/nookies/-/nookies-2.5.2.tgz"
   integrity sha512-x0TRSaosAEonNKyCrShoUaJ5rrT5KHRNZ5DwPCuizjgrnkpE5DRf3VL7AyyQin4htict92X1EQ7ejDbaHDVdYA==
   dependencies:
     cookie "^0.4.1"
@@ -3565,7 +3594,7 @@ semver@^7.6.0, semver@^7.6.3:
 
 set-cookie-parser@^2.4.6:
   version "2.7.1"
-  resolved "https://registry.yarnpkg.com/set-cookie-parser/-/set-cookie-parser-2.7.1.tgz#3016f150072202dfbe90fadee053573cc89d2943"
+  resolved "https://registry.npmjs.org/set-cookie-parser/-/set-cookie-parser-2.7.1.tgz"
   integrity sha512-IOc8uWeOZgnb3ptbCURJWNjWUPcO3ZnTTdzsurqERrP6nPyv+paC55vJM0LpOlT2ne+Ix+9+CRG1MNLlyZ4GjQ==
 
 set-function-length@^1.2.2:
@@ -3910,7 +3939,7 @@ tabbable@^6.0.0:
 
 tailwind-merge@^3.0.2:
   version "3.0.2"
-  resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-3.0.2.tgz#567eff76de12211e24dd909da0f5ed6f4f422b0c"
+  resolved "https://registry.npmjs.org/tailwind-merge/-/tailwind-merge-3.0.2.tgz"
   integrity sha512-l7z+OYZ7mu3DTqrL88RiKrKIqO3NcpEO8V/Od04bNpvk0kiIFndGEoqfuzvj4yuhRkHKjRkII2z+KS2HfPcSxw==
 
 tailwindcss@4.0.9, tailwindcss@^4:
