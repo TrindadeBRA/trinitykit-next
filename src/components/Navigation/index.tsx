@@ -8,6 +8,7 @@ import LanguageSwitcher from '../LanguageSwitcher'
 import { twMerge } from 'tailwind-merge'
 import { usePathname } from 'next/navigation'
 import { ArrowRightIcon } from 'lucide-react'
+import Link from 'next/link'
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -52,7 +53,7 @@ export default function Navigation() {
 
         {/* Logo */}
         <div className="flex w-auto">
-          <a href="#" className="-m-1.5 p-1.5">
+          <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Tiken</span>
             <Image
               alt=""
@@ -61,7 +62,7 @@ export default function Navigation() {
               height={48}
               width={48}
             />
-          </a>
+          </Link>
         </div>
 
         {/* Menu mobile */}
@@ -100,7 +101,7 @@ export default function Navigation() {
         <div className="fixed inset-0 z-10" />
         <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <a href="#" className="-m-1.5 p-1.5">
+            <Link href="/" className="-m-1.5 p-1.5">
               <span className="sr-only">Tiken</span>
               <Image
                 alt=""
@@ -109,7 +110,7 @@ export default function Navigation() {
                 width={32}
                 height={32}
               />
-            </a>
+            </Link>
             <button
               type="button"
               onClick={() => setMobileMenuOpen(false)}
@@ -126,7 +127,7 @@ export default function Navigation() {
                   <a
                     key={item.name}
                     href={item.href}
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 font-space-mono font-bold"
+                    className="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-gray-900 hover:bg-gray-50 font-space-mono font-bold"
                   >
                     {item.name}
                   </a>
