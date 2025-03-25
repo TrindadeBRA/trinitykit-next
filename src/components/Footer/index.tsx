@@ -170,9 +170,9 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="mt-16 border-t border-gray-900/10 pt-8 sm:mt-20 lg:mt-24 flex flex-row justify-between">
-          <p className="text-sm/6 text-gray-600">© {new Date().getFullYear()} TIKEN - Todos os Direitos Reservados.</p>
-          <p className="text-sm/6 text-gray-600">Desenvolvido por <Link href="https://www.thetrinityweb.com.br" className="text-base text-gray-600 hover:text-gray-800 font-bold font-space-mono" target="_blank">Trinity Web</Link></p>
+        <div className="mt-16 border-t border-gray-900/10 pt-8 sm:mt-20 lg:mt-24 flex flex-col lg:flex-row gap-y-4 justify-between">
+          <p className="text-sm/6 text-gray-600 text-center lg:text-left">© {new Date().getFullYear()} TIKEN - Todos os Direitos Reservados.</p>
+          <p className="text-sm/6 text-gray-600 text-center lg:text-right">Desenvolvido por <Link href="https://www.thetrinityweb.com.br" className="text-base text-gray-600 hover:text-gray-800 font-bold font-space-mono" target="_blank">Trinity Web</Link></p>
         </div>
       </div>
     </footer>

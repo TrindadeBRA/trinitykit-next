@@ -21,7 +21,7 @@ export default function ContactItems() {
             <h2 className="text-5xl font-semibold tracking-tight text-white" data-aos="fade-left">Esperamos seu contato</h2>
           </div>
 
-          <div className="flex flex-row gap-4 mt-12">
+          <div className="flex flex-col lg:flex-row gap-4 mt-12">
 
             <div className="text-white border border-white/10 rounded-lg w-full bg-white/10 p-4" data-aos="fade-left">
               <div className="flex flex-row gap-2 items-center">
