@@ -16,7 +16,7 @@ export default function TalkToUs() {
   }
 
   return (
-    <div className="relative isolate bg-[#7b61c2]">
+    <div className="relative isolate bg-[#7b61c2]" id="contato">
       <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
         <div className="relative px-6 pt-24 pb-20  lg:static lg:px-8">
           <div className="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">

@@ -15,7 +15,7 @@ const navigation = [
   { name: 'Quem Somos', href: '/quem-somos' },
   { name: 'Produtos', href: '/produtos' },
   { name: 'Mercados', href: '/#mercados' },
-  { name: 'Contato', href: '/contato' },
+  { name: 'Contato', href: '/#contato' },
   { name: 'Blog', href: '/blog' },
   { name: 'Portal Inove', href: 'https://inove.tiken.com.br/', separator: true, external: true },
 ]

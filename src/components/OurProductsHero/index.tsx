@@ -98,7 +98,7 @@ export default function OurProductsHero({ heroData }: OurProductsHeroProps) {
                                 <div className="relative">
                                     <Image
                                         alt=""
-                                        src={'https://placehold.co/500x500.png'}
+                                        src={'/assets/images/products-page/product-04.webp'}
                                         className="aspect-2/3 w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
                                         width={400}
                                         height={528}
@@ -110,7 +110,7 @@ export default function OurProductsHero({ heroData }: OurProductsHeroProps) {
                                 <div className="relative">
                                     <Image
                                         alt=""
-                                        src={'https://placehold.co/500x500.png'}
+                                        src={'/assets/images/products-page/product-02.webp'}
                                         className="aspect-2/3 w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
                                         width={400}
                                         height={528}
@@ -120,7 +120,7 @@ export default function OurProductsHero({ heroData }: OurProductsHeroProps) {
                                 <div className="relative">
                                     <Image
                                         alt=""
-                                        src={'https://placehold.co/500x500.png'}
+                                        src={'/assets/images/products-page/product-05.webp'}
                                         className="aspect-2/3 w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
                                         width={400}
                                         height={528}
@@ -132,7 +132,7 @@ export default function OurProductsHero({ heroData }: OurProductsHeroProps) {
                                 <div className="relative">
                                     <Image
                                         alt=""
-                                        src={'https://placehold.co/500x500.png'}
+                                        src={'/assets/images/products-page/product-01.webp'}
                                         className="aspect-2/3 w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
                                         width={400}
                                         height={528}
@@ -142,7 +142,7 @@ export default function OurProductsHero({ heroData }: OurProductsHeroProps) {
                                 <div className="relative">
                                     <Image
                                         alt=""
-                                        src={'https://placehold.co/500x500.png'}
+                                        src={'/assets/images/products-page/product-03.webp'}
                                         className="aspect-2/3 w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
                                         width={400}
                                         height={528}

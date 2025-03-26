@@ -1,11 +1,11 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Mercados | Tiken',
+  title: 'Linha de produtos | Tiken',
   description: 'A Tiken oferece soluções inovadoras em química. Se não encontrar seu produto, entre em contato e encontraremos a solução ideal para você.',
 }
 
-export default function Mercados() {
+export default function LinhaDeProdutos() {
   const slugs = [
     "plasticos-elastomeros",
     "cosmeticos",
