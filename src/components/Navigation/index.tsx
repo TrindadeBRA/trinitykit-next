@@ -78,7 +78,7 @@ export default function Navigation() {
         </div>
 
         {/* Menu desktop */}
-        <div className="hidden lg:flex gap-x-4 items-center">
+        <div className="hidden lg:flex gap-x-8 items-center">
           {navigation.map((item) => (
             <Link
               key={item.name}

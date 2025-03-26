@@ -40,6 +40,22 @@ body {
     );
   }
 
+  /* Gradiente para borda esquerda */
+  .border-gradient-left {
+    position: relative;
+    padding-left: 1.5rem;
+  }
+  
+  .border-gradient-left::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background-image: linear-gradient(to bottom, #f9b03a, #6a2771);
+  }
+
   .font-geist-sans {
     font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   }
