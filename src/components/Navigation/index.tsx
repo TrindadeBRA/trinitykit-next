@@ -25,22 +25,39 @@ export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [isFixed, setIsFixed] = useState(false)
   const [isGradient, setIsGradient] = useState(false)
+  const [activeHash, setActiveHash] = useState('')
 
   const pathname = usePathname()
+
+  const isActiveRoute = (href: string) => {
+    if (href.startsWith('/#')) {
+      return activeHash === href.substring(1)
+    }
+    return pathname === href
+  }
 
   useEffect(() => {
     setIsGradient(pathname !== '/')
   }, [pathname])
-
 
   useEffect(() => {
     const handleScroll = () => {
       setIsFixed(window.scrollY > 50)
     }
 
+    const handleHashChange = () => {
+      setActiveHash(window.location.hash.substring(1))
+    }
+
+    // Initial hash check
+    handleHashChange()
+
     window.addEventListener('scroll', handleScroll)
+    window.addEventListener('hashchange', handleHashChange)
+    
     return () => {
       window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('hashchange', handleHashChange)
     }
   }, [])
 
@@ -83,7 +100,18 @@ export default function Navigation() {
             <Link
               key={item.name}
               href={item.href}
-              className={twMerge("text-base text-gray-900 font-space-mono font-bold ", item.separator && "border-l border-gray-900 pl-4", isGradient && "text-white border-white")}
+              className={twMerge(
+                "text-base font-space-mono font-bold transition-colors",
+                isActiveRoute(item.href)
+                  ? isGradient 
+                    ? "text-white border-b-2 border-white" 
+                    : "text-gray-900 border-b-2 border-gray-900"
+                  : isGradient
+                    ? "text-white/80 hover:text-white"
+                    : "text-gray-900/80 hover:text-gray-900",
+                item.separator && "border-l border-gray-900 pl-4",
+                isGradient && item.separator && "border-white"
+              )}
               target={item.external ? '_blank' : '_self'}
             >
               {item.name}
