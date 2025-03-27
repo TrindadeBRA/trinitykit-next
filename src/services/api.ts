@@ -122,7 +122,7 @@ export const getProducts = async ( options?: RequestInit): Promise<getProductsRe
 
 
 /**
- * Cria um novo registro de contato no WordPress
+ * Cria um novo registro de contato no WordPress com suporte para upload de arquivos. Apenas os campos email e tag são obrigatórios.
  * @summary Enviar formulário de contato
  */
 export type postContactFormSubmitResponse200 = {
@@ -160,14 +160,29 @@ export const getPostContactFormSubmitUrl = () => {
 }
 
 export const postContactFormSubmit = async (postContactFormSubmitBody: PostContactFormSubmitBody, options?: RequestInit): Promise<postContactFormSubmitResponse> => {
-  
+    const formData = new FormData();
+if(postContactFormSubmitBody.name !== undefined) {
+ formData.append('name', postContactFormSubmitBody.name)
+ }
+formData.append('email', postContactFormSubmitBody.email)
+if(postContactFormSubmitBody.phone !== undefined) {
+ formData.append('phone', postContactFormSubmitBody.phone)
+ }
+if(postContactFormSubmitBody.message !== undefined) {
+ formData.append('message', postContactFormSubmitBody.message)
+ }
+formData.append('tag', postContactFormSubmitBody.tag)
+if(postContactFormSubmitBody.attachment !== undefined) {
+ formData.append('attachment', postContactFormSubmitBody.attachment)
+ }
+
   const res = await fetch(getPostContactFormSubmitUrl(),
   {      
     ...options,
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', ...options?.headers },
-    body: JSON.stringify(
-      postContactFormSubmitBody,)
+    method: 'POST'
+    ,
+    body: 
+      formData,
   }
 )
 

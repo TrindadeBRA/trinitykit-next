@@ -5,10 +5,8 @@
  * API para criar posts e fazer upload de imagens no WordPress
  * OpenAPI spec version: 1.0.0
  */
-import type { PostContactFormSubmit400Data } from './postContactFormSubmit400Data';
+import type { PostContactFormSubmit400OneOf } from './postContactFormSubmit400OneOf';
+import type { PostContactFormSubmit400OneOfThree } from './postContactFormSubmit400OneOfThree';
+import type { PostContactFormSubmit400OneOfFive } from './postContactFormSubmit400OneOfFive';
 
-export type PostContactFormSubmit400 = {
-  code?: string;
-  message?: string;
-  data?: PostContactFormSubmit400Data;
-};
+export type PostContactFormSubmit400 = PostContactFormSubmit400OneOf | PostContactFormSubmit400OneOfThree | PostContactFormSubmit400OneOfFive;
