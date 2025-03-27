@@ -1,8 +1,8 @@
 // app/mercado/[slug]/page.tsx
-import IntroProductLine from "@/src/components/IntroProductLine";
+// import IntroProductLine from "@/src/components/IntroProductLine";
 import { getGetSegmentSlugUrl, getSegmentSlugResponse } from "@/src/services/api";
 import customFetch from "@/src/services/custom-fetch";
-import { GetSegmentSlug200DataItem, GetSegmentSlug200DataItemCategoriesItem, GetSegmentSlug200DataItemCategoriesItemProductsItem } from "@/src/services/model";
+// import { GetSegmentSlug200DataItem, GetSegmentSlug200DataItemCategoriesItem, GetSegmentSlug200DataItemCategoriesItemProductsItem } from "@/src/services/model";
 import { Metadata } from 'next';
 
 interface MercadoProps {
@@ -10,12 +10,12 @@ interface MercadoProps {
 }
 
 // Traduzir slugs
-export const slugToName = {
-  "plasticos-elastomeros": "Plásticos e Elastoméricos",
-  "cosmeticos": "Cosméticos",
-  "adesivos": "Adesivos",
-  "tintas-vernizes": "Tintas e Vernizes",
-}
+// export const slugToName = {
+//   "plasticos-elastomeros": "Plásticos e Elastoméricos",
+//   "cosmeticos": "Cosméticos",
+//   "adesivos": "Adesivos",
+//   "tintas-vernizes": "Tintas e Vernizes",
+// }
 
 async function getSegmentsInfo(slug: string): Promise<getSegmentSlugResponse> {
   try {
@@ -33,12 +33,12 @@ export async function generateMetadata(
   const resolvedParams = await params;
   const { slug } = resolvedParams;
   
-  const segmentName = slug ? slugToName[slug as keyof typeof slugToName] || slug : 'Segmento Desconhecido';
-  const segmentNameLower = segmentName.toLowerCase();
+//   const segmentName = slug ? slugToName[slug as keyof typeof slugToName] || slug : 'Segmento Desconhecido';
+//   const segmentNameLower = segmentName.toLowerCase();
   
   return {
-    title: `Tiken - ${segmentName}`,
-    description: `Explore nossa linha de produtos para o mercado de ${segmentNameLower}.`,
+    title: `Tiken - ${slug}`,
+    description: `Explore nossa linha de produtos para o mercado de ${slug}.`,
   };
 }
 
@@ -57,7 +57,7 @@ export default async function Page({ params }: { params: Promise<MercadoProps> }
 
   return (
     <div>
-      {
+      {/* {
         Object.values(segmentInfo).map((product_lines: GetSegmentSlug200DataItem, index: number) => {
           return (
             <div key={product_lines.slug} style={{ flexDirection: index % 2 === 0 ? 'row' : 'row-reverse' }}>
@@ -93,7 +93,7 @@ export default async function Page({ params }: { params: Promise<MercadoProps> }
             </div>
           )
         })
-      }
+      } */}
       <div className="mb-96"></div>
     </div>
   )

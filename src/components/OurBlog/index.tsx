@@ -1,3 +1,5 @@
+import Image from "next/image"
+
 const posts = [
     {
         id: 2,
@@ -68,7 +70,7 @@ export default function OurBlog() {
                             className="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-gray-900 px-8 pt-80 pb-8 sm:pt-48 lg:pt-80"
                             data-aos="zoom-in"
                         >
-                            <img alt="" src={post.imageUrl} className="absolute inset-0 -z-10 size-full object-cover" />
+                            <Image alt="" src={post.imageUrl} className="absolute inset-0 -z-10 size-full object-cover" width={1000} height={1000} />
                             <div className="absolute inset-0 -z-10 bg-linear-to-t from-gray-900 via-gray-900/40" />
                             <div className="absolute inset-0 -z-10 rounded-2xl ring-1 ring-gray-900/10 ring-inset" />
 

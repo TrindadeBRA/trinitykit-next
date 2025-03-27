@@ -1,4 +1,5 @@
 import { ArrowRightIcon } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
 
 const markets = [
@@ -48,9 +49,12 @@ export default function Markets() {
 
                 <div className="relative">
                   <Link href={`/produtos?segment=${market.slug}`}>
-                    <img
+                    <Image
                       src={market.imageSrc}
                       className="w-full rounded-lg bg-white object-cover group-hover:opacity-75 transition-all duration-300 max-sm:h-80 sm:aspect-2/1 lg:aspect-square"
+                      width={1000}
+                      height={1000}
+                      alt={market.name}
                     />
                   </Link>
                 </div>

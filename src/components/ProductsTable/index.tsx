@@ -78,7 +78,9 @@ export default function ProductsTable({ allProducts }: { allProducts: ProductsTa
         ),
       }),
     ],
-    []
+    [
+      columnHelper
+    ]
   );
 
   console.log('Renderizando ProductsTable com produtos:');

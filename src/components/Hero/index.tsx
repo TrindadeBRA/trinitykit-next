@@ -1,5 +1,4 @@
-import { ChevronRightIcon } from '@heroicons/react/20/solid'
-import { ArrowRight, ArrowRightIcon } from 'lucide-react'
+import { ArrowRightIcon } from 'lucide-react'
 import Link from 'next/link'
 import Particles from '../Particles'
 
