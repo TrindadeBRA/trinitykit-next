@@ -8,6 +8,7 @@ import { useState } from 'react'
 import { getPostContactFormSubmitUrl, postContactFormSubmitResponse } from '@/src/services/api'
 import customFetch from '@/src/services/custom-fetch'
 import { errorToast, successToast } from '@/src/hooks/useToastify'
+import { useHookFormMask, withMask } from 'use-mask-input'
 
 const talkToUsFormSchema = z.object({
   name: z.string().min(3, 'Nome deve ter pelo menos 3 caracteres'),
@@ -29,6 +30,7 @@ export function TalkToUsForm() {
   } = useForm<TalkToUsFormData>({
     resolver: zodResolver(talkToUsFormSchema),
   })
+  const registerWithMask = useHookFormMask(register);
 
   const onSubmit = async (data: TalkToUsFormData) => {
     try {
@@ -102,10 +104,10 @@ export function TalkToUsForm() {
             </label>
             <div className="mt-2.5">
               <input
-                {...register('phone')}
                 type="tel"
                 autoComplete="tel"
                 className="block w-full rounded-md bg-white/5 px-3.5 py-2 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500"
+                {...registerWithMask("phone", ['(99) 99999-9999'])}
               />
               {errors.phone && (
                 <p className="mt-1 text-sm text-red-400">{errors.phone.message}</p>

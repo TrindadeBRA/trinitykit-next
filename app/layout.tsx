@@ -61,10 +61,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${spaceMono.variable} antialiased !bg-white !text-black pt-[96px]`}
       >
-        <WhatsAppFloat 
-          whatsappNumber="5511999999999" 
-          message="Olá! Vim pelo site e gostaria de mais informações."
-        />
+        <WhatsAppFloat />
         <AOS_Init />
         <Navigation />
         {children}

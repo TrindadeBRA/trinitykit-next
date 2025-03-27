@@ -1,14 +1,9 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { X } from "lucide-react"
-import { twMerge } from "tailwind-merge"
 import { WhatsAppForm } from "./form"
-// import { toast } from "@/hooks/use-toast"
-
-
 
 export function WhatsAppFloat() {
     const [isOpen, setIsOpen] = useState(false)
@@ -16,7 +11,7 @@ export function WhatsAppFloat() {
     return (
         <div className="fixed bottom-6 right-6 z-50">
             {isOpen ? (
-                <div className="bg-white! dark:bg-gray-800 rounded-lg shadow-lg p-4 w-72 animate-in slide-in-from-bottom-5 duration-300">
+                <div className="bg-white! dark:bg-gray-800 rounded-lg shadow-lg p-4 w-72 animate-in slide-in-from-bottom-5 duration-300 shadow-lg">
                     <div className="flex justify-between items-center mb-3">
                         <h3 className="font-bold text-sm">Fale conosco pelo WhatsApp</h3>
                         <button

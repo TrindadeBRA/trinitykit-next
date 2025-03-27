@@ -81,8 +81,9 @@ export function WhatsAppForm({ setIsOpen }: WhatsAppFormProps) {
                         id="email"
                         {...register('email')}
                         type="email"
+                        autoComplete="email"
                         placeholder="seu@email.com"
-                        className="mt-1 w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-gray-800 dark:text-white bg-white! placeholder:text-gray-500 text-black!"
+                        className="mt-1 w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-gray-800 dark:text-white bg-white! placeholder:text-gray-500 text-black! text-sm"
                     />
                     {errors.email && (
                         <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
@@ -95,7 +96,7 @@ export function WhatsAppForm({ setIsOpen }: WhatsAppFormProps) {
                         "w-full px-4 py-2 rounded-md font-medium text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors",
                     )}
                 >
-                    Enviar
+                    {isSubmitting ? "Enviando..." : "Chamar no WhatsApp!"}
                 </button>
             </div>
         </form>
