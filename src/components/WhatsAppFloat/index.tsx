@@ -5,56 +5,13 @@ import type React from "react"
 import { useState } from "react"
 import { X } from "lucide-react"
 import { twMerge } from "tailwind-merge"
+import { WhatsAppForm } from "./form"
 // import { toast } from "@/hooks/use-toast"
 
-interface WhatsAppFloatProps {
-    whatsappNumber: string
-    message?: string
-}
 
-export function WhatsAppFloat({ whatsappNumber, message = "Olá, gostaria de mais informações!" }: WhatsAppFloatProps) {
+
+export function WhatsAppFloat() {
     const [isOpen, setIsOpen] = useState(false)
-    const [email, setEmail] = useState("")
-    const [isSubmitting, setIsSubmitting] = useState(false)
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault()
-
-        if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
-            //   toast({
-            //     title: "Email inválido",
-            //     description: "Por favor, insira um email válido.",
-            //     variant: "destructive",
-            //   })
-
-            console.log("Email inválido")
-            return
-        }
-
-        setIsSubmitting(true)
-
-        // Aqui você poderia salvar o email em um banco de dados
-        // usando uma Server Action ou API route
-
-        // Simulando um pequeno delay antes de redirecionar
-        setTimeout(() => {
-            const encodedMessage = encodeURIComponent(message)
-            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`
-            window.open(whatsappUrl, "_blank")
-
-            // Resetar o estado
-            setIsSubmitting(false)
-            setIsOpen(false)
-            setEmail("")
-
-            // toast({
-            //     title: "Sucesso!",
-            //     description: "Redirecionando para o WhatsApp...",
-            // })
-
-            console.log("Sucesso!")
-        }, 500)
-    }
 
     return (
         <div className="fixed bottom-6 right-6 z-50">
@@ -72,35 +29,9 @@ export function WhatsAppFloat({ whatsappNumber, message = "Olá, gostaria de mai
                         </button>
                     </div>
 
-                    <form onSubmit={handleSubmit}>
-                        <div className="space-y-3">
-                            <div>
-                                <label htmlFor="email" className="text-xs text-muted-foreground">
-                                    Seu email para contato:
-                                </label>
-                                <input
-                                    id="email"
-                                    type="email"
-                                    placeholder="seu@email.com"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    required
-                                    className="mt-1 w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent dark:bg-gray-800 dark:text-white bg-white! placeholder:text-gray-500 text-black!"
-                                />
-                            </div>
-
-                            <button
-                                type="submit"
-                                disabled={isSubmitting}
-                                className={twMerge(
-                                    "w-full px-4 py-2 rounded-md font-medium text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors",
-                                    isSubmitting && "opacity-70 cursor-not-allowed",
-                                )}
-                            >
-                                {isSubmitting ? "Enviando..." : "Continuar para WhatsApp"}
-                            </button>
-                        </div>
-                    </form>
+                    <WhatsAppForm
+                        setIsOpen={setIsOpen}
+                    />
                 </div>
             ) : (
                 <button
