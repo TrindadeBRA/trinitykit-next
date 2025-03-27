@@ -17,7 +17,6 @@ export default function ExcellenceRecognition() {
           </p>
           <Link
             href="/trabalhe-conosco"
-            target="_blank"
             className="flex items-center gap-x-2 text-black font-bold font-space-mono mt-4"
             data-aos="fade-right"
           >
