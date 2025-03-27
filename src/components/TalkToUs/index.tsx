@@ -1,8 +1,10 @@
 'use client'
 
 import { ArrowRightIcon } from 'lucide-react'
+import { useMobileCheck } from '@/src/hooks/useMobileCheck'
 
 export default function TalkToUs() {
+  const isMobile = useMobileCheck()
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -54,18 +56,30 @@ export default function TalkToUs() {
                 />
               </div>
             </div>
-            <p className="text-base/7 font-semibold text-white" data-aos="fade-right">Entre em contato</p>
-
-            <h2 className="text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl" data-aos="fade-right">
-            Fale Conosco!
-            </h2>
-            <p className="mt-6 text-lg/8 text-white" data-aos="fade-right">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna.
+            <p className="text-base/7 font-semibold text-white" data-aos={isMobile ? "fade-in" : "fade-right"}>
+              Entre em contato
             </p>
 
+            <h2 
+              className="text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl" 
+              data-aos={isMobile ? "fade-in" : "fade-right"}
+            >
+              Fale Conosco!
+            </h2>
+            <p 
+              className="mt-6 text-lg/8 text-white" 
+              data-aos={isMobile ? "fade-in" : "fade-right"}
+            >
+              Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna.
+            </p>
           </div>
         </div>
-        <form action="#" method="POST" className="px-6 pt-16 pb-16 lg:px-8" data-aos="fade-left">
+        <form 
+          action="#" 
+          method="POST" 
+          className="px-6 pt-16 pb-16 lg:px-8" 
+          data-aos={isMobile ? "fade-in" : "fade-in"}
+        >
           <div className="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">
             <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
               <div className="sm:col-span-2">
