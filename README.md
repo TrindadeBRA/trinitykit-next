@@ -1,20 +1,21 @@
-# Project TODO List
+# TrinityWeb TODO
 
 ## Itens a ser desenvolvido no front
 - [X] Home
-- [ ] Quem Somos
-- [ ] Produtos
+- [X] Quem Somos
+- [X] Produtos
 - [ ] Blog
 - [ ] Blog Interna
 - [ ] Politica e Privacidade
-- [ ] Trabalhe Conosco
-- [ ] Interagções dos forms
+- [X] Trabalhe Conosco
+- [X] Interagções dos forms
+- [ ] Modais de Literatura Técnica/Solicitar amostra
 
 ## Itens a ser desenvolvido no back
-- [ ] Inserir anexos .pdf (Apresentacoes e Catalogos)
+- [X] Inserir anexos .pdf (Apresentacoes e Catalogos)
 - [ ] API para Blog
 - [ ] API para Paginacao do Blog
-- [ ] API para Trabalhe conosco
+- [X] API para Trabalhe conosco
 
 ## Itens de CI/CD
 - [ ] Criar github da Tiken

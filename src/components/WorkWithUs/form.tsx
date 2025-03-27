@@ -4,12 +4,16 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { ArrowRightIcon } from 'lucide-react'
-import { PhotoIcon } from '@heroicons/react/24/outline'
+import { useState } from 'react'
+import { getPostContactFormSubmitUrl, postContactFormSubmitResponse } from '@/src/services/api'
+import customFetch from '@/src/services/custom-fetch'
+import { errorToast, successToast } from '@/src/hooks/useToastify'
+import { useHookFormMask } from 'use-mask-input'
 
 const workWithUsFormSchema = z.object({
   name: z.string().min(3, 'Nome deve ter pelo menos 3 caracteres'),
   email: z.string().email('Email inválido'),
-  phone: z.string().min(10, 'Telefone inválido'),
+  phone: z.string().min(3, 'Telefone inválido'),
   linkedin: z.string().url('URL do Linkedin inválida'),
   resume: typeof window === 'undefined' 
     ? z.any() 
@@ -31,17 +35,46 @@ const workWithUsFormSchema = z.object({
 type WorkWithUsFormData = z.infer<typeof workWithUsFormSchema>
 
 export function WorkWithUsForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<WorkWithUsFormData>({
     resolver: zodResolver(workWithUsFormSchema),
   })
+  const registerWithMask = useHookFormMask(register)
 
   const onSubmit = async (data: WorkWithUsFormData) => {
-    // Handle form submission here
-    console.log(data)
+    try {
+      setIsSubmitting(true)
+      
+      const formData = new FormData()
+      formData.append('name', data.name)
+      formData.append('email', data.email)
+      formData.append('phone', data.phone)
+      formData.append('linkedin', data.linkedin)
+      formData.append('tag', 'Trabalhe Conosco')
+      
+      if (data.resume instanceof FileList && data.resume.length > 0) {
+        const file = data.resume[0]
+        formData.append('attachment', file, file.name)
+      }
+
+    await customFetch<postContactFormSubmitResponse>(getPostContactFormSubmitUrl(), {
+        method: 'POST',
+        body: formData,
+      })
+
+      successToast("Formulário enviado com sucesso! Entraremos em contato em breve.")
+      reset()
+    } catch (e) {
+      console.error("Erro ao enviar o formulário", e)
+      errorToast("Ocorreu um erro ao enviar o formulário. Tente novamente mais tarde.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -88,7 +121,7 @@ export function WorkWithUsForm() {
             </label>
             <div className="mt-2.5">
               <input
-                {...register('phone')}
+                {...registerWithMask("phone", ['(99) 99999-9999'])}
                 type="tel"
                 autoComplete="tel"
                 className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
@@ -116,34 +149,19 @@ export function WorkWithUsForm() {
             </div>
           </div>
 
-          <div className="col-span-full">
-            <label htmlFor="resume" className="block text-sm/6 font-medium text-gray-900">
+          <div className="sm:col-span-2">
+            <label htmlFor="resume" className="block text-sm/6 font-semibold text-gray-900">
               Currículo
             </label>
-            <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-              <div className="text-center">
-                <PhotoIcon aria-hidden="true" className="mx-auto size-12 text-gray-300" />
-                <div className="mt-4 flex text-sm/6 text-gray-600">
-                  <label
-                    htmlFor="resume"
-                    className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 focus-within:outline-hidden hover:text-indigo-500"
-                  >
-                    <span>Faça o upload do seu currículo</span>
-                    <input
-                      {...register('resume')}
-                      id="resume"
-                      type="file"
-                      className="sr-only"
-                      accept=".pdf,.doc,.docx"
-                    />
-                  </label>
-                  <p className="pl-1">ou arraste e solte</p>
-                </div>
-                <p className="text-xs/5 text-gray-600">PDF, DOC, DOCX até 10MB</p>
-                {errors.resume && (
-                  <p className="mt-1 text-sm text-red-600">{errors.resume.message as string}</p>
-                )}
-              </div>
+            <div className="mt-2.5">
+              <input
+                {...register('resume')}
+                type="file"
+                className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+              />
+              {errors.resume && (
+                <p className="mt-1 text-sm text-red-600">{errors.resume.message as string}</p>
+              )}
             </div>
           </div>
         </div>
@@ -151,9 +169,10 @@ export function WorkWithUsForm() {
         <div className="mt-8 flex justify-end">
           <button
             type="submit"
-            className="flex items-center gap-x-2 rounded-md bg-[#9061a8] text-white px-4 py-2.5 font-bold font-space-mono w-fit"
+            disabled={isSubmitting}
+            className="flex items-center gap-x-2 rounded-md bg-[#9061a8] text-white px-4 py-2.5 font-bold font-space-mono w-fit hover:bg-[#9061a8]/80 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            enviar <ArrowRightIcon className="size-4" />
+            {isSubmitting ? 'Enviando...' : 'enviar'} <ArrowRightIcon className="size-4" />
           </button>
         </div>
       </div>
