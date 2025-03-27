@@ -16,6 +16,7 @@
 - [ ] API para Blog
 - [ ] API para Paginacao do Blog
 - [X] API para Trabalhe conosco
+- [ ] Envio de emails internos / SMTP
 
 ## Itens de CI/CD
 - [ ] Criar github da Tiken
