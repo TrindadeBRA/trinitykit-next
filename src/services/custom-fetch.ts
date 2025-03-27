@@ -1,15 +1,14 @@
 const customFetch = async <T>(url: string, options: RequestInit = {}): Promise<T> => {
-    const baseUrl = process.env.WORDPRESS_API_URL;
+    const baseUrl = process.env.NEXT_PUBLIC_WORDPRESS_API_URL;
     const apiKey = process.env.WORDPRESS_API_KEY;
     const fullUrl = baseUrl + url;
 
-    if (!apiKey) {
-      throw new Error('API Key is not defined');
+    let defaultHeaders = {};
+    if(apiKey) {
+      defaultHeaders = {
+        'X-API-Key': apiKey,
+      };
     }
-  
-    const defaultHeaders = {
-      'X-API-Key': apiKey,
-    };
   
     const requestOptions: RequestInit = {
       ...options,

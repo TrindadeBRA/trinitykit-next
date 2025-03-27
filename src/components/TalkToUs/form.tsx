@@ -4,33 +4,73 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { ArrowRightIcon } from 'lucide-react'
+import { useState } from 'react'
+import { getGetSegmentSlugUrl, getPostContactFormSubmitUrl, getSegmentSlugResponse, postContactFormSubmit, postContactFormSubmitResponse, postContactFormSubmitResponse200 } from '@/src/services/api'
+import customFetch from '@/src/services/custom-fetch'
+import { PostContactFormSubmitBody } from '@/src/services/model'
 
 const talkToUsFormSchema = z.object({
   name: z.string().min(3, 'Nome deve ter pelo menos 3 caracteres'),
   email: z.string().email('Email inválido'),
-  phone: z.string().min(10, 'Telefone inválido'),
+  phone: z.string().min(1, 'Telefone inválido'),
   message: z.string().optional(),
 })
 
 type TalkToUsFormData = z.infer<typeof talkToUsFormSchema>
 
 export function TalkToUsForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
+  const [submitSuccess, setSubmitSuccess] = useState(false)
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<TalkToUsFormData>({
     resolver: zodResolver(talkToUsFormSchema),
   })
 
   const onSubmit = async (data: TalkToUsFormData) => {
-    // Handle form submission here
-    console.log('Dados enviados!', data)
+    try {
+      setIsSubmitting(true)
+      setSubmitError(null)
+      
+      const formData = new FormData()
+      formData.append('name', data.name)
+      formData.append('email', data.email)
+      formData.append('phone', data.phone)
+      formData.append('message', data.message || '')
+      formData.append('tag', 'Fale Conosco')
+
+      await customFetch<postContactFormSubmitResponse>(getPostContactFormSubmitUrl(), {
+        method: 'POST',
+        body: formData,
+      })
+
+    } catch (error) {
+      setSubmitError('Ocorreu um erro ao enviar o formulário.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="px-6 pt-16 pb-16 lg:px-8">
       <div className="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">
+        {submitSuccess && (
+          <div className="mb-6 p-4 bg-green-500/10 text-green-500 rounded-md">
+            Mensagem enviada com sucesso! Entraremos em contato em breve.
+          </div>
+        )}
+
+        {submitError && (
+          <div className="mb-6 p-4 bg-red-500/10 text-red-500 rounded-md">
+            {submitError}
+          </div>
+        )}
+
         <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
           <div className="sm:col-span-2">
             <label htmlFor="name" className="block text-sm/6 font-semibold text-white">
@@ -103,9 +143,10 @@ export function TalkToUsForm() {
         <div className="mt-8 flex justify-end">
           <button
             type="submit"
-            className="flex items-center gap-x-2 rounded-md bg-[#f5d22c] text-black px-4 py-2.5 font-bold font-space-mono text-sm hover:bg-[#f5d22c]/80 transition-all duration-300 cursor-pointer"
+            disabled={isSubmitting}
+            className="flex items-center gap-x-2 rounded-md bg-[#f5d22c] text-black px-4 py-2.5 font-bold font-space-mono text-sm hover:bg-[#f5d22c]/80 transition-all duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Enviar
+            {isSubmitting ? 'Enviando...' : 'Enviar'}
             <ArrowRightIcon className="size-4" />
           </button>
         </div>
