@@ -3,7 +3,7 @@ import { MapPinIcon, PhoneIcon } from "lucide-react"
 
 export default function ContactItems() {
   return (
-    <div className="relative isolate overflow-hidden">
+    <div className="relative isolate overflow-hidden overflow-x-hidden">
       {/* Background com efeito parallax */}
       <div
         className="absolute inset-0 bg-[url('/assets/images/contact-itens-bg.webp')] bg-cover bg-center bg-fixed"

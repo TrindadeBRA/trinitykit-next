@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function DiscoverOurProducts() {
   return (
-    <div className="relative isolate overflow-hidden">
+    <div className="relative isolate overflow-hidden overflow-x-hidden">
       {/* Background com efeito parallax */}
       <div
         className="absolute inset-0 bg-[url('/assets/images/our-products-bg.webp')] bg-cover bg-center bg-fixed"

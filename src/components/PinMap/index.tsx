@@ -7,7 +7,7 @@ export default function PinMap() {
     const [isLoading, setIsLoading] = React.useState(true);
 
     return (
-        <div className="relative" data-aos="fade-in">
+        <div className="relative overflow-x-hidden" data-aos="fade-in">
             {isLoading && (
                 <div className="absolute inset-0 w-full h-[450px] bg-gray-200 animate-pulse flex items-center justify-center">
                     <ArrowPathIcon className="w-12 h-12 text-gray-400 animate-spin" />

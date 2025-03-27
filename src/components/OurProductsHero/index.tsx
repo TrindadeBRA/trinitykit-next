@@ -6,7 +6,6 @@ import Image from "next/image"
 import Link from "next/link";
 
 interface OurProductsHeroProps {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     heroData: any
 }
 

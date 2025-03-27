@@ -53,7 +53,7 @@ const posts = [
 
 export default function OurBlog() {
     return (
-        <div className="bg-white py-16">
+        <div className="bg-white py-16 overflow-x-hidden">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="mx-auto max-w-2xl text-center">
                     <p className="text-base/7 font-semibold text-[#0399c4] text-center" data-aos="zoom-in">Fique por Dentro</p>

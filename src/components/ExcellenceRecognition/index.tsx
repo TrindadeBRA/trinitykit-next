@@ -5,7 +5,7 @@ import { ArrowRightIcon } from 'lucide-react'
 
 export default function ExcellenceRecognition() {
   return (
-    <div className="bg-[#f4f4f4] py-20">
+    <div className="bg-[#f4f4f4] py-20 overflow-x-hidden">
       <div className="mx-auto max-w-7xl px-8 flex flex-col lg:flex-row items-center justify-between gap-12">
         {/* Lado esquerdo - Texto */}
         <div className="lg:w-2/3">
