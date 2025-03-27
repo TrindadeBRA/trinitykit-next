@@ -5,9 +5,9 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { ArrowRightIcon } from 'lucide-react'
 import { useState } from 'react'
-import { getGetSegmentSlugUrl, getPostContactFormSubmitUrl, getSegmentSlugResponse, postContactFormSubmit, postContactFormSubmitResponse, postContactFormSubmitResponse200 } from '@/src/services/api'
+import { getPostContactFormSubmitUrl, postContactFormSubmitResponse } from '@/src/services/api'
 import customFetch from '@/src/services/custom-fetch'
-import { PostContactFormSubmitBody } from '@/src/services/model'
+import { errorToast, successToast } from '@/src/hooks/useToastify'
 
 const talkToUsFormSchema = z.object({
   name: z.string().min(3, 'Nome deve ter pelo menos 3 caracteres'),
@@ -20,8 +20,6 @@ type TalkToUsFormData = z.infer<typeof talkToUsFormSchema>
 
 export function TalkToUsForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitError, setSubmitError] = useState<string | null>(null)
-  const [submitSuccess, setSubmitSuccess] = useState(false)
 
   const {
     register,
@@ -35,7 +33,6 @@ export function TalkToUsForm() {
   const onSubmit = async (data: TalkToUsFormData) => {
     try {
       setIsSubmitting(true)
-      setSubmitError(null)
       
       const formData = new FormData()
       formData.append('name', data.name)
@@ -49,27 +46,20 @@ export function TalkToUsForm() {
         body: formData,
       })
 
-    } catch (error) {
-      setSubmitError('Ocorreu um erro ao enviar o formulário.')
+    } catch (e) {
+      console.error("Erro ao enviar o formulário", e)
+      errorToast("Ocorreu um erro ao enviar o formulário. Tente novamente mais tarde.")
     } finally {
       setIsSubmitting(false)
+      successToast("Mensagem enviada com sucesso! Entraremos em contato em breve.")
+      reset()
+
     }
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="px-6 pt-16 pb-16 lg:px-8">
       <div className="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">
-        {submitSuccess && (
-          <div className="mb-6 p-4 bg-green-500/10 text-green-500 rounded-md">
-            Mensagem enviada com sucesso! Entraremos em contato em breve.
-          </div>
-        )}
-
-        {submitError && (
-          <div className="mb-6 p-4 bg-red-500/10 text-red-500 rounded-md">
-            {submitError}
-          </div>
-        )}
 
         <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
           <div className="sm:col-span-2">

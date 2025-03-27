@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter, Space_Mono } from "next/font/google";
 import "./globals.css";
+import "toastify-js/src/toastify.css"
 import Navigation from "@/src/components/Navigation";
 import Script from "next/script";
 import { WhatsAppFloat } from "../src/components/WhatsAppFloat";
 import Footer from "@/src/components/Footer";
 import AOS_Init from "@/src/components/AOS_Init";
+
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
