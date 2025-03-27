@@ -11,10 +11,7 @@ interface OurProductsHeroProps {
 
 export default function OurProductsHero({ heroData }: OurProductsHeroProps) {
 
-    console.log(">>>>>>>>>>>>>heroData", heroData);
-
     return (
-
         <div className="relative isolate lg:h-[calc(100vh-96px)] lg:flex lg:items-center overflow-x-hidden">
             <svg
                 aria-hidden="true"

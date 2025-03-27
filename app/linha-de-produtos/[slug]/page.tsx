@@ -126,8 +126,6 @@ export default async function Page({ params }: { params: Promise<ProductLineProp
 export async function generateStaticParams() {
   try {
     const { data } = await customFetch<getProductLineSlugsResponse>(getGetProductLineSlugsUrl());
-
-    console.log("Slugs encontrados: ", data);
     
     if (!data || !Array.isArray(data)) {
       console.error('Dados de slugs não encontrados ou formato inválido');

@@ -1,5 +1,3 @@
-import { BuildingOffice2Icon, EnvelopeIcon, PhoneIcon, PhotoIcon } from '@heroicons/react/24/outline'
-import { ArrowRightIcon } from 'lucide-react'
 import { WorkWithUsForm } from './form'
 
 export default function WorkWithUs() {

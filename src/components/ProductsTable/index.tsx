@@ -83,7 +83,7 @@ export default function ProductsTable({ allProducts }: { allProducts: ProductsTa
     ]
   );
 
-  console.log('Renderizando ProductsTable com produtos:');
+  // console.log('Renderizando ProductsTable com produtos:');
 
   const tableState = useMemo(() => ({
     columnFilters: [
@@ -111,7 +111,7 @@ export default function ProductsTable({ allProducts }: { allProducts: ProductsTa
   });
 
   // Log para verificar a quantidade de linhas
-  console.log('Número de linhas na tabela:', table.getRowModel().rows.length);
+  // console.log('Número de linhas na tabela:', table.getRowModel().rows.length);
 
   // Extrair segmentos únicos para o filtro dropdown
   const uniqueSegments = useMemo(() => {
@@ -211,7 +211,7 @@ export default function ProductsTable({ allProducts }: { allProducts: ProductsTa
               <tbody className="divide-y divide-gray-300">
                 {table.getRowModel().rows.length > 0 ? (
                   table.getRowModel().rows.map(row => {
-                    console.log('Renderizando linha:');
+                    // console.log('Renderizando linha:');
                     return (
                       <tr key={row.id} className="text-gray-850 hover:bg-gray-200">
                         {row.getVisibleCells().map(cell => (

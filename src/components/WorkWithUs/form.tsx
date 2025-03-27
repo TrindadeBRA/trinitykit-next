@@ -11,19 +11,21 @@ const workWithUsFormSchema = z.object({
   email: z.string().email('Email inválido'),
   phone: z.string().min(10, 'Telefone inválido'),
   linkedin: z.string().url('URL do Linkedin inválida'),
-  resume: z.instanceof(FileList)
-    .refine((files) => files.length > 0, 'Currículo é obrigatório')
-    .refine(
-      (files) => files[0]?.size <= 10 * 1024 * 1024,
-      'Arquivo deve ter no máximo 10MB'
-    )
-    .refine(
-      (files) => {
-        const validTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document']
-        return validTypes.includes(files[0]?.type)
-      },
-      'Formato de arquivo inválido. Use PDF, DOC ou DOCX'
-    ),
+  resume: typeof window === 'undefined' 
+    ? z.any() 
+    : z.instanceof(FileList)
+      .refine((files) => files.length > 0, 'Currículo é obrigatório')
+      .refine(
+        (files) => files[0]?.size <= 10 * 1024 * 1024,
+        'Arquivo deve ter no máximo 10MB'
+      )
+      .refine(
+        (files) => {
+          const validTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document']
+          return validTypes.includes(files[0]?.type)
+        },
+        'Formato de arquivo inválido. Use PDF, DOC ou DOCX'
+      ),
 })
 
 type WorkWithUsFormData = z.infer<typeof workWithUsFormSchema>
@@ -139,7 +141,7 @@ export function WorkWithUsForm() {
                 </div>
                 <p className="text-xs/5 text-gray-600">PDF, DOC, DOCX até 10MB</p>
                 {errors.resume && (
-                  <p className="mt-1 text-sm text-red-600">{errors.resume.message}</p>
+                  <p className="mt-1 text-sm text-red-600">{errors.resume.message as string}</p>
                 )}
               </div>
             </div>
