@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function OurPeople() {
     return (
 
-        <div className = "my-16 overflow-hidden" id="equipe" >
+        <div className = "my-16 overflow-hidden overflow-x-hidden" id="equipe" >
             <div className="mx-auto max-w-7xl px-6 lg:flex lg:px-8">
                 <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-12 gap-y-16 lg:mx-0 lg:max-w-none lg:min-w-full lg:flex-none lg:gap-y-8">
                     <div className="lg:col-end-1 lg:w-full lg:max-w-lg lg:pb-8">

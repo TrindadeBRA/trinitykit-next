@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function AboutHero() {
     return (
-        <div className="relative isolate -z-10 overflow-hidden bg-linear-to-b from-indigo-100/20 pt-14">
+        <div className="relative isolate -z-10 overflow-hidden bg-linear-to-b from-indigo-100/20 pt-14 overflow-x-hidden">
             <div
                 aria-hidden="true"
                 className="absolute inset-y-0 right-1/2 -z-10 -mr-96 w-[200%] origin-top-right skew-x-[-30deg] bg-white ring-1 shadow-xl shadow-indigo-600/10 ring-indigo-50 sm:-mr-80 lg:-mr-96"

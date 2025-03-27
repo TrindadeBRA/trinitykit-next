@@ -158,7 +158,7 @@ export default function ProductsTable({ allProducts }: { allProducts: ProductsTa
   }, [uniqueSegments]);
 
   return (
-    <div className="p-4 md:p-8 mt-6">
+    <div className="p-4 md:p-8 mt-6 overflow-x-hidden">
       <div className="mb-6 flex flex-col md:flex-row gap-4">
         <div className="flex flex-col md:flex-row gap-4">
           <div className="relative">

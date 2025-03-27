@@ -65,7 +65,7 @@ export default async function Page({ params }: { params: Promise<ProductLineProp
       />
 
       <>
-        <div className="flex flex-wrap w-full gap-x-8 gap-y-24 px-8 lg:px-0 container max-w-7xl mx-auto">
+        <div className="flex flex-wrap w-full gap-x-8 gap-y-24 px-8 lg:px-0 container max-w-7xl mx-auto overflow-x-hidden">
           {data?.subcategories?.map((category: GetProductLineSlug200DataSubcategoriesItem) => {
             
             const getColumnClass = (length: number) => {

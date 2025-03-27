@@ -6,7 +6,7 @@ export default function OurMission() {
     ]
 
     return (
-        <div className="bg-[#f4f4f4] py-20">
+        <div className="bg-[#f4f4f4] py-20 overflow-x-hidden">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
                     <h2 className="text-4xl font-semibold tracking-tight text-pretty text-black sm:text-5xl" data-aos="fade-right">Missão</h2>
