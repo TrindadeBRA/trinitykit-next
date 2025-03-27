@@ -1,20 +1,10 @@
 'use client'
 
-import { ArrowRightIcon } from 'lucide-react'
 import { useMobileCheck } from '@/src/hooks/useMobileCheck'
+import { TalkToUsForm } from './form'
 
 export default function TalkToUs() {
   const isMobile = useMobileCheck()
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    console.log('Dados enviados!', {
-      name: (document.getElementById('name') as HTMLInputElement)?.value,
-      email: (document.getElementById('email') as HTMLInputElement)?.value,
-      phone: (document.getElementById('phone-number') as HTMLInputElement)?.value,
-      message: (document.getElementById('message') as HTMLTextAreaElement)?.value,
-    })
-  }
 
   return (
     <div className="relative isolate bg-[#7b61c2] overflow-x-hidden" id="contato">
@@ -74,82 +64,9 @@ export default function TalkToUs() {
             </p>
           </div>
         </div>
-        <form 
-          action="#" 
-          method="POST" 
-          className="px-6 pt-16 pb-16 lg:px-8" 
-          data-aos={isMobile ? "fade-in" : "fade-in"}
-        >
-          <div className="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">
-            <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-              <div className="sm:col-span-2">
-                <label htmlFor="name" className="block text-sm/6 font-semibold text-white">
-                  Nome
-                </label>
-                <div className="mt-2.5">
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    autoComplete="name"
-                    className="block w-full rounded-md bg-white/5 px-3.5 py-2 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500"
-                  />
-                </div>
-              </div>
-              <div className="sm:col-span-2">
-                <label htmlFor="email" className="block text-sm/6 font-semibold text-white">
-                  Email
-                </label>
-                <div className="mt-2.5">
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    className="block w-full rounded-md bg-white/5 px-3.5 py-2 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500"
-                  />
-                </div>
-              </div>
-              <div className="sm:col-span-2">
-                <label htmlFor="phone-number" className="block text-sm/6 font-semibold text-white">
-                  Telefone
-                </label>
-                <div className="mt-2.5">
-                  <input
-                    id="phone-number"
-                    name="phone-number"
-                    type="tel"
-                    autoComplete="tel"
-                    className="block w-full rounded-md bg-white/5 px-3.5 py-2 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500"
-                  />
-                </div>
-              </div>
-              <div className="sm:col-span-2">
-                <label htmlFor="message" className="block text-sm/6 font-semibold text-white">
-                  Mensagem
-                </label>
-                <div className="mt-2.5">
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={4}
-                    className="block w-full rounded-md bg-white/5 px-3.5 py-2 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500"
-                    defaultValue={''}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="mt-8 flex justify-end">
-              <button
-                className="flex items-center gap-x-2 rounded-md bg-[#f5d22c] text-black px-4 py-2.5 font-bold font-space-mono text-sm hover:bg-[#f5d22c]/80 transition-all duration-300 cursor-pointer"
-                onClick={(e: any) => handleSubmit(e)}
-              >
-                Enviar
-                <ArrowRightIcon className="size-4" />
-              </button>
-            </div>
-          </div>
-        </form>
+        <div data-aos={isMobile ? "fade-in" : "fade-in"}>
+          <TalkToUsForm />
+        </div>
       </div>
     </div>
   )
