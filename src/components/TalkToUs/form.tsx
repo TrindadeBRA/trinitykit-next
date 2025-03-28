@@ -8,7 +8,7 @@ import { useState } from 'react'
 import { getPostContactFormSubmitUrl, postContactFormSubmitResponse } from '@/src/services/api'
 import customFetch from '@/src/services/custom-fetch'
 import { errorToast, successToast } from '@/src/hooks/useToastify'
-import { useHookFormMask, withMask } from 'use-mask-input'
+import { useHookFormMask } from 'use-mask-input'
 
 const talkToUsFormSchema = z.object({
   name: z.string().min(3, 'Nome deve ter pelo menos 3 caracteres'),
