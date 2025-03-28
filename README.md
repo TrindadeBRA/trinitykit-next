@@ -22,3 +22,6 @@
 ## Itens de CI/CD
 - [ ] Criar github da Tiken
 - [ ] Criar action com build e deploy
+
+## Fixes
+- [ ] Ajustar efeito parallax no mobile
