@@ -25,3 +25,5 @@
 
 ## Fixes
 - [ ] Ajustar efeito parallax no mobile
+- [ ] Ajustar overflow do hero de produtos
+- [ ] Ajustar responsivo de table de produtos
