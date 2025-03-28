@@ -6,10 +6,11 @@
 - [X] Produtos
 - [ ] Blog
 - [ ] Blog Interna
-- [ ] Politica e Privacidade
+- [X] Politica e Privacidade
 - [X] Trabalhe Conosco
 - [X] Interagções dos forms
 - [ ] Modais de Literatura Técnica/Solicitar amostra
+- [ ] Widget de Cookies
 
 ## Itens a ser desenvolvido no back
 - [X] Inserir anexos .pdf (Apresentacoes e Catalogos)
