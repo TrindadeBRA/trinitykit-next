@@ -11,6 +11,7 @@
 - [X] Interagções dos forms
 - [ ] Modais de Literatura Técnica/Solicitar amostra
 - [ ] Widget de Cookies
+- [ ] Sitemap
 
 ## Itens a ser desenvolvido no back
 - [X] Inserir anexos .pdf (Apresentacoes e Catalogos)
