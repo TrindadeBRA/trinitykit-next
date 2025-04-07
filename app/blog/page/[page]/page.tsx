@@ -29,7 +29,7 @@ async function getPostsPagination(page: string): Promise<getPostSlugsResponse> {
   }
 }
 
-export async function generateMetadata({ params }: { params: BlogPageProps }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<BlogPageProps> }): Promise<Metadata> {
 
   const { page } = await params
   

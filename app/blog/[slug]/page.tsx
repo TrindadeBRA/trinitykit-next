@@ -22,7 +22,7 @@ async function getPostSlug(slug: string): Promise<getPostSlugResponse> {
   }
 }
 
-export async function generateMetadata({ params }: { params: BlogPostProps }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<BlogPostProps> }): Promise<Metadata> {
 
   const { slug } = await params
 
