@@ -8,8 +8,13 @@
 import type {
   GetConfigs200,
   GetConfigs401,
+  GetPostSlug200,
+  GetPostSlug400,
+  GetPostSlug401,
+  GetPostSlug404,
   GetPostSlugs200,
   GetPostSlugs401,
+  GetPostSlugsParams,
   GetProductLineSlug200,
   GetProductLineSlug401,
   GetProductLineSlug404,
@@ -122,7 +127,7 @@ export const getProducts = async ( options?: RequestInit): Promise<getProductsRe
 
 
 /**
- * Cria um novo registro de contato no WordPress com suporte para upload de arquivos. Apenas os campos email e tag são obrigatórios.
+ * Cria um novo registro de contato no WordPress com suporte para upload de arquivos. Todos os campos são obrigatórios exceto o arquivo anexo.
  * @summary Enviar formulário de contato
  */
 export type postContactFormSubmitResponse200 = {
@@ -161,16 +166,10 @@ export const getPostContactFormSubmitUrl = () => {
 
 export const postContactFormSubmit = async (postContactFormSubmitBody: PostContactFormSubmitBody, options?: RequestInit): Promise<postContactFormSubmitResponse> => {
     const formData = new FormData();
-if(postContactFormSubmitBody.name !== undefined) {
- formData.append('name', postContactFormSubmitBody.name)
- }
+formData.append('name', postContactFormSubmitBody.name)
 formData.append('email', postContactFormSubmitBody.email)
-if(postContactFormSubmitBody.phone !== undefined) {
- formData.append('phone', postContactFormSubmitBody.phone)
- }
-if(postContactFormSubmitBody.message !== undefined) {
- formData.append('message', postContactFormSubmitBody.message)
- }
+formData.append('phone', postContactFormSubmitBody.phone)
+formData.append('message', postContactFormSubmitBody.message)
 formData.append('tag', postContactFormSubmitBody.tag)
 if(postContactFormSubmitBody.attachment !== undefined) {
  formData.append('attachment', postContactFormSubmitBody.attachment)
@@ -195,8 +194,8 @@ if(postContactFormSubmitBody.attachment !== undefined) {
 
 
 /**
- * Retorna uma lista de todos os slugs dos posts publicados.
- * @summary Listar todos os slugs dos posts
+ * Retorna uma lista de posts publicados com seus detalhes. Pode ser limitado por quantidade ou paginado.
+ * @summary Listar posts
  */
 export type getPostSlugsResponse200 = {
   data: GetPostSlugs200
@@ -214,17 +213,24 @@ export type getPostSlugsResponse = getPostSlugsResponseComposite & {
   headers: Headers;
 }
 
-export const getGetPostSlugsUrl = () => {
+export const getGetPostSlugsUrl = (params?: GetPostSlugsParams,) => {
+  const normalizedParams = new URLSearchParams();
 
+  Object.entries(params || {}).forEach(([key, value]) => {
+    
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? 'null' : value.toString())
+    }
+  });
 
-  
+  const stringifiedParams = normalizedParams.toString();
 
-  return `/post-slugs`
+  return stringifiedParams.length > 0 ? `/post-slugs?${stringifiedParams}` : `/post-slugs`
 }
 
-export const getPostSlugs = async ( options?: RequestInit): Promise<getPostSlugsResponse> => {
+export const getPostSlugs = async (params?: GetPostSlugsParams, options?: RequestInit): Promise<getPostSlugsResponse> => {
   
-  const res = await fetch(getGetPostSlugsUrl(),
+  const res = await fetch(getGetPostSlugsUrl(params),
   {      
     ...options,
     method: 'GET'
@@ -388,4 +394,61 @@ export const getProductLineSlugs = async ( options?: RequestInit): Promise<getPr
   const data: getProductLineSlugsResponse['data'] = body ? JSON.parse(body) : {}
 
   return { data, status: res.status, headers: res.headers } as getProductLineSlugsResponse
+}
+
+
+
+/**
+ * Retorna os detalhes de um post específico usando seu slug
+ * @summary Obter post por slug
+ */
+export type getPostSlugResponse200 = {
+  data: GetPostSlug200
+  status: 200
+}
+
+export type getPostSlugResponse400 = {
+  data: GetPostSlug400
+  status: 400
+}
+
+export type getPostSlugResponse401 = {
+  data: GetPostSlug401
+  status: 401
+}
+
+export type getPostSlugResponse404 = {
+  data: GetPostSlug404
+  status: 404
+}
+    
+export type getPostSlugResponseComposite = getPostSlugResponse200 | getPostSlugResponse400 | getPostSlugResponse401 | getPostSlugResponse404;
+    
+export type getPostSlugResponse = getPostSlugResponseComposite & {
+  headers: Headers;
+}
+
+export const getGetPostSlugUrl = (slug: string,) => {
+
+
+  
+
+  return `/post/${slug}`
+}
+
+export const getPostSlug = async (slug: string, options?: RequestInit): Promise<getPostSlugResponse> => {
+  
+  const res = await fetch(getGetPostSlugUrl(slug),
+  {      
+    ...options,
+    method: 'GET'
+    
+    
+  }
+)
+
+  const body = [204, 205, 304].includes(res.status) ? null : await res.text()
+  const data: getPostSlugResponse['data'] = body ? JSON.parse(body) : {}
+
+  return { data, status: res.status, headers: res.headers } as getPostSlugResponse
 }

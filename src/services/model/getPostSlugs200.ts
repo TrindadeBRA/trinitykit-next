@@ -10,4 +10,10 @@ import type { GetPostSlugs200DataItem } from './getPostSlugs200DataItem';
 export type GetPostSlugs200 = {
   success?: boolean;
   data?: GetPostSlugs200DataItem[];
+  /** Número total de posts existentes */
+  total?: number;
+  /** Número total de páginas disponíveis (quando usando paginação) */
+  total_pages?: number;
+  /** Número da página atual (quando usando paginação) */
+  current_page?: number;
 };

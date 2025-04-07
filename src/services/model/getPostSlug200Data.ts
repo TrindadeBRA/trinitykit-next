@@ -6,7 +6,7 @@
  * OpenAPI spec version: 1.0.0
  */
 
-export type GetPostSlugs200DataItem = {
+export type GetPostSlug200Data = {
   /** Slug do post */
   slug?: string;
   /** Título do post */

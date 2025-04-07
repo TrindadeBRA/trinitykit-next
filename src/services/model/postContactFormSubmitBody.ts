@@ -7,14 +7,14 @@
  */
 
 export type PostContactFormSubmitBody = {
-  /** Nome do contato (opcional) */
-  name?: string;
+  /** Nome do contato (obrigatório) */
+  name: string;
   /** Email do contato (obrigatório) */
   email: string;
-  /** Telefone do contato (opcional) */
-  phone?: string;
-  /** Mensagem do contato (opcional) */
-  message?: string;
+  /** Telefone do contato (obrigatório) */
+  phone: string;
+  /** Mensagem do contato (obrigatório) */
+  message: string;
   /** Tag para categorizar o contato (obrigatório) */
   tag: string;
   /** Arquivo anexo (opcional). Formatos permitidos: PDF, XLS, XLSX, CSV, DOC, DOCX, JPG, JPEG, PNG, GIF, SVG, WEBP. Tamanho máximo: 10MB */
