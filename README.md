@@ -4,8 +4,8 @@
 - [X] Home
 - [X] Quem Somos
 - [X] Produtos
-- [ ] Blog
-- [ ] Blog Interna
+- [ Desenvolvendo ] Blog
+- [ Desenvolvendo ] Blog Interna
 - [X] Politica e Privacidade
 - [X] Trabalhe Conosco
 - [X] Interagções dos forms
@@ -14,9 +14,9 @@
 - [ ] Sitemap
 
 ## Itens a ser desenvolvido no back
-- [X] Inserir anexos .pdf (Apresentacoes e Catalogos)
-- [ ] API para Blog
-- [ ] API para Paginacao do Blog
+- [ ] Inserir rota no WP para anexos .pdf (Apresentacoes e Catalogos)
+- [X] API para Blog
+- [X] API para Paginacao do Blog
 - [X] API para Trabalhe conosco
 - [ ] Envio de emails internos / SMTP
 
@@ -25,6 +25,6 @@
 - [ ] Criar action com build e deploy
 
 ## Fixes
-- [ ] Ajustar efeito parallax no mobile
-- [ ] Ajustar overflow do hero de produtos
+- [X] Ajustar efeito parallax no mobile
+- [X] Ajustar overflow do hero de produtos
 - [ ] Ajustar responsivo de table de produtos
