@@ -8,6 +8,7 @@ import { WhatsAppFloat } from "../src/components/WhatsAppFloat";
 import Footer from "@/src/components/Footer";
 import AOS_Init from "@/src/components/AOS_Init";
 import { CookieConsentComponent } from "@/src/components/CookieConsentComponent";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 
 const geistSans = Geist({
@@ -67,7 +68,7 @@ export default function RootLayout({
         <Navigation />
         {children}
         <Footer />
-        {/* <GoogleAnalytics gaId={settings?.google_analytics_id} /> */}
+        <GoogleAnalytics gaId={"G-WRGXJHNQPF"} /> {/* GA do Inove */}
         <CookieConsentComponent />
       </body>
     </html>
