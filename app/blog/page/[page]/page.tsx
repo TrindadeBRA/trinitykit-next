@@ -1,4 +1,5 @@
 import ContactItems from "@/src/components/ContactItems";
+import Pagination from "@/src/components/Pagination";
 import PinMap from "@/src/components/PinMap";
 import { getGetPostSlugsUrl, getPostSlugsResponse } from "@/src/services/api";
 import customFetch from "@/src/services/custom-fetch";
@@ -6,13 +7,7 @@ import { GetPostSlugs200, GetPostSlugs200DataItem } from "@/src/services/model";
 import { Metadata } from "next";
 import Link from "next/link";
 
-
-interface BlogPageProps {
-  page: string;
-}
-
-export const postsPerPage = 3;
-
+const postsPerPage = 12;
 
 async function getPostsPagination(page: string): Promise<getPostSlugsResponse> {
   try {
@@ -22,6 +17,7 @@ async function getPostsPagination(page: string): Promise<getPostSlugsResponse> {
         per_page: postsPerPage
       })
     );
+    console.log(response);
     return response;
   } catch (error) {
     console.error('Erro ao buscar posts:', error);
@@ -29,9 +25,13 @@ async function getPostsPagination(page: string): Promise<getPostSlugsResponse> {
   }
 }
 
-export async function generateMetadata({ params }: { params: Promise<BlogPageProps> }): Promise<Metadata> {
-
-  const { page } = await params
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: Promise<{ page: string }> 
+}): Promise<Metadata> {
+  const resolvedParams = await params;
+  const { page } = resolvedParams;
   
   return {
     title: `Blog | Tiken - Página ${page}`,
@@ -39,8 +39,14 @@ export async function generateMetadata({ params }: { params: Promise<BlogPagePro
   }
 }
 
-export default async function Page({ params }: { params: BlogPageProps }) {
-  const { page } = await params;
+export default async function Page({ 
+  params, 
+}: { 
+  params: Promise<{ page: string }>;
+}) {
+  const resolvedParams = await params;
+  const { page } = resolvedParams;
+  
   let response: getPostSlugsResponse;
   try {
     response = await getPostsPagination(page);
@@ -48,16 +54,15 @@ export default async function Page({ params }: { params: BlogPageProps }) {
     console.error('Erro ao buscar posts:', error);
     throw error;
   }
-
+  
   const data = response.data as GetPostSlugs200DataItem[];
+  const paginationData: GetPostSlugs200 = response as any;
 
   return (
     <>
-
       <div className="container mx-auto px-4 py-8 overflow-x-hidden">
         <h1 className="text-3xl font-bold mb-8">Blog - Página {page}</h1>
         <pre className="flex w-full flex-wrap">{JSON.stringify(response, null, 2)}</pre>
-
         {
           data && (
             <div className="flex flex-col gap-4 w-full">
@@ -72,14 +77,22 @@ export default async function Page({ params }: { params: BlogPageProps }) {
             </div>
           )
         }
+
+        <Pagination
+          currentPage={paginationData.current_page || 1}
+          totalPages={paginationData.total_pages || 1}
+          basePath="/blog/page"
+        />
       </div>
 
+
+
+
+      
       <ContactItems />
       <PinMap />
     </>
-
   );
-
 }
 
 export async function generateStaticParams() {
@@ -90,15 +103,15 @@ export async function generateStaticParams() {
         per_page: postsPerPage
       }
     ));
-
+    
     if (!total_pages) {
       throw new Error("Não foi possível obter o total de páginas");
     }
-
+    
     const pages = Array.from({ length: Math.max(1, total_pages) }, (_, i) => ({
       page: (i + 1).toString()
     }));
-
+    
     return pages;
   } catch (error) {
     console.error('Erro ao buscar meta informações dos posts:', error);

@@ -1,33 +1,10 @@
 import { ArrowRightIcon } from 'lucide-react'
 import Link from 'next/link'
-import Particles from '../Particles'
-
 
 export default function Hero() {
     return (
         <div className="h-[calc(100vh-100px)] bg-[url('/assets/images/home-hero.webp')] bg-cover bg-center relative">
-            {/* Camada de partículas */}
-            <div className="w-full absolute top-0 left-0 right-0 bottom-0 z-10">
-                <Particles
-                    particleColors={[
-                        "#672873",
-                        "#9a5183",
-                        "#cc2e4a",
-                        "#dd5736",
-                        "#e37d4f",
-                        "#e7ae24"
-                    ]}
-                    particleCount={1000}
-                    particleSpread={15}
-                    particleHoverFactor={1}
-                    speed={0.8}
-                    particleBaseSize={500}
-                    moveParticlesOnHover={false}
-                    alphaParticles={false}
-                    className="w-full h-full"
-                />
-            </div>
-
+           
             {/* Conteúdo/Texto */}
             <div className="relative mx-auto max-w-7xl px-6 lg:flex h-full items-center justify-center lg:justify-start z-20">
                 <div className="mx-auto max-w-2xl lg:mx-0 lg:shrink-0 lg:pt-8 p-2 rounded-lg">
