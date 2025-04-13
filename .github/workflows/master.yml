@@ -35,11 +35,43 @@ jobs:
           echo "Allow: /sitemap.xml" >> out/robots.txt
           echo "Allow: /sitemap.xml.gz" >> out/robots.txt
           echo "Sitemap: https://tiken.com.br/sitemap.xml" >> out/robots.txt
-          echo "Redirect 301 /blog/ /blog/page/1" >> out/robots.txt
-          echo "Redirect 301 /blog /blog/page/1" >> out/robots.txt
 
-          
-          
+      - name: Create .htaccess for production
+        run: |
+          echo "# Disable directory indexes and MultiViews" >> out/.htaccess
+          echo "Options -Indexes -MultiViews" >> out/.htaccess
+          echo "" >> out/.htaccess
+          echo "# Prevent mod_dir appending a slash to directory requests" >> out/.htaccess
+          echo "DirectorySlash Off" >> out/.htaccess
+          echo "" >> out/.htaccess
+          echo "RewriteEngine On" >> out/.htaccess
+          echo "" >> out/.htaccess
+          echo "# Redirect to HTTPS" >> out/.htaccess
+          echo "RewriteCond %{HTTPS} off" >> out/.htaccess
+          echo "RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]" >> out/.htaccess
+          echo "" >> out/.htaccess
+          echo "# Remove .html extension from URLs" >> out/.htaccess
+          echo "RewriteCond %{REQUEST_FILENAME} !-d" >> out/.htaccess
+          echo "RewriteCond %{REQUEST_FILENAME}\.html -f" >> out/.htaccess
+          echo "RewriteRule ^(.*)/$ /$1.html [L]" >> out/.htaccess
+          echo "" >> out/.htaccess
+          echo "# Rewrite /foo to /foo.html if it exists" >> out/.htaccess
+          echo "RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}.html -f" >> out/.htaccess
+          echo "RewriteRule !\.\w{2,4}$ %{REQUEST_URI}.html [L]" >> out/.htaccess
+          echo "" >> out/.htaccess
+          echo "# Otherwise, rewrite /foo to /foo/index.html if it exists" >> out/.htaccess
+          echo "RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}/index.html -f" >> out/.htaccess
+          echo "RewriteRule !\.\w{2,4}$ %{REQUEST_URI}/index.html [L]" >> out/.htaccess
+          echo "" >> out/.htaccess
+          echo "# Redirects 301 (SEO)" >> out/.htaccess
+          echo "RewriteEngine On" >> out/.htaccess
+          echo "" >> out/.htaccess
+          echo "# Redirect blog to first page" >> out/.htaccess
+          echo "Redirect 301 /blog /blog/page/1" >> out/.htaccess
+          echo "" >> out/.htaccess
+          echo "# Redirecionar todas as páginas 404 para /404" >> out/.htaccess
+          echo "ErrorDocument 404 /404" >> out/.htaccess
+
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
