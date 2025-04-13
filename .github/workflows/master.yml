@@ -34,6 +34,7 @@ jobs:
           echo "Allow: /sitemap.xml" >> out/robots.txt
           echo "Allow: /sitemap.xml.gz" >> out/robots.txt
           echo "Sitemap: https://tiken.com.br/sitemap.xml" >> out/robots.txt
+          echo "Redirect 301 /blog /blog/page/1" >> out/robots.txt
           
       - name: Cache dependencies
         uses: actions/cache@v3
@@ -52,8 +53,3 @@ jobs:
             local-dir: out/
             server-dir: /public_html/
             state-name: .ftp-deploy-sync-state.json
-
-
-      - name: Reset rebuild status
-        run: |
-          curl -X POST "${{ secrets.WORDPRESS_URL }}/wp-json/trinitykit/v1/reset-rebuild-status"
