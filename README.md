@@ -10,9 +10,10 @@
 - [X] Trabalhe Conosco
 - [X] Interagções dos forms
 - [ ] Modais de Literatura Técnica/Solicitar amostra
-- [ ] Widget de Cookies
-- [ ] Sitemap
-- [ ] Revisar SEO em todas as páginas
+- [X] Widget de Cookies
+- [X] Sitemap
+- [X] Revisar SEO em todas as páginas
+- [ ] Integrar anexos .pdf (Apresentacoes e Catalogos)
 
 ## Itens a ser desenvolvido no back
 - [ ] Inserir rota no WP para anexos .pdf (Apresentacoes e Catalogos)
@@ -20,15 +21,14 @@
 - [X] API para Paginacao do Blog
 - [X] API para Trabalhe conosco
 - [ ] Envio de emails internos / SMTP
-- [ ] Desenvolvimento de blocos para SEO em artigos
 - [ ] Instalação do WordFance para a segurança
 
 ## Itens de CI/CD
 - [ ] Criar github da Tiken
-- [ ] Criar action com build e deploy
-- [ ] Criar redirect de /blog para /blog/page/1 no .htaccess
+- [X] Criar action com build e deploy
+- [X] Criar redirect de /blog para /blog/page/1 no .htaccess
 
 ## Fixes
 - [X] Ajustar efeito parallax no mobile
 - [X] Ajustar overflow do hero de produtos
-- [ ] Ajustar responsivo de table de produtos
+- [X] Ajustar responsivo de table de produtos

@@ -7,6 +7,7 @@ import Script from "next/script";
 import { WhatsAppFloat } from "../src/components/WhatsAppFloat";
 import Footer from "@/src/components/Footer";
 import AOS_Init from "@/src/components/AOS_Init";
+import { CookieConsentComponent } from "@/src/components/CookieConsentComponent";
 
 
 const geistSans = Geist({
@@ -66,6 +67,8 @@ export default function RootLayout({
         <Navigation />
         {children}
         <Footer />
+        {/* <GoogleAnalytics gaId={settings?.google_analytics_id} /> */}
+        <CookieConsentComponent />
       </body>
     </html>
   );
