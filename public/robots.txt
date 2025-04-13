@@ -1,6 +1,0 @@
-User-agent: *
-Disallow: */?*
-Disallow: */?
-Allow: /sitemap.xml
-Allow: /sitemap.xml.gz
-Sitemap: https://resumodolivro.com/sitemap.xml
