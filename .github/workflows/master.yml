@@ -66,11 +66,10 @@ jobs:
           echo "# Redirects 301 (SEO)" >> out/.htaccess
           echo "RewriteEngine On" >> out/.htaccess
           echo "" >> out/.htaccess
-          echo "# Redirect blog to first page" >> out/.htaccess
-          echo "Redirect 301 /blog /blog/page/1" >> out/.htaccess
+          echo "# Redirect blog to first page (prevent infinite loops)" >> out/.htaccess
+          echo "RewriteCond %{REQUEST_URI} ^/blog$ [NC]" >> out/.htaccess
+          echo "RewriteRule ^blog$ /blog/page/1 [R=301,L]" >> out/.htaccess
           echo "" >> out/.htaccess
-          echo "# Redirecionar todas as páginas 404 para /404" >> out/.htaccess
-          echo "ErrorDocument 404 /404" >> out/.htaccess
 
       - name: Cache dependencies
         uses: actions/cache@v3
