@@ -33,6 +33,9 @@ export default function Navigation() {
     if (href.startsWith('/#')) {
       return activeHash === href.substring(1)
     }
+    if (href === '/blog') {
+      return pathname.startsWith('/blog')
+    }
     return pathname === href
   }
 
