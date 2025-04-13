@@ -158,17 +158,17 @@ export default function ProductsTable({ allProducts }: { allProducts: ProductsTa
   }, [uniqueSegments]);
 
   return (
-    <div className="p-4 md:p-8 mt-6 overflow-x-hidden">
-      <div className="mb-6 flex flex-col md:flex-row gap-4">
-        <div className="flex flex-col md:flex-row gap-4">
-          <div className="relative">
+    <div className="p-2 md:p-8 mt-4 md:mt-6 overflow-x-auto">
+      <div className="mb-4 md:mb-6 flex flex-col md:flex-row gap-2 md:gap-4">
+        <div className="flex flex-col md:flex-row gap-2 md:gap-4">
+          <div className="relative w-full md:w-auto">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Filter className="h-5 w-5 text-black" />
+              <Filter className="h-4 w-4 md:h-5 md:w-5 text-black" />
             </div>
             <select
               value={segmentoFilter}
               onChange={handleSegmentChange}
-              className="pl-10 p-2 bg-[#f5d22c] rounded-md text-black w-full md:w-auto"
+              className="pl-8 md:pl-10 p-2 bg-[#f5d22c] rounded-md text-black w-full md:w-auto text-sm md:text-base"
             >
               <option value="">Todos os Segmentos</option>
               {uniqueSegments.map(segment => (
@@ -179,27 +179,27 @@ export default function ProductsTable({ allProducts }: { allProducts: ProductsTa
         </div>
       </div>
 
-      <div className="overflow-x-auto rounded-lg shadow md:overflow-visible">
+      <div className="overflow-x-auto rounded-lg shadow">
         <div className="min-w-full inline-block align-middle">
-          <div className="overflow-x-auto md:overflow-visible">
+          <div className="overflow-x-auto">
             <table className="min-w-full table-fixed divide-y divide-gray-300" 
-                   style={{ minWidth: '768px', width: '100%' }}>
+                   style={{ minWidth: '768px' }}>
               <thead>
                 {table.getHeaderGroups().map(headerGroup => (
                   <tr key={headerGroup.id}>
                     {headerGroup.headers.map(header => (
                       <th
                         key={header.id}
-                        className="px-4 md:px-6 py-3 text-center text-xs font-bold text-gray-850 uppercase tracking-wider cursor-pointer whitespace-nowrap"
+                        className="px-2 md:px-6 py-2 md:py-3 text-center text-xs md:text-sm font-bold text-gray-850 uppercase tracking-wider cursor-pointer whitespace-nowrap"
                         onClick={header.column.getToggleSortingHandler()}
                         style={{ width: `${header.getSize()}%` }}
                       >
                         <div className="flex items-center justify-center">
-                          <span>{flexRender(header.column.columnDef.header, header.getContext())}</span>
+                          <span className="text-xs md:text-sm">{flexRender(header.column.columnDef.header, header.getContext())}</span>
                           <span>
                             {{
-                              asc: <ChevronUp className="h-4 w-4" />,
-                              desc: <ChevronDown className="h-4 w-4" />,
+                              asc: <ChevronUp className="h-3 w-3 md:h-4 md:w-4" />,
+                              desc: <ChevronDown className="h-3 w-3 md:h-4 md:w-4" />,
                             }[header.column.getIsSorted() as string] ?? null}
                           </span>
                         </div>
@@ -210,28 +210,25 @@ export default function ProductsTable({ allProducts }: { allProducts: ProductsTa
               </thead>
               <tbody className="divide-y divide-gray-300">
                 {table.getRowModel().rows.length > 0 ? (
-                  table.getRowModel().rows.map(row => {
-                    // console.log('Renderizando linha:');
-                    return (
-                      <tr key={row.id} className="text-gray-850 hover:bg-gray-200">
-                        {row.getVisibleCells().map(cell => (
-                          <td key={cell.id} className={
-                            twMerge(
-                              `px-6 py-4 whitespace-nowrap truncate text-xs`
-                            )}
-                              style={{ width: `${cell.column.getSize()}%` }}
-                          >
-                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                          </td>
-                        ))}
-                      </tr>
-                    );
-                  })
+                  table.getRowModel().rows.map(row => (
+                    <tr key={row.id} className="text-gray-850 hover:bg-gray-200">
+                      {row.getVisibleCells().map(cell => (
+                        <td key={cell.id} className={
+                          twMerge(
+                            `px-2 md:px-6 py-2 md:py-4 whitespace-nowrap truncate text-xs md:text-sm`
+                          )}
+                            style={{ width: `${cell.column.getSize()}%` }}
+                        >
+                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        </td>
+                      ))}
+                    </tr>
+                  ))
                 ) : (
                   <tr>
                     <td
                       colSpan={columns.length}
-                      className="px-6 py-8 text-center text-gray-400"
+                      className="px-6 py-8 text-center text-gray-400 text-sm md:text-base"
                     >
                       Nenhum resultado encontrado
                     </td>
@@ -243,7 +240,7 @@ export default function ProductsTable({ allProducts }: { allProducts: ProductsTa
         </div>
 
         {/* Paginação */}
-        <div className="p-2 md:p-4 flex flex-col md:flex-row items-center justify-between border-t border-gray-300 gap-4">
+        <div className="p-2 md:p-4 flex flex-col md:flex-row items-center justify-between border-t border-gray-300 gap-2 md:gap-4">
           <div className="flex items-center gap-2 text-xs md:text-sm text-gray-850">
             <span>
               Página{' '}
@@ -257,37 +254,37 @@ export default function ProductsTable({ allProducts }: { allProducts: ProductsTa
             </span>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 md:gap-2">
             <button
-              className="px-2 md:px-3 py-1 bg-gray-300 text-gray-850 rounded hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed text-xs md:text-sm"
+              className="px-1 md:px-3 py-1 bg-gray-300 text-gray-850 rounded hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed text-xs md:text-sm"
               onClick={() => table.setPageIndex(0)}
               disabled={!table.getCanPreviousPage()}
             >
               {'<<'}
             </button>
             <button
-              className="px-2 md:px-3 py-1 bg-gray-300 text-gray-850 rounded hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed text-xs md:text-sm"
+              className="px-1 md:px-3 py-1 bg-gray-300 text-gray-850 rounded hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed text-xs md:text-sm"
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
             >
               {'<'}
             </button>
             <button
-              className="px-2 md:px-3 py-1 bg-gray-300 text-gray-850 rounded hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed text-xs md:text-sm"
+              className="px-1 md:px-3 py-1 bg-gray-300 text-gray-850 rounded hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed text-xs md:text-sm"
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
             >
               {'>'}
             </button>
             <button
-              className="px-2 md:px-3 py-1 bg-gray-300 text-gray-850 rounded hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed text-xs md:text-sm"
+              className="px-1 md:px-3 py-1 bg-gray-300 text-gray-850 rounded hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed text-xs md:text-sm"
               onClick={() => table.setPageIndex(table.getPageCount() - 1)}
               disabled={!table.getCanNextPage()}
             >
               {'>>'}
             </button>
             <select
-              className="px-2 md:px-3 py-1 md:py-2 bg-gray-300 text-gray-850 rounded focus:outline-none text-xs md:text-sm"
+              className="px-1 md:px-3 py-1 bg-gray-300 text-gray-850 rounded focus:outline-none text-xs md:text-sm"
               value={table.getState().pagination.pageSize}
               onChange={e => {
                 table.setPageSize(Number(e.target.value));
@@ -295,7 +292,7 @@ export default function ProductsTable({ allProducts }: { allProducts: ProductsTa
             >
               {[500, 1000, 2000, 3000, 4000, 5000].map(pageSize => (
                 <option key={pageSize} value={pageSize}>
-                  Mostrar {pageSize}
+                  {pageSize}
                 </option>
               ))}
             </select>
