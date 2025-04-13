@@ -61,6 +61,10 @@ export default function Navigation() {
     }
   }, [])
 
+  const handleNavigationClick = () => {
+    setMobileMenuOpen(false)
+  }
+
   return (
     <header className={twMerge(`fixed top-0 left-0 right-0 z-50 transition-all duration-300 
       ${isFixed ? 'shadow-lg' : ''}
@@ -162,6 +166,7 @@ export default function Navigation() {
                     href={item.href}
                     className="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-gray-900 hover:bg-gray-50 font-space-mono font-bold"
                     target={item.external ? '_blank' : '_self'}
+                    onClick={handleNavigationClick}
                   >
                     {item.name}
                   </Link>
