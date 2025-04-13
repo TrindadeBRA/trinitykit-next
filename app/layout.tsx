@@ -35,6 +35,13 @@ const spaceMono = Space_Mono({
 export const metadata: Metadata = {
   title: "Tiken",
   description: 'Tiken é uma empresa que cria soluções para o mundo através da química',
+  openGraph: {
+    images: [
+      {
+        url: "/assets/images/ogimage.webp",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({

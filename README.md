@@ -13,7 +13,10 @@
 - [X] Widget de Cookies
 - [X] Sitemap
 - [X] Revisar SEO em todas as páginas
+- [X] Integrar - Google Analytics
 - [ ] Integrar anexos .pdf (Apresentacoes e Catalogos)
+- [ ] Solicitar uma OGImage para integracao 1200x675 https://cms.resumodolivro.com/wp-content/uploads/2024/03/og-image.webp 
+
 
 ## Itens a ser desenvolvido no back
 - [ ] Inserir rota no WP para anexos .pdf (Apresentacoes e Catalogos)
