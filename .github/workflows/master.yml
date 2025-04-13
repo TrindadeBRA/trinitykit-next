@@ -24,7 +24,8 @@ jobs:
           yarn install --frozen-lockfile
           yarn build
         env:
-          WORDPRESS_URL: ${{ secrets.WORDPRESS_URL }}
+          NEXT_PUBLIC_WORDPRESS_API_URL: ${{ secrets.NEXT_PUBLIC_WORDPRESS_API_URL }}
+          WORDPRESS_API_KEY: ${{ secrets.WORDPRESS_API_KEY }}
 
       - name: Create robots.txt for production
         run: |
