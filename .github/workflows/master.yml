@@ -35,7 +35,10 @@ jobs:
           echo "Allow: /sitemap.xml" >> out/robots.txt
           echo "Allow: /sitemap.xml.gz" >> out/robots.txt
           echo "Sitemap: https://tiken.com.br/sitemap.xml" >> out/robots.txt
+          echo "Redirect 301 /blog/ /blog/page/1" >> out/robots.txt
           echo "Redirect 301 /blog /blog/page/1" >> out/robots.txt
+
+          
           
       - name: Cache dependencies
         uses: actions/cache@v3
