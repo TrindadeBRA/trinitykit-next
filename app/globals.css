@@ -109,6 +109,30 @@ body {
   .font-space-mono {
     font-family: "Space Mono", monospace;
   }
+
+  .img-overlay-gradient {
+    position: relative;
+    display: inline-block;
+  }
+
+  .img-overlay-gradient::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to right,
+      #672873,
+      #9a5183,
+      #cc2e4a,
+      #dd5736,
+      #e37d4f,
+      #e7ae24
+    );
+    opacity: 0.6;
+    pointer-events: none;
+  }
 }
 
 .skiptranslate {
@@ -119,3 +143,4 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
 }
+

@@ -1,9 +1,11 @@
+import BlogContent from "@/src/components/BlogContent";
 import ContactItems from "@/src/components/ContactItems";
 import PinMap from "@/src/components/PinMap";
 import { getGetPostSlugsUrl, getGetPostSlugUrl, getPostSlugResponse } from "@/src/services/api";
 import customFetch from "@/src/services/custom-fetch";
 import { GetPostSlug200Data, GetPostSlugs200 } from "@/src/services/model";
 import { Metadata } from "next";
+import Image from "next/image";
 
 interface BlogPostProps {
   slug?: string;
@@ -39,35 +41,62 @@ export async function generateMetadata({ params }: { params: Promise<BlogPostPro
 
   if (!title) {
     throw new Error("Título ou resumo não encontrado");
-  } 
-  
+  }
+
   return {
-    title: `Blog | Tiken - ${title}`,
+    title: `Tiken - ${title}`,
     description: excerpt || cleanContent,
   }
 }
 
 export default async function Page({ params }: { params: Promise<BlogPostProps> }) {
   const { slug } = await params;
-
   if (!slug) {
     throw new Error("Slug não encontrado");
   }
-
-  let response: getPostSlugResponse;
+  let response: any;
   try {
     response = await getPostSlug(slug);
   } catch (error) {
     console.error('Erro ao buscar posts:', error);
     throw error;
   }
+
+  console.log(response?.data?.featured_image_url)
+
   return (
     <>
 
-      <div className="container mx-auto px-4 py-8 overflow-x-hidden">
-        <h1 className="text-3xl font-bold mb-8">Blog - {slug}</h1>
-        <pre className="block">{JSON.stringify(response, null, 2)}</pre>
+      <div className="img-overlay-gradient w-full h-96" data-aos="fade-right">
+        <Image
+          className="w-full h-full object-cover object-center"
+          src={response?.data?.featured_image_url ?? "/assets/images/home-hero.webp"}
+          alt={response.data.title}
+          width={1000}
+          height={1000}
+        />
+
       </div>
+
+      <div className="mx-auto flex lg:flex-row flex-col container gap-x-16">
+        <div className=" w-3/4">
+          <BlogContent content={response} />
+        </div>
+        <div className=" w-1/4 flex flex-col gap-y-4 pt-[2.5rem]">
+
+          {/* lorem ipsum dolor sit amet */}
+          {
+            Array.from({ length: 10 }).map((_, index) => (
+              <div key={index} className="bg-gray-100 p-4 rounded-lg">
+                <h2 className="text-lg font-bold">Lorem ipsum dolor sit amet</h2>
+                <p className="text-sm text-gray-500">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+
 
       <ContactItems />
       <PinMap />
