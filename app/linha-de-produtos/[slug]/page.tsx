@@ -26,7 +26,7 @@ export async function generateMetadata(
   const description = (data as GetProductLineSlug200Data)?.parent?.description?.replace(/<[^>]*>?/g, '') || '';
 
   return {
-    title: `Tiken - Linha de produtos - ${(data as GetProductLineSlug200Data)?.parent?.name || ''}`,
+    title: `Tiken - Linha de produtos: ${(data as GetProductLineSlug200Data)?.parent?.name || ''}`,
     description: description,
   };
 }

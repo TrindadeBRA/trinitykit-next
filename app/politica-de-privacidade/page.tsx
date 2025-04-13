@@ -3,7 +3,7 @@ import PinMap from "@/src/components/PinMap";
 import PoliticalContent from "@/src/components/PoliticalContent";
 
 export const metadata = {
-  title: 'Politica e Privacidade | Tiken',
+  title: 'Tiken - Politica e Privacidade',
   description: 'A Tiken é uma empresa de química que oferece soluções inovadoras para o mercado. Nossa política de privacidade explica como coletamos, usamos e protegemos seus dados pessoais.',
 }
 

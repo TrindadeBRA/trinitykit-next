@@ -3,7 +3,7 @@ import PinMap from "@/src/components/PinMap";
 import WorkWithUs from "@/src/components/WorkWithUs";
 
 export const metadata = {
-  title: 'Trabalhe Conosco | Tiken',
+  title: 'Tiken - Trabalhe Conosco',
   description: 'Trabalhe conosco e faça parte do nosso time.',
 }
 

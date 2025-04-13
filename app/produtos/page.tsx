@@ -6,7 +6,7 @@ import { getGetProductLineSlugsUrl, getGetProductsUrl, getProductLineSlugsRespon
 import customFetch from "@/src/services/custom-fetch";
 
 export const metadata = {
-  title: 'Nossos Produtos | Tiken',
+  title: 'Tiken - Nossos Produtos',
   description: 'A Tiken oferece soluções inovadoras em química. Se não encontrar seu produto, entre em contato e encontraremos a solução ideal para você.',
 }
 
