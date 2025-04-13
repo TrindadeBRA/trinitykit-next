@@ -1,3 +1,4 @@
+import BlogGrid from "@/src/components/BlogGrid";
 import ContactItems from "@/src/components/ContactItems";
 import Pagination from "@/src/components/Pagination";
 import PinMap from "@/src/components/PinMap";
@@ -5,7 +6,6 @@ import { getGetPostSlugsUrl, getPostSlugsResponse } from "@/src/services/api";
 import customFetch from "@/src/services/custom-fetch";
 import { GetPostSlugs200, GetPostSlugs200DataItem } from "@/src/services/model";
 import { Metadata } from "next";
-import Link from "next/link";
 
 const postsPerPage = 12;
 
@@ -17,7 +17,6 @@ async function getPostsPagination(page: string): Promise<getPostSlugsResponse> {
         per_page: postsPerPage
       })
     );
-    console.log(response);
     return response;
   } catch (error) {
     console.error('Erro ao buscar posts:', error);
@@ -61,28 +60,14 @@ export default async function Page({
   return (
     <>
       <div className="container mx-auto px-4 py-8 overflow-x-hidden">
-        <h1 className="text-3xl font-bold mb-8">Blog - Página {page}</h1>
-        <pre className="flex w-full flex-wrap">{JSON.stringify(response, null, 2)}</pre>
-        {
-          data && (
-            <div className="flex flex-col gap-4 w-full">
-              {data.map((post: GetPostSlugs200DataItem) => (
-                <div key={post.slug}>
-                  <Link href={`/blog/${post.slug}`} className="flex flex-col gap-2">
-                    <h2 className="text-2xl font-bold">{post.title}</h2>
-                    <p className="text-sm text-gray-500">{post.excerpt}</p>
-                  </Link>
-                </div>
-              ))}
-            </div>
-          )
-        }
-
-        <Pagination
-          currentPage={paginationData.current_page || 1}
-          totalPages={paginationData.total_pages || 1}
-          basePath="/blog/page"
-        />
+        <BlogGrid posts={data} />
+        <div className="mx-auto max-w-2xl lg:max-w-4xl">
+          <Pagination
+            currentPage={paginationData.current_page || 1}
+            totalPages={paginationData.total_pages || 1}
+            basePath="/blog/page"
+          />
+        </div>
       </div>
 
 

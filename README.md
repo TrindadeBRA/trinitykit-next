@@ -12,6 +12,8 @@
 - [ ] Modais de Literatura Técnica/Solicitar amostra
 - [ ] Widget de Cookies
 - [ ] Sitemap
+- [ ] Revisar SEO em todas as páginas
+- [ ] Criar redirect de /blog para /blog/page/1 no .htaccess
 
 ## Itens a ser desenvolvido no back
 - [ ] Inserir rota no WP para anexos .pdf (Apresentacoes e Catalogos)
@@ -19,6 +21,7 @@
 - [X] API para Paginacao do Blog
 - [X] API para Trabalhe conosco
 - [ ] Envio de emails internos / SMTP
+- [ ] Desenvolvimento de blocos para SEO em artigos
 
 ## Itens de CI/CD
 - [ ] Criar github da Tiken

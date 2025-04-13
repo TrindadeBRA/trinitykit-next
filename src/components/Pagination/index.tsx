@@ -1,3 +1,4 @@
+import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react';
 import Link from 'next/link';
 
 interface PaginationProps {
@@ -8,23 +9,27 @@ interface PaginationProps {
 
 export default function Pagination({ currentPage, totalPages, basePath }: PaginationProps) {
   return (
-    <div className="flex justify-center gap-4 my-8">
-      {currentPage > 1 && (
+    <div className="flex justify-between gap-4 my-8 border-t pt-6 border-gray-200">
+      {currentPage > 1 ? (
         <Link
           href={`${basePath}/${currentPage - 1}`}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+          className="flex gap-2 items-center font-space-mono font-bold text-sm lg:text-lg"
         >
-          Anterior
+           <ArrowLeftIcon className="size-4" /> anterior 
         </Link>
+      ) : (
+        <div></div>
       )}
       
-      {currentPage < totalPages && (
+      {currentPage < totalPages ? (
         <Link
           href={`${basePath}/${currentPage + 1}`}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+          className="flex gap-2 items-center font-space-mono font-bold text-sm lg:text-lg"
         >
-          Próximo
+          próximo <ArrowRightIcon className="size-4" />
         </Link>
+      ) : (
+        <div></div>
       )}
     </div>
   );
