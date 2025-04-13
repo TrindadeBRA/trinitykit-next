@@ -5,7 +5,10 @@ import { getGetPostSlugsUrl, getGetPostSlugUrl, getPostSlugResponse } from "@/sr
 import customFetch from "@/src/services/custom-fetch";
 import { GetPostSlug200Data, GetPostSlugs200 } from "@/src/services/model";
 import { Metadata } from "next";
-import Image from "next/image";
+
+import { format, parseISO } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
+
 
 interface BlogPostProps {
   slug?: string;
@@ -67,24 +70,27 @@ export default async function Page({ params }: { params: Promise<BlogPostProps> 
   return (
     <>
 
-      <div className="img-overlay-gradient w-full h-96" data-aos="fade-right">
-        <Image
-          className="w-full h-full object-cover object-center"
-          src={response?.data?.featured_image_url ?? "/assets/images/home-hero.webp"}
-          alt={response.data.title}
-          width={1000}
-          height={1000}
-        />
-
+<div
+        className="img-overlay-gradient w-full h-96 relative bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${response?.data?.featured_image_url ?? "/assets/images/home-hero.webp"})` }}
+        data-aos="fade-right"
+      >
+        <div className="container mx-auto h-full flex flex-col items-center justify-center">
+          <h1 className="text-2xl lg:text-4xl font-bold text-white text-center px-4 z-10 font-space-mono">
+            {response.data.title}
+          </h1>
+          <p className="text-base lg:text-lg text-white text-center px-4 z-10 font-space-mono font-bold mt-4">
+            {format(parseISO(response.data.created_at || ''), "dd 'de' MMMM',' yyyy", { locale: ptBR })}
+          </p>
+        </div>
       </div>
 
-      <div className="mx-auto flex lg:flex-row flex-col container gap-x-16">
-        <div className=" w-3/4">
+      <div className="mx-auto flex flex-col lg:flex-row container gap-x-8">
+
+        <div className="w-full lg:w-3/4 py-16">
           <BlogContent content={response} />
         </div>
-        <div className=" w-1/4 flex flex-col gap-y-4 pt-[2.5rem]">
-
-          {/* lorem ipsum dolor sit amet */}
+        <div className="w-full lg:w-1/4 flex flex-col gap-y-4 py-16">
           {
             Array.from({ length: 10 }).map((_, index) => (
               <div key={index} className="bg-gray-100 p-4 rounded-lg">
