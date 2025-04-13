@@ -1,0 +1,59 @@
+name: 🚀 Deploy - Tiken (Front End)
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build_and_deploy_master:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v1
+        with:
+          node-version: '20.x'
+
+      - name: Build with secrets variables
+        run: |
+          npm install -g yarn
+          yarn install --frozen-lockfile
+          yarn build
+        env:
+          WORDPRESS_URL: ${{ secrets.WORDPRESS_URL }}
+
+      - name: Create robots.txt for production
+        run: |
+          echo "User-agent: *" > out/robots.txt
+          echo "Disallow: */?*" >> out/robots.txt
+          echo "Disallow: */?" >> out/robots.txt
+          echo "Allow: /sitemap.xml" >> out/robots.txt
+          echo "Allow: /sitemap.xml.gz" >> out/robots.txt
+          echo "Sitemap: https://tiken.com.br/sitemap.xml" >> out/robots.txt
+          
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.yarn
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Deploy to FTP Server (master)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+            server: ${{secrets.FTP_HOST}}
+            username: ${{ secrets.FTP_LOGIN }}
+            password: ${{ secrets.FTP_PASSWORD }}
+            local-dir: out/
+            server-dir: /public_html/
+            state-name: .ftp-deploy-sync-state.json
+
+
+      - name: Reset rebuild status
+        run: |
+          curl -X POST "${{ secrets.WORDPRESS_URL }}/wp-json/trinitykit/v1/reset-rebuild-status"
