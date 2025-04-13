@@ -12,7 +12,7 @@ interface OurProductsHeroProps {
 export default function OurProductsHero({ heroData }: OurProductsHeroProps) {
 
     return (
-        <div className="relative isolate lg:h-[calc(100vh-96px)] lg:flex lg:items-center overflow-x-hidden">
+        <div className="relative isolate lg:h-screen lg:flex lg:items-center">
             <svg
                 aria-hidden="true"
                 className="absolute inset-x-0 top-0 -z-10 h-[64rem] w-full stroke-gray-200 [mask-image:radial-gradient(32rem_32rem_at_center,white,transparent)]"

@@ -13,7 +13,7 @@ export default function IntroProductLine({ invert = false, title, description, i
 
 
     return (
-        <div className="relative isolate overflow-x-hidden">
+        <div className="relative isolate">
             <svg
                 aria-hidden="true"
                 className="absolute inset-x-0 top-0 -z-10 h-[64rem] w-full stroke-gray-200 [mask-image:radial-gradient(32rem_32rem_at_center,white,transparent)]"

@@ -51,7 +51,11 @@ export default async function NossosProdutos() {
   return (
     <>
       <OurProductsHero heroData={allProductsLines} />
-      <ProductsTable allProducts={allProducts} />
+      {
+        allProducts && (
+          <ProductsTable allProducts={allProducts} />
+        )
+      }
       <ContactItems />
       <PinMap />
     </>

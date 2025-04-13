@@ -22,6 +22,7 @@
 - [X] API para Trabalhe conosco
 - [ ] Envio de emails internos / SMTP
 - [ ] Desenvolvimento de blocos para SEO em artigos
+- [ ] Instalação do WordFance para a segurança
 
 ## Itens de CI/CD
 - [ ] Criar github da Tiken
