@@ -13,7 +13,7 @@ import { GetPostSlugs200DataItem } from "@/src/services/model";
 
 export const metadata = {
   title: 'Tiken - Home',
-  description: 'Tiken é uma empresa que cria soluções para o mundo através da química',
+  description: 'Inove seu mundo!',
 }
 
 async function getPostsPagination(): Promise<getPostSlugsResponse> {
