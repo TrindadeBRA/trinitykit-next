@@ -6,7 +6,7 @@ import PinMap from "@/src/components/PinMap";
 
 export const metadata = {
   title: 'Tiken - Quem somos',
-  description: 'Tiken é uma empresa que oferece soluções químicas para o mundo.',
+  description: 'Conheça a Tiken: excelência em especialidades químicas, com foco em inovação, sustentabilidade e compromisso. Inove seu mundo!',
 }
 
 export default function QuemSomos() {

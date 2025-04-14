@@ -7,7 +7,7 @@ import customFetch from "@/src/services/custom-fetch";
 
 export const metadata = {
   title: 'Tiken - Nossos Produtos',
-  description: 'A Tiken oferece soluções inovadoras em química. Se não encontrar seu produto, entre em contato e encontraremos a solução ideal para você.',
+  description: 'Descubra nossa linha de especialidades químicas de alta performance. Se não encontrar seu produto, entre em contato!',
 }
 
 async function getProducts(): Promise<getProductsResponse> {

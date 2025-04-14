@@ -34,7 +34,7 @@ export async function generateMetadata({
   
   return {
     title: `Tiken - Blog: Página ${page}`,
-    description: 'A Tiken oferece soluções inovadoras em química. Se não encontrar seu produto, entre em contato e encontraremos a solução ideal para você.',
+    description: 'Acompanhe as últimas tendências e novidades do mundo químico com a Tiken. Inove seu mundo!',
   }
 }
 

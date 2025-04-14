@@ -13,7 +13,7 @@ import { GetPostSlugs200DataItem } from "@/src/services/model";
 
 export const metadata = {
   title: 'Tiken - Home',
-  description: 'Inove seu mundo!',
+  description: 'Especialidades químicas para Plásticos, Adesivos, Tintas e Cosméticos. Inovação, sustentabilidade e excelência técnica. Inove seu mundo!',
 }
 
 async function getPostsPagination(): Promise<getPostSlugsResponse> {

@@ -4,7 +4,7 @@ import PoliticalContent from "@/src/components/PoliticalContent";
 
 export const metadata = {
   title: 'Tiken - Politica e Privacidade',
-  description: 'A Tiken é uma empresa de química que oferece soluções inovadoras para o mercado. Nossa política de privacidade explica como coletamos, usamos e protegemos seus dados pessoais.',
+  description: 'Saiba como protegemos seus dados pessoais conforme a LGPD em nossa política de privacidade.',
 }
 
 export default function PoliticaPrivacidade() {

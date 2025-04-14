@@ -4,7 +4,7 @@ import WorkWithUs from "@/src/components/WorkWithUs";
 
 export const metadata = {
   title: 'Tiken - Trabalhe Conosco',
-  description: 'Trabalhe conosco e faça parte do nosso time.',
+  description: 'Junte-se à Tiken, uma das melhores empresas para se trabalhar, reconhecida pelo GPTW. Inove seu mundo!',
 }
 
 export default function TrabalheConosco() {
