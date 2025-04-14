@@ -33,6 +33,7 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://red-duck-948605.hostingersite.com'), // TODO: Change to production URL
   title: "Tiken",
   description: 'Tiken é uma empresa que cria soluções para o mundo através da química',
   openGraph: {
