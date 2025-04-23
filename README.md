@@ -20,7 +20,7 @@
 
 
 ## Itens a ser desenvolvido no back
-- [ ] Inserir rota no WP para anexos .pdf (Apresentacoes e Catalogos)
+- [X] Inserir rota no WP para anexos .pdf (Apresentacoes e Catalogos)
 - [X] API para Blog
 - [X] API para Paginacao do Blog
 - [X] API para Trabalhe conosco

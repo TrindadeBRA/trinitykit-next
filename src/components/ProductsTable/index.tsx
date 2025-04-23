@@ -27,12 +27,12 @@ export default function ProductsTable({ allProducts }: { allProducts: ProductsTa
   const [segmentoFilter, setSegmentoFilter] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<ProductsTableProps | null>(null);
-  const [modalTitle, setModalTitle] = useState('');
+  const [modalType, setModalType] = useState('');
   const columnHelper = createColumnHelper<ProductsTableProps>();
 
   const handleOpenModal = (product: ProductsTableProps, title: string) => {
     setSelectedProduct(product);
-    setModalTitle(title);
+    setModalType(title);
     setIsModalOpen(true);
   };
 
@@ -320,10 +320,10 @@ export default function ProductsTable({ allProducts }: { allProducts: ProductsTa
       <ModalForm
         isOpen={isModalOpen}
         onClose={handleCloseModal}
-        title={`${modalTitle}: ${selectedProduct?.title || ''}`}
+        title={`${modalType}: ${selectedProduct?.title || ''}`}
       >
         {selectedProduct && (
-          <TemplateForm selectedProduct={selectedProduct} />
+          <TemplateForm selectedProduct={selectedProduct} onClose={handleCloseModal} modalType={modalType} />
         )}
       </ModalForm>
     </div>

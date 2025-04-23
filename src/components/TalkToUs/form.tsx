@@ -9,6 +9,7 @@ import { getPostContactFormSubmitUrl, postContactFormSubmitResponse } from '@/sr
 import customFetch from '@/src/services/custom-fetch'
 import { errorToast, successToast } from '@/src/hooks/useToastify'
 import { useHookFormMask } from 'use-mask-input'
+import Link from 'next/link'
 
 const talkToUsFormSchema = z.object({
   name: z.string().min(3, 'Nome deve ter pelo menos 3 caracteres'),
@@ -131,7 +132,7 @@ export function TalkToUsForm() {
             </div>
 
             <div className="w-full leading-3">
-              <span className="text-[10px] font-semibold text-white">Ao clicar no botão enviar, você está de acordo em receber e-mails desta empresa.</span>
+              <span className="text-[11px] font-semibold text-white">Ao enviar, você concorda com nossa <Link href="/politica-de-privacidade" className="text-blue-300 hover:text-blue-400 underline">Política de Privacidade</Link> e autoriza o recebimento de comunicações da Tiken.</span>
             </div>
           </div>
 
