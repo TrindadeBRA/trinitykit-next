@@ -43,18 +43,17 @@ export default function TemplateForm({ selectedProduct, onClose, modalType }: Te
 
             console.log(data);
 
-            const createdMessage =
-                `
-                Nome: ${data.name}
-                Email: ${data.email}
-                ${data.message ? `Mensagem: ${data.message}` : ''}
-                ================================
-                Tipo de solicitação: ${modalType}
-                Produto: ${selectedProduct.title}
-                CAS Number: ${selectedProduct.cas_number || ''}
-                Segmentos: ${selectedProduct.segments?.map(s => s.name).join(', ') || ''}
-                Descrição: ${selectedProduct.product_lines?.flatMap(l => l.children?.map(c => c.name) || []).join(', ') || ''}
-                `
+            const createdMessage = `
+Nome: ${data.name}
+Email: ${data.email}
+${data.message ? `Mensagem: ${data.message}` : ''}
+================================
+Tipo de solicitação: ${modalType}
+Produto: ${selectedProduct.title}
+CAS Number: ${selectedProduct.cas_number || ''}
+Segmentos: ${selectedProduct.segments?.map(s => s.name).join(', ') || ''}
+Descrição: ${selectedProduct.product_lines?.flatMap(l => l.children?.map(c => c.name) || []).join(', ') || ''}
+`.trim()
 
             const formData = new FormData();
             formData.append('name', data.name);
@@ -129,7 +128,7 @@ export default function TemplateForm({ selectedProduct, onClose, modalType }: Te
                             <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>
                         )}
                         <div className="w-full leading-3">
-                        <span className="text-[11px] font-medium text-gray-600">Ao enviar, você concorda com nossa <Link href="/politica-de-privacidade" className="text-blue-500 hover:text-blue-700 underline">Política de Privacidade</Link> e autoriza o recebimento de comunicações da Tiken.</span>                        </div>
+                            <span className="text-[11px] font-medium text-gray-600">Ao enviar, você concorda com nossa <Link href="/politica-de-privacidade" className="text-blue-500 hover:text-blue-700 underline">Política de Privacidade</Link> e autoriza o recebimento de comunicações da Tiken.</span>                        </div>
                     </div>
 
 
