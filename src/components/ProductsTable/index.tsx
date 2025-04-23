@@ -15,6 +15,7 @@ import { GetProducts200DataItem } from "@/src/services/model";
 import { twMerge } from 'tailwind-merge';
 import ModalForm from './ModalForm';
 import TemplateForm from './ModalForm/TemplateForm';
+import { BeakerIcon, DocumentArrowDownIcon } from '@heroicons/react/24/outline';
 
 export type ProductsTableProps = GetProducts200DataItem;
 
@@ -72,12 +73,12 @@ export default function ProductsTable({ allProducts }: { allProducts: ProductsTa
         header: 'Literatura Técnica',
         size: 1,
         cell: info => (
-          <button
-            onClick={() => handleOpenModal(info.row.original, 'Literatura Técnica')}
-            className="px-2 py-1 bg-blue-500 text-white rounded mx-auto block cursor-pointer"
+          <div
+          className="flex items-center justify-center cursor-pointer"
+          onClick={() => handleOpenModal(info.row.original, 'Literatura Técnica')}
           >
-            Solicitar
-          </button>
+            <DocumentArrowDownIcon className="size-6 text-black" />
+          </div>
         ),
       }),
       columnHelper.accessor(() => '', {
@@ -85,12 +86,12 @@ export default function ProductsTable({ allProducts }: { allProducts: ProductsTa
         header: 'Solicitar Amostra',
         size: 1,
         cell: info => (
-          <button
-            onClick={() => handleOpenModal(info.row.original, 'Solicitar Amostra')}
-            className="px-2 py-1 bg-blue-500 text-white rounded mx-auto block cursor-pointer"
+          <div
+          className="flex items-center justify-center cursor-pointer"
+          onClick={() => handleOpenModal(info.row.original, 'Solicitar Amostra')}
           >
-            Solicitar
-          </button>
+            <BeakerIcon className="size-6 text-black" />
+          </div>
         ),
       }),
     ],
