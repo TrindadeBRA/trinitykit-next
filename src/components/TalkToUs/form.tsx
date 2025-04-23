@@ -35,7 +35,7 @@ export function TalkToUsForm() {
   const onSubmit = async (data: TalkToUsFormData) => {
     try {
       setIsSubmitting(true)
-      
+
       const formData = new FormData()
       formData.append('name', data.name)
       formData.append('email', data.email)
@@ -47,13 +47,13 @@ export function TalkToUsForm() {
         method: 'POST',
         body: formData,
       })
-
+      successToast("Mensagem enviada com sucesso! Entraremos em contato em breve.")
+      
     } catch (e) {
       console.error("Erro ao enviar o formulário", e)
       errorToast("Ocorreu um erro ao enviar o formulário. Tente novamente mais tarde.")
     } finally {
       setIsSubmitting(false)
-      successToast("Mensagem enviada com sucesso! Entraremos em contato em breve.")
       reset()
 
     }
@@ -90,7 +90,7 @@ export function TalkToUsForm() {
                 {...register('email')}
                 type="email"
                 autoComplete="email"
-                className="block w-full rounded-md bg-white/5 px-3.5 py-2 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500"
+                className="block w-full rounded-md bg-white/5 px-3.5 py-2 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-white focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500"
               />
               {errors.email && (
                 <p className="mt-1 text-sm text-red-400">{errors.email.message}</p>
@@ -106,7 +106,7 @@ export function TalkToUsForm() {
               <input
                 type="tel"
                 autoComplete="tel"
-                className="block w-full rounded-md bg-white/5 px-3.5 py-2 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500"
+                className="block w-full rounded-md bg-white/5 px-3.5 py-2 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-white focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500"
                 {...registerWithMask("phone", ['(99) 99999-9999'])}
               />
               {errors.phone && (
@@ -129,8 +129,16 @@ export function TalkToUsForm() {
                 <p className="mt-1 text-sm text-red-400">{errors.message.message}</p>
               )}
             </div>
+
+            <div className="w-full leading-3">
+              <span className="text-[10px] font-semibold text-white">Ao clicar no botão enviar, você está de acordo em receber e-mails desta empresa.</span>
+            </div>
           </div>
+
+
         </div>
+
+
 
         <div className="mt-8 flex justify-end">
           <button

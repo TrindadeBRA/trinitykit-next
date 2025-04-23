@@ -53,6 +53,8 @@ export function WhatsAppForm({ setIsOpen }: WhatsAppFormProps) {
                 body: formData,
             })
 
+            successToast("Entraremos em contato em breve!")
+
         } catch (e) {
             console.error("Erro ao enviar.", e)
             errorToast("Ocorreu um erro ao enviar.")
@@ -62,7 +64,6 @@ export function WhatsAppForm({ setIsOpen }: WhatsAppFormProps) {
             }, 1000)
         } finally {
             setIsSubmitting(false)
-            successToast("Entraremos em contato em breve!")
             reset()
             setIsOpen(false)
             setTimeout(() => {
