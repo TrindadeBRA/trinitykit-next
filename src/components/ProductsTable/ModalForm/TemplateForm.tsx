@@ -41,8 +41,6 @@ export default function TemplateForm({ selectedProduct, onClose, modalType }: Te
         try {
             setIsSubmitting(true);
 
-            console.log(data);
-
             const createdMessage = `
 Nome: ${data.name}
 Email: ${data.email}
