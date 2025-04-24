@@ -8,6 +8,7 @@ import { useState } from 'react'
 import { getPostContactFormSubmitUrl, postContactFormSubmitResponse } from '@/src/services/api'
 import { errorToast, successToast } from '@/src/hooks/useToastify'
 import customFetch from '@/src/services/custom-fetch'
+import Link from 'next/link'
 
 const whatsAppFormSchema = z.object({
     email: z
@@ -99,6 +100,9 @@ export function WhatsAppForm({ setIsOpen }: WhatsAppFormProps) {
                 >
                     {isSubmitting ? "Enviando..." : "Chamar no WhatsApp!"}
                 </button>
+                <div className="w-full leading-3">
+                    <span className="text-[11px] font-medium text-gray-600">Ao enviar, você concorda com nossa <Link href="/politica-de-privacidade" className="text-blue-500 hover:text-blue-700 underline">Política de Privacidade</Link> e autoriza o recebimento de comunicações da Tiken.</span>
+                </div>
             </div>
         </form>
     )

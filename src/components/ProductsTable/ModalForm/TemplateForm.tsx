@@ -126,7 +126,8 @@ Descrição: ${selectedProduct.product_lines?.flatMap(l => l.children?.map(c => 
                             <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>
                         )}
                         <div className="w-full leading-3">
-                            <span className="text-[11px] font-medium text-gray-600">Ao enviar, você concorda com nossa <Link href="/politica-de-privacidade" className="text-blue-500 hover:text-blue-700 underline">Política de Privacidade</Link> e autoriza o recebimento de comunicações da Tiken.</span>                        </div>
+                            <span className="text-[11px] font-medium text-gray-600">Ao enviar, você concorda com nossa <Link href="/politica-de-privacidade" className="text-blue-500 hover:text-blue-700 underline">Política de Privacidade</Link> e autoriza o recebimento de comunicações da Tiken.</span>
+                        </div>
                     </div>
 
 
