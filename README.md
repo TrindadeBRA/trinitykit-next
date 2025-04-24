@@ -9,7 +9,7 @@
 - [X] Politica e Privacidade
 - [X] Trabalhe Conosco
 - [X] Interagções dos forms
-- [ ] Modais de Literatura Técnica/Solicitar amostra
+- [X] Modais de Literatura Técnica/Solicitar amostra
 - [X] Widget de Cookies
 - [X] Sitemap
 - [X] Revisar SEO em todas as páginas
@@ -24,7 +24,7 @@
 - [X] API para Blog
 - [X] API para Paginacao do Blog
 - [X] API para Trabalhe conosco
-- [ ] Envio de emails internos / SMTP
+- [X] Envio de emails internos / SMTP
 - [ ] Instalação do WordFance para a segurança
 
 ## Itens de CI/CD
